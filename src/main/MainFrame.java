@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -13,6 +14,12 @@ public class MainFrame extends JFrame {
 	int height = screenSize.height;
 	setSize(width*3/4,height*3/4);
 	setLocationRelativeTo(null);
+	MenuBar mb = new MenuBar();
+	this.setJMenuBar(mb);
+	mb.setVisible(true);
+	StatusBar sb = new StatusBar();
+	add(sb,BorderLayout.SOUTH);
+	sb.setVisible(true);
 	setVisible(true);
 	}
 }
