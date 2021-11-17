@@ -1,5 +1,7 @@
 package main;
 
+import java.util.List;
+
 enum Kind_of_semester{Summer, Winter}
 public class Subject {
 
@@ -8,6 +10,8 @@ public class Subject {
 	private int Year_of_subject_execution;
 	private Professor Professor_of_Subject;
 	private int ESPB_value;
+	private List<Student> Students_who_passed_subject;
+	private List<Student> Students_who_didnt_pass_subject;
 	
 	public Subject() {
 	}
@@ -59,5 +63,24 @@ public class Subject {
 	public void setESPB_value(int eSPB_value) {
 		ESPB_value = eSPB_value;
 	}
+	public List<Student> getStudents_who_passed_subject() {
+		return Students_who_passed_subject;
+	}
+	public void addStudents_who_passed_subject(Student students_who_passed_subject) {
+		Students_who_passed_subject.add(students_who_passed_subject);
+	}
+	public void deleteStudents_who_passed_subject(Student students_who_passed_subject) {
+		Students_who_passed_subject.remove(students_who_passed_subject);
+	}
+	public List<Student> getStudents_who_didnt_pass_subject() {
+		return Students_who_didnt_pass_subject;
+	}
+	public void addStudents_who_didnt_pass_subject(Student students_who_didnt_pass_subject) {
+		Students_who_didnt_pass_subject.add(students_who_didnt_pass_subject);
+	}
+	public void deleteStudents_who_didnt_pass_subject(Student students_who_didnt_pass_subject) {
+		Students_who_didnt_pass_subject.remove(students_who_didnt_pass_subject);
+	}
+	
 	
 }

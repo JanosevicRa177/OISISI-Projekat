@@ -2,7 +2,7 @@ package main;
 
 public class Address {
 
-	private String street;
+	private String Street;
 	private int Number;
 	private String City;
 	private String State;
@@ -11,16 +11,16 @@ public class Address {
 	}
 	public Address(String street, int number, String city, String state) {
 		super();
-		this.street = street;
+		Street = street;
 		Number = number;
 		City = city;
 		State = state;
 	}
 	public String getStreet() {
-		return street;
+		return Street;
 	}
 	public void setStreet(String street) {
-		this.street = street;
+		Street = street;
 	}
 	public int getNumber() {
 		return Number;

@@ -23,7 +23,7 @@ public class StatusBar extends JPanel {
 	public StatusBar()
 	{
 	
-	this.setBackground(Color.GRAY);
+	this.setBackground(new Color(42, 101, 159));
 	BoxLayout box=new BoxLayout(this, BoxLayout.X_AXIS);
 	this.setLayout(box);
 	Toolkit kit = Toolkit.getDefaultToolkit();

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Professor extends Person {
-	private String Office_adress;
+	private Address Office_address;
 	private int ID_number;
 	private String Title;
 	private double Years_of_experience;
@@ -12,20 +12,20 @@ public class Professor extends Person {
 	public Professor() {
 	}
 	public Professor(String name, String surname, LocalDate date_of_birth, Address address, int mobile_phone,
-			String email, String office_adress, int iD_number, String title, double years_of_experience,
+			String email, Address office_address, int iD_number, String title, double years_of_experience,
 			List<Subject> professors_subjects) {
 		super(name, surname, date_of_birth, address, mobile_phone, email);
-		Office_adress = office_adress;
+		Office_address = office_address;
 		ID_number = iD_number;
 		Title = title;
 		Years_of_experience = years_of_experience;
 		Professors_subjects = professors_subjects;
 	}
-	public String getOffice_adress() {
-		return Office_adress;
+	public Address getOffice_address() {
+		return Office_address;
 	}
-	public void setOffice_adress(String office_adress) {
-		Office_adress = office_adress;
+	public void setOffice_address(Address office_address) {
+		Office_address = office_address;
 	}
 	public int getID_number() {
 		return ID_number;
@@ -48,8 +48,11 @@ public class Professor extends Person {
 	public List<Subject> getProfessors_subjects() {
 		return Professors_subjects;
 	}
-	public void setProfessors_subjects(List<Subject> professors_subjects) {
-		Professors_subjects = professors_subjects;
+	public void add_Professors_subject(Subject professors_subjects) {
+		Professors_subjects.add(professors_subjects);
+	}
+	public void delete_Professors_subject(Subject professors_subjects) {
+		Professors_subjects.remove(professors_subjects);
 	}
 
 }
