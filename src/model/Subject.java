@@ -1,10 +1,13 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 enum Kind_of_semester{Summer, Winter}
-public class Subject {
 
+public class Subject {
+	
+	private int iDSubject;
 	private String subjectName;
 	private Kind_of_semester semesterKind;
 	private int subjectYearExecution;
@@ -15,15 +18,28 @@ public class Subject {
 	
 	public Subject() {
 	}
-	public Subject(String subjectName, Kind_of_semester semesterKind, int subjectYearExecution,
+	public Subject(int iDSubject, String subjectName, Kind_of_semester semesterKind, int subjectYearExecution,
 			Professor professorsSubjects, int eSPBvalue) {
 		super();
+		this.iDSubject = iDSubject;
 		this.subjectName = subjectName;
 		this.semesterKind = semesterKind;
+
 		this.subjectYearExecution = subjectYearExecution;
 		this.professorsSubjects = professorsSubjects;
 		this.eSPBvalue = eSPBvalue;
+		studentsWhoPassed = new ArrayList<Student>();
+		studentsWhoDidntPass = new ArrayList<Student>();
 	}
+	
+	public int getiDSubject() {
+		return iDSubject;
+	}
+	
+	public void setiDSubject(int iDSubject) {
+		this.iDSubject = iDSubject;
+	}
+	
 	public String getSubjectName() {
 		return subjectName;
 	}

@@ -22,9 +22,10 @@ public class TabsWithTabels extends JTabbedPane {
 	public TabsWithTabels() {
 		// TODO Auto-generated constructor stub
 		ProfessorTable professorTable = new ProfessorTable();
+		SubjectTable subjectTable = new SubjectTable();
 		addTab("Students",new JScrollPane());
 		addTab("Professors", new JScrollPane(professorTable));
-		addTab("Subjects",new JScrollPane());
+		addTab("Subjects",new JScrollPane(subjectTable));
 		setBackground(new Color(42, 101, 159));
 	}
 	
