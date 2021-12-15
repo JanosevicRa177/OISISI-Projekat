@@ -1,4 +1,4 @@
-package main;
+package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -32,12 +32,16 @@ public class Mytoolbar extends JToolBar {
 		add(Box.createHorizontalStrut(10)); 
 		
 		JButton Add = new JButton();
+		
 		Add.setToolTipText("Add");
 		ImageIcon Add_icon = new ImageIcon("images/Add.png");
-		Image Scaled_Add_icon = Add_icon.getImage().getScaledInstance(20, 20,Image.SCALE_DEFAULT);
+		Image Scaled_Add_icon = Add_icon.getImage().getScaledInstance(26, 26, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon Add_icon_real = new ImageIcon(Scaled_Add_icon);
 		Add.setIcon(Add_icon_real);
-		Add.setPreferredSize(new Dimension(25,25));
+		
+		Add.setPreferredSize(new Dimension(26,26));
+		Add.setBackground(new Color(42, 101, 159));
+		Add.setBorderPainted(false);
 		panLeft.add(Add);
 		
 		panLeft.add(Box.createHorizontalStrut(10)); 
@@ -46,11 +50,13 @@ public class Mytoolbar extends JToolBar {
 		
 		Edit.setToolTipText("Edit");
 		ImageIcon Edit_icon = new ImageIcon("images/Edit_2.png");
-		Image Scaled_Edit_icon = Edit_icon.getImage().getScaledInstance(23, 23,Image.SCALE_DEFAULT);
+		Image Scaled_Edit_icon = Edit_icon.getImage().getScaledInstance(25, 25, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon Edit_icon_real = new ImageIcon(Scaled_Edit_icon);
 		Edit.setIcon(Edit_icon_real);
 		
 		Edit.setPreferredSize(new Dimension(25,25));
+		Edit.setBackground(new Color(42, 101, 159));
+		Edit.setBorderPainted(false);
 		add(Edit);
 		panLeft.add(Edit);
 		
@@ -60,11 +66,13 @@ public class Mytoolbar extends JToolBar {
 		
 		Delete.setToolTipText("Delete");
 		ImageIcon Delete_icon = new ImageIcon("images/Delete_2.png");
-		Image Scaled_Delete_icon = Delete_icon.getImage().getScaledInstance(25, 25,Image.SCALE_DEFAULT);
+		Image Scaled_Delete_icon = Delete_icon.getImage().getScaledInstance(26, 26, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon Delete_icon_real = new ImageIcon(Scaled_Delete_icon);
 		Delete.setIcon(Delete_icon_real);
 		
-		Delete.setPreferredSize(new Dimension(25,25));
+		Delete.setPreferredSize(new Dimension(26,26));
+		Delete.setBorderPainted(false);
+		Delete.setBackground(new Color(42, 101, 159));
 		panLeft.add(Delete);
 		panLeft.add(Box.createHorizontalStrut(10)); 
 		add(panLeft,BorderLayout.WEST);
@@ -82,11 +90,13 @@ public class Mytoolbar extends JToolBar {
 		
 		Search.setToolTipText("Search");
 		ImageIcon Search_icon = new ImageIcon("images/Search.png");
-		Image Scaled_Search_icon = Search_icon.getImage().getScaledInstance(18, 18,Image.SCALE_DEFAULT);
+		Image Scaled_Search_icon = Search_icon.getImage().getScaledInstance(23, 23, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon Search_icon_real = new ImageIcon(Scaled_Search_icon);
 		Search.setIcon(Search_icon_real);
 		
-		Search.setPreferredSize(new Dimension(25,25));
+		Search.setPreferredSize(new Dimension(23,23));
+		Search.setBorderPainted(false);
+		Search.setBackground(new Color(42, 101, 159));
 		panCenter.add(Search);
 		panCenter.add(Box.createHorizontalStrut(10)); 
 		add(panCenter,BorderLayout.CENTER);

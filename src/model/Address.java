@@ -1,44 +1,44 @@
-package main;
+package model;
 
 public class Address {
 
-	private String Street;
-	private int Number;
-	private String City;
-	private String State;
+	private String street;
+	private int number;
+	private String city;
+	private String state;
 	
 	public Address() {
 	}
 	public Address(String street, int number, String city, String state) {
 		super();
-		Street = street;
-		Number = number;
-		City = city;
-		State = state;
+		this.street = street;
+		this.number = number;
+		this.city = city;
+		this.state = state;
 	}
 	public String getStreet() {
-		return Street;
+		return street;
 	}
 	public void setStreet(String street) {
-		Street = street;
+		this.street = street;
 	}
 	public int getNumber() {
-		return Number;
+		return number;
 	}
 	public void setNumber(int number) {
-		Number = number;
+		this.number = number;
 	}
 	public String getCity() {
-		return City;
+		return city;
 	}
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
 	}
 	public String getState() {
-		return State;
+		return state;
 	}
 	public void setState(String state) {
-		State = state;
+		this.state = state;
 	}
 	
 	

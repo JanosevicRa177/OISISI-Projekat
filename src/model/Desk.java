@@ -1,13 +1,13 @@
-package main;
+package model;
 
 import java.util.List;
 
 public class Desk {
 
-	private int DeskCode;
-	private String DeskName;
-	private Professor DeskChief;
-	private List<Professor> ProfessorsOnDesk;
+	private int deskCode;
+	private String deskName;
+	private Professor deskChief;
+	private List<Professor> professorsOnDesk;
 	
 	public Desk() {
 		super();
@@ -15,43 +15,43 @@ public class Desk {
 	
 	public Desk(int deskCode, String deskName, Professor deskChief, List<Professor> professorsOnDesk) {
 		super();
-		DeskCode = deskCode;
-		DeskName = deskName;
-		DeskChief = deskChief;
-		ProfessorsOnDesk = professorsOnDesk;
-		ProfessorsOnDesk.add(deskChief);
+		this.deskCode = deskCode;
+		this.deskName = deskName;
+		this.deskChief = deskChief;
+		this.professorsOnDesk = professorsOnDesk;
+		professorsOnDesk.add(deskChief);
 	}
 
 	public int getDeskCode() {
-		return DeskCode;
+		return deskCode;
 	}
 
 	public void setDeskCode(int deskCode) {
-		DeskCode = deskCode;
+		this.deskCode = deskCode;
 	}
 
 	public String getDeskName() {
-		return DeskName;
+		return deskName;
 	}
 
 	public void setDeskName(String deskName) {
-		DeskName = deskName;
+		this.deskName = deskName;
 	}
 
 	public Professor getDeskChief() {
-		return DeskChief;
+		return deskChief;
 	}
 
 	public void setDeskChief(Professor deskChief) {
-		DeskChief = deskChief;
+		this.deskChief = deskChief;
 	}
 
 	public List<Professor> getProfessorsOnDesk() {
-		return ProfessorsOnDesk;
+		return professorsOnDesk;
 	}
 
 	public void setProfessorsOnDesk(List<Professor> professorsOnDesk) {
-		ProfessorsOnDesk = professorsOnDesk;
+		this.professorsOnDesk = professorsOnDesk;
 	}
 	
 	
