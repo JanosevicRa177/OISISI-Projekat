@@ -13,13 +13,17 @@ import java.awt.event.KeyEvent;
 
 public class MenuBar extends JMenuBar {
 
-	
-
-		/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
+	private static MenuBar instance = null;
 
+	public static MenuBar getInstance() {
+		if (instance == null) {
+			instance = new MenuBar();
+		}
+		return instance;
+	}
+	
 		public MenuBar() {
 
 			JMenu file = new JMenu("File");

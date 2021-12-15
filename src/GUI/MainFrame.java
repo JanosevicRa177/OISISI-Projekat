@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -12,6 +13,15 @@ public class MainFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static MainFrame instance = null;
+
+	public static MainFrame getInstance() {
+		if (instance == null) {
+			instance = new MainFrame();
+		}
+		return instance;
+	}
+	
 	public MainFrame(){
 	Toolkit kit = Toolkit.getDefaultToolkit();
 	Dimension screenSize = kit.getScreenSize();
@@ -27,6 +37,10 @@ public class MainFrame extends JFrame {
 	setVisible(true);
 	StatusBar sb = new StatusBar();
 	add(sb,BorderLayout.SOUTH);
+	
+	TabsWithTabels twt = new TabsWithTabels();
+	add(twt,BorderLayout.CENTER);
+	
 	sb.setVisible(true);
 	setVisible(true);
 	}

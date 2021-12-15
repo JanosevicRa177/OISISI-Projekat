@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Professor extends Person {
@@ -12,14 +13,13 @@ public class Professor extends Person {
 	public Professor() {
 	}
 	public Professor(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, Address officeAddress, int iDnumber, String title, double experienceYears,
-			List<Subject> professorsSubjects) {
+			String email, Address officeAddress, int iDnumber, String title, double experienceYears) {
 		super(name, surname, dateOfBirth, address, mobilePhone, email);
 		this.officeAddress = officeAddress;
 		this.iDnumber = iDnumber;
 		this.title = title;
 		this.experienceYears = experienceYears;
-		this.professorsSubjects = professorsSubjects;
+		professorsSubjects = new ArrayList<Subject>();
 	}
 	public Address getOfficeAddress() {
 		return officeAddress;

@@ -21,6 +21,15 @@ public class Mytoolbar extends JToolBar {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static Mytoolbar instance = null;
+
+	public static Mytoolbar getInstance() {
+		if (instance == null) {
+			instance = new Mytoolbar();
+		}
+		return instance;
+	}
+	
 	public Mytoolbar() {
 		super(SwingConstants.HORIZONTAL);
 		setPreferredSize(new Dimension(100,40));
