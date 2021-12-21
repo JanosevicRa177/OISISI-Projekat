@@ -25,7 +25,6 @@ public class ProfessorController {
     	if (rowSelectedIndex < 0) {
 			return;
 		}
-    	System.out.println("Usao!");
     	Professor professor = ProfessorBase.getInstance().getRow(rowSelectedIndex);
     	ProfessorBase.getInstance().deleteProfessor(professor.getIDnumber());
     }
