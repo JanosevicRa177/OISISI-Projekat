@@ -17,7 +17,6 @@ public class ChangeListenerTabs implements ChangeListener {
              }else {
             	 TabsWithTabels.getInstance().focusOnSubject();
              }
-             System.out.println(TabsWithTabels.getInstance().getFocus());
          }
 	}
 
