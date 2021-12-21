@@ -24,7 +24,7 @@ public class AbstractActionDelete extends AbstractAction  {
 		return instance;
 	}
 	
-	public AbstractActionDelete() {
+	private AbstractActionDelete() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -36,11 +36,13 @@ public class AbstractActionDelete extends AbstractAction  {
 			ProfessorController.getInstance().deleteProfessor(row);
 			AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();
 			model.fireTableRowsDeleted(row, row);
+			MainFrame.getInstance().validate();
 		} else if(TabsWithTabels.getInstance().getFocus().equals("Subjects")) {
 			int row = SubjectTable.getInstance().getSelectedRow();
 			SubjectController.getInstance().deleteSubject(row);
 			AbstractTableModelSubjects model = (AbstractTableModelSubjects) SubjectTable.getInstance().getModel();
 			model.fireTableRowsDeleted(row, row);
+			
 		}
 		
 	}

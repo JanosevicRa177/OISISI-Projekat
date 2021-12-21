@@ -30,7 +30,7 @@ public class Mytoolbar extends JToolBar {
 		return instance;
 	}
 	
-	public Mytoolbar() {
+	private Mytoolbar() {
 		super(SwingConstants.HORIZONTAL);
 		setPreferredSize(new Dimension(100,40));
 		setBackground(new Color(42, 101, 159));

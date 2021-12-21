@@ -23,7 +23,7 @@ public class ProfessorTable  extends JTable {
 		return instance;
 	}
 	
-	public ProfessorTable() {
+	private ProfessorTable() {
 		// TODO Auto-generated constructor stub
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);

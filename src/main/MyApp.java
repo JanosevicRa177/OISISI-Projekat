@@ -5,7 +5,7 @@ import GUI.MainFrame;
 public class MyApp {
 
 	public static void main(String[] args) {
-		MainFrame mf  = new MainFrame();
+		MainFrame.getInstance();
 	}
 
 }

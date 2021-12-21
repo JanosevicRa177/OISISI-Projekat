@@ -29,7 +29,7 @@ public class StatusBar extends JPanel {
 		return instance;
 	}
 	
-	public StatusBar()
+	private StatusBar()
 	{
 	
 	this.setBackground(new Color(42, 101, 159));
