@@ -9,9 +9,6 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-import Professor.AbstractTableModelProfessors;
-import Professor.ProfessorTable;
-
 public class StudentTable extends JTable{
 	
 	
@@ -34,15 +31,15 @@ private static StudentTable instance = null;
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractTableModelProfessors());
+		this.setModel(new AbstractTableModelStudents());
 		this.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
 				super.mouseReleased(e);
-				int row = ProfessorTable.getInstance().rowAtPoint(e.getPoint());
-				ProfessorTable.getInstance().setRowSelectionInterval(row,row);
+				int row = StudentTable.getInstance().rowAtPoint(e.getPoint());
+				StudentTable.getInstance().setRowSelectionInterval(row,row);
 			}
 			
 		});

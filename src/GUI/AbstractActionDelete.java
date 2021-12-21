@@ -5,9 +5,12 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import Controller.ProfessorController;
+import Controller.StudentController;
 import Controller.SubjectController;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
+import Student.AbstractTableModelStudents;
+import Student.StudentTable;
 import Subject.AbstractTableModelSubjects;
 import Subject.SubjectTable;
 
@@ -42,7 +45,15 @@ public class AbstractActionDelete extends AbstractAction  {
 			SubjectController.getInstance().deleteSubject(row);
 			AbstractTableModelSubjects model = (AbstractTableModelSubjects) SubjectTable.getInstance().getModel();
 			model.fireTableRowsDeleted(row, row);
+			MainFrame.getInstance().validate();
 			
+		}else if(TabsWithTabels.getInstance().getFocus().equals("Students"))
+		{
+			int row = StudentTable.getInstance().getSelectedRow();
+			StudentController.getInstance().deleteSubject(row);
+			AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
+			model.fireTableRowsDeleted(row, row);
+			MainFrame.getInstance().validate();
 		}
 		
 	}

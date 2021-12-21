@@ -20,14 +20,14 @@ public class StudentBase {
 	
 	private StudentBase() {
 		this.students = new ArrayList<Student>();
-		Student student = new Student("mirko","mirkovic",LocalDate.of(2017, 1, 13),
-				new Address("ulica",5,"beograd","srbija"),060,"nekiMail@gmail.com",
-				new Address("ulica",5,"beograd","srbija"),567, "nastavnik",56.6);
+		Student student = new Student("Pera","Peric",LocalDate.of(1994, 1, 20),
+				new Address("Nikole Tesle",5,"Novi Sad","Srbija"),0601241252,"mejlpera@gmail.com",
+				"ra123", 2005,2007,STATUS.B,9.32);
 		students.add(student);
-		students.add(student);
-		students.add(student);
-		students.add(student);
-		students.add(student);
+		Student studentt = new Student("Jova","Jovic",LocalDate.of(1994, 5, 5),
+				new Address("JJZ",7,"Novi Sad","Srbija"),0612145421,"mejljova@gmail.com",
+				"ra124", 2005,2007,STATUS.B,9.12);
+		students.add(studentt);
 		this.colons = new ArrayList<String>();
 		this.colons.add("Index");
 		this.colons.add("Name");
@@ -39,7 +39,7 @@ public class StudentBase {
 	}
 
 	public int getColumnCount() {
-		return 4;
+		return 6;
 	}
 	public int getRowCount() {
 		return students.size();
@@ -67,6 +67,10 @@ public class StudentBase {
 				return "";
 			case 3:
 				return "";
+			case 4:
+				return "";
+			case 5:
+				return "";
 			default:
 				return null;
 			}
@@ -81,11 +85,11 @@ public class StudentBase {
 			case 2:
 				return student.getSurname();
 			case 3:
-				return student.getCurrentYear();
+				return "" + (student.getCurrentYear() - student.getEntryYear());
 			case 4:
-				return student.getStatus();
+				return "" + student.getStatus();
 			case 5:
-				return student.getAvgMark();
+				return "" + student.getAvgMark();
 			default:
 				return null;
 			}

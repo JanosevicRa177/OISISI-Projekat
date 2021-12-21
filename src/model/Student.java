@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 enum STATUS {B,S}
@@ -21,16 +22,15 @@ public class Student extends Person {
 	}
 	
 	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
-			String email, String indexNumber, int entryYear, int currentYear, STATUS status, double avgMark,
-			List<Mark> passedSubjects, List<Subject> unpassedSubjects) {
+			String email, String indexNumber, int entryYear, int currentYear, STATUS status, double avgMark) {
 		super(name, surname, dateOfBirth, adress, mobilePhone, email);
 		this.indexNumber = indexNumber;
 		this.entryYear = entryYear;
 		this.currentYear = currentYear;
 		this.status = status;
 		this.avgMark = avgMark;
-		this.passedSubjects = passedSubjects;
-		this.unpassedSubjects = unpassedSubjects;
+		passedSubjects = new ArrayList<Mark>();
+		unpassedSubjects = new ArrayList<Subject>();
 	}
 
 
@@ -101,6 +101,13 @@ public class Student extends Person {
 
 	public void setUnpassedSubjects(List<Subject> unpassedSubjects) {
 		this.unpassedSubjects = unpassedSubjects;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [indexNumber=" + indexNumber + ", entryYear=" + entryYear + ", currentYear=" + currentYear
+				+ ", status=" + status + ", avgMark=" + avgMark + ", passedSubjects=" + passedSubjects
+				+ ", unpassedSubjects=" + unpassedSubjects + "]";
 	}
 	
 	
