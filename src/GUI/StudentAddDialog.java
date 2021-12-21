@@ -21,6 +21,7 @@ import Student.StudentTable;
 import model.Address;
 import model.Student;
 
+
 public class StudentAddDialog extends JFrame  {
 	
 	/**
@@ -34,7 +35,6 @@ public class StudentAddDialog extends JFrame  {
 	private JTextField inputIndex = new JTextField();
 	private JTextField inputYear = new JTextField();
 	private JTextField inputCell = new JTextField();
-	private int help = 0;
 	
 
 	
@@ -129,7 +129,7 @@ public class StudentAddDialog extends JFrame  {
 			this.add(addStudent);
 			
 			JPanel Current = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			String[] years = { "Prva(1)","Druga(2)", "Treca(3)", "Cetvrta(4)" };
+			String[] years = { "Prva (1)","Druga (2)", "Treca (3)", "Cetvrta (4)" };
 			JLabel labelCurrent = new JLabel("Current year:");
 			labelCurrent.setPreferredSize(labelDim);
 			JComboBox<String> currentList = new JComboBox<String>(years);
@@ -172,11 +172,17 @@ public class StudentAddDialog extends JFrame  {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					System.out.println(inputName.getText());
-					
+					String[] adresa = inputAddress.getText().split("\\W+");
+					String cmb = currentList.getSelectedItem().toString();
+					String[] godina = cmb.split(" ");
+					int god;
+					if(godina[0].equals("Prva"))god = 1;
+					else if(godina[0].equals("Druga"))god = 2;
+					else if(godina[0].equals("Treca"))god = 3;
+					else god = 4;
 					int row = StudentTable.getInstance().getRowCount();
-					help = 1;
 					Student student = new Student(getInputName().getText(),getInputSurname().getText(),LocalDate.of(1994, 5, 5),
-							new Address("JJZ",7,"Novi Sad","Srbija"),Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(), Integer.parseInt(getInputYear().getText()),2007,9.12);
+							new Address(adresa[0],Integer.parseInt(adresa[1]),adresa[2],adresa[3]),Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(), Integer.parseInt(getInputYear().getText()),god,9.12);
 					StudentController.getInstance().addStudent(student);
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsInserted(row, row);
@@ -205,17 +211,6 @@ public class StudentAddDialog extends JFrame  {
 			
 			
 		}
-		
-
-		public int getHelp() {
-			return help;
-		}
-
-
-		public void setHelp(int help) {
-			this.help = help;
-		}
-
 
 		public JTextField getInputName() {
 			return inputName;

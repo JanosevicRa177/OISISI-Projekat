@@ -85,7 +85,7 @@ public class StudentBase {
 			case 2:
 				return student.getSurname();
 			case 3:
-				return "" + (student.getCurrentYear() - student.getEntryYear());
+				return "" + student.getCurrentYear();
 			case 4:
 				return "" + student.getStatus();
 			case 5:
