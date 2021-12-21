@@ -1,4 +1,4 @@
-package GUI;
+package Subject;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -10,7 +10,6 @@ public class AbstractTableModelSubjects extends AbstractTableModel {
 	
 	public AbstractTableModelSubjects() {
 	}
-	
 	public int getRowCount() {
 		return SubjectBase.getInstance().getRowCount();
 	}

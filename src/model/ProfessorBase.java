@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class ProfessorBase {
 
 	private static ProfessorBase instance = null;
@@ -23,6 +25,10 @@ public class ProfessorBase {
 				new Address("ulica",5,"beograd","srbija"),060,"nekiMail@gmail.com",
 				new Address("ulica",5,"beograd","srbija"),567, "nastavnik",56.6);
 		professors.add(professor);
+		professors.add(professor);
+		professors.add(professor);
+		professors.add(professor);
+		professors.add(professor);
 		this.colons = new ArrayList<String>();
 		this.colons.add("Name");
 		this.colons.add("Surname");
@@ -35,7 +41,7 @@ public class ProfessorBase {
 		return 4;
 	}
 	public int getRowCount() {
-		return 10;
+		return professors.size();
 	}
 
 	public List<Professor> getProfessors() {
@@ -84,7 +90,8 @@ public class ProfessorBase {
 		this.professors = professors;
 	}
 	
-	public void addProfessor(String name, String surname, String title, String email) {
+	public void addProfessor(Professor professor) {
+		professors.add(professor);
 	}
 
 	public void deleteProfessor(long id) {
@@ -96,7 +103,22 @@ public class ProfessorBase {
 		}
 	}
 
-	public void changeProfessor(String name, String surname, String title, String email) {
+	public void changeProfessor(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
+			String email, Address officeAddress, int iDnumber, String title, double experienceYears) {
+		for (Professor professor : professors) {
+			if (professor.getIDnumber() == iDnumber) {
+				professor.setName(name);
+				professor.setSurname(surname);
+				professor.setDate_of_birth(dateOfBirth);
+				professor.setAdress(officeAddress);
+				professor.setMobile_phone(iDnumber);
+				professor.setEmail(email);
+				professor.setAdress(officeAddress);
+				professor.setTitle(title);
+				professor.setYears_of_experience(experienceYears);
+				professor.setOfficeAddress(officeAddress);
+			}
+		}
 	}
 	
 }

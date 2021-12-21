@@ -40,7 +40,7 @@ public class Mytoolbar extends JToolBar {
 		panLeft.setPreferredSize(new Dimension(100,30));
 		add(Box.createHorizontalStrut(10)); 
 		
-		JButton Add = new JButton();
+		JButton Add = new JButton(AbstractActionAdd.getInstance());
 		
 		Add.setToolTipText("Add");
 		ImageIcon Add_icon = new ImageIcon("images/Add.png");
@@ -71,7 +71,7 @@ public class Mytoolbar extends JToolBar {
 		
 		panLeft.add(Box.createHorizontalStrut(10)); 
 		
-		JButton Delete = new JButton();
+		JButton Delete = new JButton(AbstractActionDelete.getInstance());
 		
 		Delete.setToolTipText("Delete");
 		ImageIcon Delete_icon = new ImageIcon("images/Delete_2.png");

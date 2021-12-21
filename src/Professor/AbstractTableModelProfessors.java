@@ -1,4 +1,4 @@
-package GUI;
+package Professor;
 
 import javax.swing.table.AbstractTableModel;
 

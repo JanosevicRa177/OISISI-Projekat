@@ -29,19 +29,23 @@ public class MainFrame extends JFrame {
 	int height = screenSize.height;
 	setSize(width*3/4,height*3/4);
 	setLocationRelativeTo(null);
+	setTitle("Studentska služba");
+	
 	MenuBar mb = new MenuBar();
 	this.setJMenuBar(mb);
 	mb.setVisible(true);
+	
 	Mytoolbar toolbar = new Mytoolbar();
 	add(toolbar, BorderLayout.NORTH);
 	setVisible(true);
+	
 	StatusBar sb = new StatusBar();
 	add(sb,BorderLayout.SOUTH);
+	sb.setVisible(true);
 	
 	TabsWithTabels twt = new TabsWithTabels();
 	add(twt,BorderLayout.CENTER);
-	
-	sb.setVisible(true);
+
 	setVisible(true);
 	}
 }

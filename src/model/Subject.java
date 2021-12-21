@@ -11,7 +11,7 @@ public class Subject {
 	private String subjectName;
 	private Kind_of_semester semesterKind;
 	private int subjectYearExecution;
-	private Professor professorsSubjects;
+	private Professor professorOfSubject;
 	private int eSPBvalue;
 	private List<Student> studentsWhoPassed;
 	private List<Student> studentsWhoDidntPass;
@@ -19,14 +19,14 @@ public class Subject {
 	public Subject() {
 	}
 	public Subject(int iDSubject, String subjectName, Kind_of_semester semesterKind, int subjectYearExecution,
-			Professor professorsSubjects, int eSPBvalue) {
+			Professor professorOfSubject, int eSPBvalue) {
 		super();
 		this.iDSubject = iDSubject;
 		this.subjectName = subjectName;
 		this.semesterKind = semesterKind;
 
 		this.subjectYearExecution = subjectYearExecution;
-		this.professorsSubjects = professorsSubjects;
+		this.professorOfSubject = professorOfSubject;
 		this.eSPBvalue = eSPBvalue;
 		studentsWhoPassed = new ArrayList<Student>();
 		studentsWhoDidntPass = new ArrayList<Student>();
@@ -64,12 +64,12 @@ public class Subject {
 		this.subjectYearExecution = subjectYearExecution;
 	}
 
-	public Professor getProfessor_of_Subject() {
-		return professorsSubjects;
+	public Professor getProfessorOfSubject() {
+		return professorOfSubject;
 	}
 
-	public void setProfessor_of_Subject(Professor professorsSubjects) {
-		this.professorsSubjects = professorsSubjects;
+	public void setProfessor_of_Subject(Professor professorOfSubject) {
+		this.professorOfSubject = professorOfSubject;
 	}
 
 	public int getESPBvalue() {

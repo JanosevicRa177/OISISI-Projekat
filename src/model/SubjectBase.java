@@ -35,7 +35,7 @@ public class SubjectBase {
 		return 5;
 	}
 	public int getRowCount() {
-		return 10;
+		return subjects.size();
 	}
 	public List<Subject> getSubjects() {
 		return subjects;
@@ -90,7 +90,8 @@ public class SubjectBase {
 		this.subjects = subjects;
 	}
 	
-	public void addSubject(String name, String surname, String title, String email) {
+	public void addSubject(Subject subject) {
+		subjects.add(subject);
 	}
 
 	public void deleteSubject(long id) {
@@ -102,6 +103,16 @@ public class SubjectBase {
 		}
 	}
 
-	public void changeSubject(String name, String surname, String title, String email) {
+	public void changeSubject(int iDSubject, String subjectName, Kind_of_semester semesterKind, int subjectYearExecution,
+			Professor professorsSubjects,int eSPBvalue) {
+		for (Subject subject : subjects) {
+			if (subject.getiDSubject() == iDSubject) {
+				subject.setSubjectName(subjectName);
+				subject.setSemesterKind(semesterKind);
+				subject.setsubjectYearExecution(subjectYearExecution);
+				subject.setProfessor_of_Subject(professorsSubjects);
+				subject.setESPBvalue(eSPBvalue);
+			}
+		}
 	}
 }
