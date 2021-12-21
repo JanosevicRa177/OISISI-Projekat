@@ -18,7 +18,7 @@ public class StudentBase {
 	private List<Student> students;
 	private List<String> colons;
 	
-	private StudentBase() {
+	public StudentBase() {
 		this.students = new ArrayList<Student>();
 		Student student = new Student("Pera","Peric",LocalDate.of(1994, 1, 20),
 				new Address("Nikole Tesle",5,"Novi Sad","Srbija"),0601241252,"mejlpera@gmail.com",
@@ -45,7 +45,7 @@ public class StudentBase {
 		return students.size();
 	}
 
-	public List<Student> getProfessors() {
+	public List<Student> getStudents() {
 		return students;
 	}
 	
