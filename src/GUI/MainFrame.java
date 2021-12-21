@@ -22,7 +22,7 @@ public class MainFrame extends JFrame {
 		return instance;
 	}
 	
-	public MainFrame(){
+	private MainFrame(){
 	Toolkit kit = Toolkit.getDefaultToolkit();
 	Dimension screenSize = kit.getScreenSize();
 	int width = screenSize.width;
@@ -31,21 +31,20 @@ public class MainFrame extends JFrame {
 	setLocationRelativeTo(null);
 	setTitle("Studentska služba");
 	
-	MenuBar mb = new MenuBar();
+	MenuBar mb = MenuBar.getInstance();
 	this.setJMenuBar(mb);
 	mb.setVisible(true);
 	
-	Mytoolbar toolbar = new Mytoolbar();
+	Mytoolbar toolbar = Mytoolbar.getInstance();
 	add(toolbar, BorderLayout.NORTH);
 	setVisible(true);
 	
-	StatusBar sb = new StatusBar();
+	StatusBar sb = StatusBar.getInstance();
 	add(sb,BorderLayout.SOUTH);
 	sb.setVisible(true);
 	
-	TabsWithTabels twt = new TabsWithTabels();
+	TabsWithTabels twt = TabsWithTabels.getInstance();
 	add(twt,BorderLayout.CENTER);
-
-	setVisible(true);
+	this.validate();
 	}
 }

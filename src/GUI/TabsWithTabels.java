@@ -14,8 +14,6 @@ public class TabsWithTabels extends JTabbedPane {
 	private static final long serialVersionUID = 1L;
 	
 	private static TabsWithTabels instance = null;
-	private ProfessorTable professorTable;
-	private SubjectTable subjectTable;
 	private String FocusTable;
 	
 	public static TabsWithTabels getInstance() {
@@ -25,14 +23,11 @@ public class TabsWithTabels extends JTabbedPane {
 		return instance;
 	}
 	
-	public TabsWithTabels() {
+	private TabsWithTabels() {
 		// TODO Auto-generated constructor stub
-		//FocusTable = "Students";
-		professorTable = new ProfessorTable();
-		subjectTable = new SubjectTable();
 		addTab("Students",new JScrollPane());
-		addTab("Professors", new JScrollPane(professorTable));
-		addTab("Subjects",new JScrollPane(subjectTable));
+		addTab("Professors", new JScrollPane(ProfessorTable.getInstance()));
+		addTab("Subjects",new JScrollPane(SubjectTable.getInstance()));
 		addChangeListener(new ChangeListenerTabs());
 		setBackground(new Color(42, 101, 159));
 	}
