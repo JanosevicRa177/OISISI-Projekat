@@ -50,7 +50,7 @@ public class AbstractActionDelete extends AbstractAction  {
 		}else if(TabsWithTabels.getInstance().getFocus().equals("Students"))
 		{
 			int row = StudentTable.getInstance().getSelectedRow();
-			StudentController.getInstance().deleteSubject(row);
+			StudentController.getInstance().deleteStudent(row);
 			AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 			model.fireTableRowsDeleted(row, row);
 			MainFrame.getInstance().validate();

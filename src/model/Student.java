@@ -20,6 +20,10 @@ public class Student extends Person {
 			String email) {
 		super(name, surname, dateOfBirth, adress, mobilePhone, email);
 	}
+	public Student()
+	{
+		
+	}
 	
 	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
 			String email, String indexNumber, int entryYear, int currentYear, STATUS status, double avgMark) {
@@ -32,10 +36,31 @@ public class Student extends Person {
 		passedSubjects = new ArrayList<Mark>();
 		unpassedSubjects = new ArrayList<Subject>();
 	}
+	
+	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
+			String email, String indexNumber, int entryYear, int currentYear, double avgMark) {
+		super(name, surname, dateOfBirth, adress, mobilePhone, email);
+		this.indexNumber = indexNumber;
+		this.entryYear = entryYear;
+		this.currentYear = currentYear;
+		this.status = STATUS.B;
+		this.avgMark = avgMark;
+		passedSubjects = new ArrayList<Mark>();
+		unpassedSubjects = new ArrayList<Subject>();
+	}
+	
+
 
 
 	public String getIndexNumber() {
 		return indexNumber;
+	}
+	
+	public STATUS getEnumByString(String s)
+	{
+		if(s.equals("Budzet"))return STATUS.B;
+		else return STATUS.S;
+		
 	}
 
 

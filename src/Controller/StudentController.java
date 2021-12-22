@@ -23,7 +23,7 @@ public class StudentController {
 	public void addStudent(Student student) {
 		StudentBase.getInstance().addStudent(student);
 	}
-	public void deleteSubject(int rowSelectedIndex) {
+	public void deleteStudent(int rowSelectedIndex) {
     	if (rowSelectedIndex < 0) {
 			return;
 		}

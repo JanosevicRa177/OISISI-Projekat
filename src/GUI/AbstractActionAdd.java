@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+
+
 public class AbstractActionAdd extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
@@ -16,6 +18,7 @@ public class AbstractActionAdd extends AbstractAction {
 		}
 		return instance;
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -27,7 +30,7 @@ public class AbstractActionAdd extends AbstractAction {
 		else if(TabsWithTabels.getInstance().getFocus().equals("Students")) {
 			StudentAddDialog sd = new StudentAddDialog();
 			sd.setVisible(true);
-	
+			
 			
 		}
 	}

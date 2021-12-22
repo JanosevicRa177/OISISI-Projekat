@@ -135,5 +135,7 @@ public class ProfessorAddDialog extends JDialog{
 		addProfessor.add(buttons);
 		this.add(addProfessor);
 	}
+	
+	
 
 }
