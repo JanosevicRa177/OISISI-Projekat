@@ -25,14 +25,11 @@ public class AbstractActionAdd extends AbstractAction {
 		// TODO Auto-generated method stub
 		if(TabsWithTabels.getInstance().getFocus().equals("Professors")) {
 			ProfessorAddDialog dialog = new ProfessorAddDialog();
-            dialog.setVisible(true);
-			
-		} 
+			dialog.setVisible(true); 
+		}
 		else if(TabsWithTabels.getInstance().getFocus().equals("Students")) {
 			StudentAddDialog sd = new StudentAddDialog();
 			sd.setVisible(true);
-			
-			
 		}
 		else if(TabsWithTabels.getInstance().getFocus().equals("Subjects")) {
 			SubjectAddDialog sd = new SubjectAddDialog();

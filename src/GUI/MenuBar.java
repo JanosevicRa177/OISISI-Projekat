@@ -37,6 +37,7 @@ public class MenuBar extends JMenuBar {
 			
 			
 			JMenuItem fiNew = new JMenuItem("New");
+			fiNew.addActionListener(AbstractActionAdd.getInstance());
 			JMenuItem fiClose = new JMenuItem("Close");
 			JMenuItem fiSave = new JMenuItem("Save");
 			
@@ -110,8 +111,10 @@ public class MenuBar extends JMenuBar {
 			
 			JMenuItem edEdit = new JMenuItem("Edit");
 			JMenuItem edDelete = new JMenuItem("Delete");
+      
 			edEdit.setAccelerator(KeyStroke.getKeyStroke('I',MenuKeyEvent.CTRL_DOWN_MASK));
 			edEdit.setMnemonic(KeyEvent.VK_I);
+
 			edDelete.setAccelerator(KeyStroke.getKeyStroke('D',MenuKeyEvent.CTRL_DOWN_MASK));
 			edDelete.setMnemonic(KeyEvent.VK_D);
 			
