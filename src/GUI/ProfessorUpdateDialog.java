@@ -15,8 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Controller.ProfessorController;
-import GUI.ProfessorAddDialog.AddFocusListener;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import model.Address;
@@ -168,12 +166,11 @@ public class ProfessorUpdateDialog extends JDialog{
 				System.out.println(txtName.getText());
 				String[] address = txtAddress.getText().split(",");
 				String[] oAddress = txtOfficeAddress.getText().split(",");
-				int row = ProfessorTable.getInstance().getRowCount();
-				Professor professor = new Professor(getTxtName().getText(),getTxtSurname().getText(),LocalDate.parse(getTxtDateOfBirth().getText()),
+				int row = ProfessorTable.getInstance().getSelectedRow();
+				ProfessorBase.getInstance().changeProfessor(getTxtName().getText(),getTxtSurname().getText(),LocalDate.parse(getTxtDateOfBirth().getText()),
 						new Address(address[0],address[1],address[2],address[3]),Integer.parseInt(getTxtPhoneNumber().getText()),
 						getTxtEmail().getText(),new Address(oAddress[0],oAddress[1],oAddress[2],oAddress[3]),Integer.parseInt(getTxtIDnumber().getText()),
 						getTxtTitle().getText(),Double.parseDouble(getTxtExperienceYears().getText()));
-				ProfessorController.getInstance().addProfessor(professor);
 				AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();
 				model.fireTableRowsInserted(row, row);
 				MainFrame.getInstance().validate();

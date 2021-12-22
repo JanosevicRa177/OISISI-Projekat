@@ -32,7 +32,9 @@ public class AbstractActionUpdate extends AbstractAction {
 			ProfessorUpdateDialog dialog = new ProfessorUpdateDialog();
 			if(ProfessorTable.getInstance().getSelectedRow() != -1)
 			dialog.setVisible(true);
-			
+		}else if(TabsWithTabels.getInstance().getFocus().equals("Subjects")){
+			SubjectUpdateDialog sd = new SubjectUpdateDialog();
+			sd.setVisible(true);
 		}
 	}
 

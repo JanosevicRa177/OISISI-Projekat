@@ -21,6 +21,8 @@ public class StatusBar extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private static StatusBar instance = null;
+	
+	private String lbl = "";
 
 	public static StatusBar getInstance() {
 		if (instance == null) {
@@ -40,7 +42,10 @@ public class StatusBar extends JPanel {
 	int width = screenSize.width;
 	int height = screenSize.height;
 	this.setPreferredSize(new Dimension(width,height*1/40));
-    JLabel label=new JLabel("Studentska Sluzba");
+	String jlbl = "Studentska sluzba - " + lbl;
+	
+    JLabel label=new JLabel(jlbl);
+
     label.setPreferredSize(new Dimension(150,20));
     this.add(Box.createHorizontalStrut(10));
     this.add(label);
@@ -52,6 +57,11 @@ public class StatusBar extends JPanel {
 	
 	
 	 
+	}
+	
+	public void setLbl(String newlbl)
+	{
+		lbl = newlbl;
 	}
 	
 	

@@ -19,14 +19,14 @@ public class Subject {
 	public Subject() {
 	}
 	public Subject(int iDSubject, String subjectName, Kind_of_semester semesterKind, int subjectYearExecution,
-			Professor professorOfSubject, int eSPBvalue) {
+			 int eSPBvalue) {
 		super();
 		this.iDSubject = iDSubject;
 		this.subjectName = subjectName;
 		this.semesterKind = semesterKind;
 
 		this.subjectYearExecution = subjectYearExecution;
-		this.professorOfSubject = professorOfSubject;
+		//this.professorOfSubject = professorOfSubject;
 		this.eSPBvalue = eSPBvalue;
 		studentsWhoPassed = new ArrayList<Student>();
 		studentsWhoDidntPass = new ArrayList<Student>();
@@ -38,6 +38,11 @@ public class Subject {
 	
 	public void setiDSubject(int iDSubject) {
 		this.iDSubject = iDSubject;
+	}
+	public Kind_of_semester getEnum(String s)
+	{
+		if(s.equals("Letnji"))return Kind_of_semester.Summer;
+		else return Kind_of_semester.Winter;
 	}
 	
 	public String getSubjectName() {

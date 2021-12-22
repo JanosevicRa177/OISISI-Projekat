@@ -6,6 +6,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -14,12 +17,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import Controller.StudentController;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import model.Address;
 import model.Student;
+import model.StudentBase;
 
 
 public class StudentAddDialog extends JFrame  {
@@ -44,9 +49,9 @@ public class StudentAddDialog extends JFrame  {
 			
 			Toolkit kit = Toolkit.getDefaultToolkit();
 			Dimension screenSize = kit.getScreenSize();
-			int width = screenSize.width / 2;
+			int width = screenSize.width;
 			int height = screenSize.height;
-			setSize(width*3/4,height*3/4);
+			setSize(width*1/4 + 50,height*3/4 - 20);
 			setLocationRelativeTo(MainFrame.getInstance());
 			setTitle("Dodavanje Studenta");
 			
@@ -167,16 +172,17 @@ public class StudentAddDialog extends JFrame  {
 			addStudent.add(buttons);
 			this.add(addStudent);
 			
+			
 			add.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					System.out.println(inputName.getText());
-					String[] adresa = inputAddress.getText().split("\\W+");
+					String[] adresa = inputAddress.getText().split(",");
 					String cmb = currentList.getSelectedItem().toString();
 					String[] birth = inputBirth.getText().split("-");
 					Student temp = new Student();
 					String stat = comboType.getSelectedItem().toString();
+					
 					
 					String[] godina = cmb.split(" ");
 					int god;
@@ -185,11 +191,15 @@ public class StudentAddDialog extends JFrame  {
 					else if(godina[0].equals("Treca"))god = 3;
 					else god = 4;
 					int row = StudentTable.getInstance().getRowCount();
-					Student student = new Student(getInputName().getText(),getInputSurname().getText(),LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])),
-							new Address(adresa[0],adresa[1],adresa[2],adresa[3]),Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(), Integer.parseInt(getInputYear().getText()),god,temp.getEnumByString(stat),9.12);
+					String date = "" + birth[0] + "-" + birth[1] + "-" + birth[2]; 
+					LocalDate localDate = LocalDate.parse(date); 
+					Student student = new Student(getInputName().getText(),getInputSurname().getText(),localDate,new Address(adresa[0],adresa[1],adresa[2],adresa[3]),
+							Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(),
+							Integer.parseInt(getInputYear().getText()),god,temp.getEnumByString(stat),9.12);
 					StudentController.getInstance().addStudent(student);
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsInserted(row, row);
+
 					MainFrame.getInstance().validate();
 					setVisible(false);
 					

@@ -31,6 +31,10 @@ public class AbstractActionAdd extends AbstractAction {
 			StudentAddDialog sd = new StudentAddDialog();
 			sd.setVisible(true);
 		}
+		else if(TabsWithTabels.getInstance().getFocus().equals("Subjects")) {
+			SubjectAddDialog sd = new SubjectAddDialog();
+			sd.setVisible(true);
+		}
 	}
 
 }
