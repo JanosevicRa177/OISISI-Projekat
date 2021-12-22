@@ -174,8 +174,9 @@ public class StudentAddDialog extends JFrame  {
 					System.out.println(inputName.getText());
 					String[] adresa = inputAddress.getText().split("\\W+");
 					String cmb = currentList.getSelectedItem().toString();
-					String[] rodj = inputBirth.getText().split(".");
-					
+					String[] birth = inputBirth.getText().split("-");
+					Student temp = new Student();
+					String stat = comboType.getSelectedItem().toString();
 					
 					String[] godina = cmb.split(" ");
 					int god;
@@ -184,8 +185,8 @@ public class StudentAddDialog extends JFrame  {
 					else if(godina[0].equals("Treca"))god = 3;
 					else god = 4;
 					int row = StudentTable.getInstance().getRowCount();
-					Student student = new Student(getInputName().getText(),getInputSurname().getText(),LocalDate.of(1994,4,4),
-							new Address(adresa[0],Integer.parseInt(adresa[1]),adresa[2],adresa[3]),Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(), Integer.parseInt(getInputYear().getText()),god,9.12);
+					Student student = new Student(getInputName().getText(),getInputSurname().getText(),LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])),
+							new Address(adresa[0],Integer.parseInt(adresa[1]),adresa[2],adresa[3]),Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(), Integer.parseInt(getInputYear().getText()),god,temp.getEnumByString(stat),9.12);
 					StudentController.getInstance().addStudent(student);
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsInserted(row, row);

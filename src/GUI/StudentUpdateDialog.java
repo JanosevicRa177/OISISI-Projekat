@@ -204,16 +204,18 @@ public class StudentUpdateDialog extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					String[] adresa = inputAddress.getText().split(",");
-					String[] birth = inputBirth.getText().split(".");
+					String[] birth = inputBirth.getText().split("-");
 					String cmb = currentList.getSelectedItem().toString();
 					String[] godina = cmb.split(" ");
+					String stat = comboType.getSelectedItem().toString();
+					Student temp = new Student();
 					int god;
 					if(godina[0].equals("Prva"))god = 1;
 					else if(godina[0].equals("Druga"))god = 2;
 					else if(godina[0].equals("Treca"))god = 3;
 					else god = 4;
 					
-					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[2]), Integer.parseInt(birth[1]), Integer.parseInt(birth[0])), new Address(adresa[0],Integer.parseInt(adresa[1]),adresa[2],adresa[3]), Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god);
+					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), new Address(adresa[0],Integer.parseInt(adresa[1]),adresa[2],adresa[3]), Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat));
 					int row = StudentTable.getInstance().getSelectedRow();
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsUpdated(row, row);

@@ -124,7 +124,7 @@ public class StudentBase {
 	}
 
 	public void changeStudent(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, String indexNumber, int entryYear, int currentYear) {
+			String email, String indexNumber, int entryYear, int currentYear, STATUS status) {
 		for (Student student : students) {
 			if (student.getIndexNumber().equals(indexNumber)) {
 				student.setName(name);
@@ -136,6 +136,7 @@ public class StudentBase {
 				student.setIndexNumber(indexNumber);
 				student.setEntryYear(entryYear);
 				student.setCurrentYear(currentYear);
+				student.setStatus(status);
 
 			}
 		}

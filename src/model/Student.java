@@ -20,6 +20,10 @@ public class Student extends Person {
 			String email) {
 		super(name, surname, dateOfBirth, adress, mobilePhone, email);
 	}
+	public Student()
+	{
+		
+	}
 	
 	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
 			String email, String indexNumber, int entryYear, int currentYear, STATUS status, double avgMark) {
@@ -50,6 +54,13 @@ public class Student extends Person {
 
 	public String getIndexNumber() {
 		return indexNumber;
+	}
+	
+	public STATUS getEnumByString(String s)
+	{
+		if(s.equals("Budzet"))return STATUS.B;
+		else return STATUS.S;
+		
 	}
 
 
