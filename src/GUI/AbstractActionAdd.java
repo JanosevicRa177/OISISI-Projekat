@@ -1,15 +1,10 @@
 package GUI;
 
 import java.awt.event.ActionEvent;
-import java.time.LocalDate;
 
 import javax.swing.AbstractAction;
 
-import Controller.StudentController;
-import Student.AbstractTableModelStudents;
-import Student.StudentTable;
-import model.Address;
-import model.Student;
+
 
 public class AbstractActionAdd extends AbstractAction {
 

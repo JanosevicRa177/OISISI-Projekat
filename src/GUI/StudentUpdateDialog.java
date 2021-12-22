@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -20,9 +22,9 @@ import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import model.Address;
 import model.Student;
+import model.StudentBase;
 
-
-public class StudentAddDialog extends JFrame  {
+public class StudentUpdateDialog extends JFrame {
 	
 	/**
 	 * 
@@ -40,7 +42,7 @@ public class StudentAddDialog extends JFrame  {
 
 	
 		
-		public StudentAddDialog(){
+		public StudentUpdateDialog(){
 			
 			Toolkit kit = Toolkit.getDefaultToolkit();
 			Dimension screenSize = kit.getScreenSize();
@@ -48,7 +50,7 @@ public class StudentAddDialog extends JFrame  {
 			int height = screenSize.height;
 			setSize(width*3/4,height*3/4);
 			setLocationRelativeTo(MainFrame.getInstance());
-			setTitle("Dodavanje Studenta");
+			setTitle("Izmena Studenta");
 			
 			JPanel addStudent = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			Dimension labelDim = new Dimension((width*1/4)/2, 30);
@@ -59,24 +61,40 @@ public class StudentAddDialog extends JFrame  {
 			JLabel labelName = new JLabel("Name:");
 			labelName.setPreferredSize(labelDim);
 			inputName.setPreferredSize(inputDim);
+			int row = StudentTable.getInstance().getSelectedRow();
+			AbstractTableModelStudents model = (AbstractTableModelStudents) StudentTable.getInstance().getModel();
+			inputName.setText(model.getValueAt(row,1).toString());
 			Name.add(labelName);
 			Name.add(inputName);
 			addStudent.add(Name);
 			this.add(addStudent);
 			
+			StudentBase sb = new StudentBase();
+			List<Student> students = new ArrayList<Student>();
+			for(Student st : sb.getAllStudents())
+			students.add(st);
+			
+			
+			
+			
+			
 			JPanel Surname = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			JLabel labelSurname = new JLabel("Surname:");
 			labelSurname.setPreferredSize(labelDim);
 			inputSurname.setPreferredSize(inputDim);
+			inputSurname.setText(model.getValueAt(row,2).toString());
+			
 			Surname.add(labelSurname);
 			Surname.add(inputSurname);
 			addStudent.add(Surname);
 			this.add(addStudent);
 			
+
 			JPanel BirthDate = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			JLabel labelBirth = new JLabel("BirthDate:");
 			labelBirth.setPreferredSize(labelDim);
 			inputBirth.setPreferredSize(inputDim);
+			inputBirth.setText("" + students.get(row).getDate_of_birth());
 			BirthDate.add(labelBirth);
 			BirthDate.add(inputBirth);
 			addStudent.add(BirthDate);
@@ -87,6 +105,7 @@ public class StudentAddDialog extends JFrame  {
 			labelAddress.setPreferredSize(labelDim);
 			JTextField inputAddress = new JTextField();
 			inputAddress.setPreferredSize(inputDim);
+			inputAddress.setText(students.get(row).getAdress());
 			Address.add(labelAddress);
 			Address.add(inputAddress);
 			addStudent.add(Address);
@@ -96,6 +115,8 @@ public class StudentAddDialog extends JFrame  {
 			JLabel labelCell = new JLabel("Cell Phone:");
 			labelCell.setPreferredSize(labelDim);
 			inputCell.setPreferredSize(inputDim);
+
+			inputCell.setText("" + students.get(row).getMobile_phone());
 			CellNumber.add(labelCell);
 			CellNumber.add(inputCell);
 			addStudent.add(CellNumber);
@@ -105,6 +126,7 @@ public class StudentAddDialog extends JFrame  {
 			JLabel labelEmail = new JLabel("Email:");
 			labelEmail.setPreferredSize(labelDim);
 			inputEmail.setPreferredSize(inputDim);
+			inputEmail.setText(students.get(row).getEmail());
 			Email.add(labelEmail);
 			Email.add(inputEmail);
 			addStudent.add(Email);
@@ -114,6 +136,7 @@ public class StudentAddDialog extends JFrame  {
 			JLabel labelIndex = new JLabel("Index Number:");
 			labelIndex.setPreferredSize(labelDim);
 			inputIndex.setPreferredSize(inputDim);
+			inputIndex.setText(model.getValueAt(row,0).toString());
 			Index.add(labelIndex);
 			Index.add(inputIndex);
 			addStudent.add(Index);
@@ -123,6 +146,8 @@ public class StudentAddDialog extends JFrame  {
 			JLabel labelYear = new JLabel("Year of sign:");
 			labelYear.setPreferredSize(labelDim);
 			inputYear.setPreferredSize(inputDim);
+
+			inputYear.setText("" + students.get(row).getEntryYear());
 			Year.add(labelYear);
 			Year.add(inputYear);
 			addStudent.add(Year);
@@ -134,6 +159,7 @@ public class StudentAddDialog extends JFrame  {
 			labelCurrent.setPreferredSize(labelDim);
 			JComboBox<String> currentList = new JComboBox<String>(years);
 			currentList.setPreferredSize(inputDim);
+			currentList.setSelectedIndex(Integer.parseInt(model.getValueAt(row,3).toString()) - 1);
 			Current.add(labelCurrent);
 			Current.add(currentList);
 			addStudent.add(Current);
@@ -145,6 +171,12 @@ public class StudentAddDialog extends JFrame  {
 			labelType.setPreferredSize(labelDim);
 			JComboBox<String> comboType = new JComboBox<String>(types);
 			comboType.setPreferredSize(inputDim);
+			String stat = "" + students.get(row).getStatus();
+			if(stat.equals("B"))
+				comboType.setSelectedIndex(0);
+			else
+				comboType.setSelectedIndex(1);
+			
 			Type.add(labelType);
 			Type.add(comboType);
 			addStudent.add(Type);
@@ -171,24 +203,21 @@ public class StudentAddDialog extends JFrame  {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					System.out.println(inputName.getText());
-					String[] adresa = inputAddress.getText().split("\\W+");
+					String[] adresa = inputAddress.getText().split(",");
+					String[] birth = inputBirth.getText().split(".");
 					String cmb = currentList.getSelectedItem().toString();
-					String[] rodj = inputBirth.getText().split(".");
-					
-					
 					String[] godina = cmb.split(" ");
 					int god;
 					if(godina[0].equals("Prva"))god = 1;
 					else if(godina[0].equals("Druga"))god = 2;
 					else if(godina[0].equals("Treca"))god = 3;
 					else god = 4;
-					int row = StudentTable.getInstance().getRowCount();
-					Student student = new Student(getInputName().getText(),getInputSurname().getText(),LocalDate.of(1994,4,4),
-							new Address(adresa[0],Integer.parseInt(adresa[1]),adresa[2],adresa[3]),Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(), Integer.parseInt(getInputYear().getText()),god,9.12);
-					StudentController.getInstance().addStudent(student);
+					
+					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[2]), Integer.parseInt(birth[1]), Integer.parseInt(birth[0])), new Address(adresa[0],Integer.parseInt(adresa[1]),adresa[2],adresa[3]), Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god);
+					int row = StudentTable.getInstance().getSelectedRow();
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
-					model.fireTableRowsInserted(row, row);
+					model.fireTableRowsUpdated(row, row);
+					StudentBase.getInstance().printStudente();
 					MainFrame.getInstance().validate();
 					setVisible(false);
 					
@@ -269,6 +298,6 @@ public class StudentAddDialog extends JFrame  {
 
 
 	
-	
+
 
 }

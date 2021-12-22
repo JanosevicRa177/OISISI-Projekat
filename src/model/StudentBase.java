@@ -22,11 +22,11 @@ public class StudentBase {
 		this.students = new ArrayList<Student>();
 		Student student = new Student("Pera","Peric",LocalDate.of(1994, 1, 20),
 				new Address("Nikole Tesle",5,"Novi Sad","Srbija"),0601241252,"mejlpera@gmail.com",
-				"ra123", 2005,2007,STATUS.B,9.32);
+				"ra123", 2005,2,STATUS.B,9.32);
 		students.add(student);
 		Student studentt = new Student("Jova","Jovic",LocalDate.of(1994, 5, 5),
 				new Address("JJZ",7,"Novi Sad","Srbija"),0612145421,"mejljova@gmail.com",
-				"ra124", 2005,2007,STATUS.B,9.12);
+				"ra124", 2005,2,STATUS.S,9.12);
 		students.add(studentt);
 		this.colons = new ArrayList<String>();
 		this.colons.add("Index");
@@ -111,11 +111,22 @@ public class StudentBase {
 			}
 		}
 	}
+	public List<Student> getAllStudents()
+	{
+		return students;
+	}
+	public void printStudente()
+	{
+		for(Student student : students)
+		{
+			System.out.println(student.getName());
+		}
+	}
 
 	public void changeStudent(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, String indexNumber, int entryYear, int currentYear, STATUS status,double avgMark, List<Mark> passedSubjects, List<Subject> unpassedSubjects) {
+			String email, String indexNumber, int entryYear, int currentYear) {
 		for (Student student : students) {
-			if (student.getIndexNumber() == indexNumber) {
+			if (student.getIndexNumber().equals(indexNumber)) {
 				student.setName(name);
 				student.setSurname(surname);
 				student.setDate_of_birth(dateOfBirth);
@@ -125,10 +136,7 @@ public class StudentBase {
 				student.setIndexNumber(indexNumber);
 				student.setEntryYear(entryYear);
 				student.setCurrentYear(currentYear);
-				student.setStatus(status);
-				student.setAvgMark(avgMark);
-				student.setUnpassedSubjects(unpassedSubjects);
-				student.setStatus(status);
+
 			}
 		}
 	}

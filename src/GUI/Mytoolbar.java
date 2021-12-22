@@ -55,7 +55,7 @@ public class Mytoolbar extends JToolBar {
 		
 		panLeft.add(Box.createHorizontalStrut(10)); 
 		
-		JButton Edit = new JButton();
+		JButton Edit = new JButton(AbstractActionUpdate.getInstance());
 		
 		Edit.setToolTipText("Edit");
 		ImageIcon Edit_icon = new ImageIcon("images/Edit_2.png");

@@ -43,7 +43,7 @@ public class Person {
 		dateOfBirth = date_of_birth;
 	}
 	public String getAdress() {
-		return address.getStreet() + address.getNumber() + address.getCity() + address.getState();
+		return address.getStreet() + "," + address.getNumber() + "," + address.getCity() + "," + address.getState();
 	}
 	public void setAdress(Address address) {
 		address.setStreet(address.getStreet());
