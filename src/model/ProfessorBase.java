@@ -54,6 +54,10 @@ public class ProfessorBase {
 	public Professor getRow(int rowIndex) {
 		return this.professors.get(rowIndex);
 	}
+	public List<Professor> getProfList()
+	{
+		return professors;
+	}
 	
 	public String getValueAt(int row, int column) {
 		if (row >= professors.size()) {

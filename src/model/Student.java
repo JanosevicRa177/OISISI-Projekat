@@ -25,6 +25,7 @@ public class Student extends Person {
 		
 	}
 	
+	
 	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
 			String email, String indexNumber, int entryYear, int currentYear, STATUS status, double avgMark) {
 		super(name, surname, dateOfBirth, adress, mobilePhone, email);
@@ -37,17 +38,17 @@ public class Student extends Person {
 		unpassedSubjects = new ArrayList<Subject>();
 	}
 	
-	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
-			String email, String indexNumber, int entryYear, int currentYear, double avgMark) {
-		super(name, surname, dateOfBirth, adress, mobilePhone, email);
-		this.indexNumber = indexNumber;
-		this.entryYear = entryYear;
-		this.currentYear = currentYear;
-		this.status = STATUS.B;
-		this.avgMark = avgMark;
-		passedSubjects = new ArrayList<Mark>();
-		unpassedSubjects = new ArrayList<Subject>();
-	}
+//	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
+//			String email, String indexNumber, int entryYear, int currentYear, double avgMark) {
+//		super(name, surname, dateOfBirth, adress, mobilePhone, email);
+//		this.indexNumber = indexNumber;
+//		this.entryYear = entryYear;
+//		this.currentYear = currentYear;
+//		this.status = STATUS.B;
+//		this.avgMark = avgMark;
+//		passedSubjects = new ArrayList<Mark>();
+//		unpassedSubjects = new ArrayList<Subject>();
+//	}
 	
 
 

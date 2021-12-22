@@ -22,7 +22,7 @@ public class SubjectBase {
 		Professor professor = new Professor("mirko","mirkovic",LocalDate.of(2017, 1, 13),
 				new Address("ulica",5,"beograd","srbija"),060,"nekiMail@gmail.com",
 				new Address("ulica",5,"beograd","srbija"),567, "nastavnik",56.6);
-		Subject subject = new Subject(150,"Matematika",Kind_of_semester.Summer,2019,professor,8);
+		Subject subject = new Subject(150,"Matematika",Kind_of_semester.Summer,2019,8);
 		subjects.add(subject);
 		this.colons = new ArrayList<String>();
 		this.colons.add("IDsubject");
@@ -89,7 +89,8 @@ public class SubjectBase {
 	public void setSubjects(List<Subject> subjects) {
 		this.subjects = subjects;
 	}
-	
+
+
 	public void addSubject(Subject subject) {
 		subjects.add(subject);
 	}
@@ -104,13 +105,12 @@ public class SubjectBase {
 	}
 
 	public void changeSubject(int iDSubject, String subjectName, Kind_of_semester semesterKind, int subjectYearExecution,
-			Professor professorsSubjects,int eSPBvalue) {
+		int eSPBvalue) {
 		for (Subject subject : subjects) {
 			if (subject.getiDSubject() == iDSubject) {
 				subject.setSubjectName(subjectName);
 				subject.setSemesterKind(semesterKind);
 				subject.setsubjectYearExecution(subjectYearExecution);
-				subject.setProfessor_of_Subject(professorsSubjects);
 				subject.setESPBvalue(eSPBvalue);
 			}
 		}

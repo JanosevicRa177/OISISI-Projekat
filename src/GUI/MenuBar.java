@@ -29,6 +29,12 @@ public class MenuBar extends JMenuBar {
 			JMenu file = new JMenu("File");
 			JMenu edit = new JMenu("Edit");
 			JMenu help = new JMenu("Help");
+			file.setMnemonic(KeyEvent.VK_F);
+			edit.setMnemonic(KeyEvent.VK_E);
+			help.setMnemonic(KeyEvent.VK_H);
+			
+			
+			
 			
 			JMenuItem fiNew = new JMenuItem("New");
 			JMenuItem fiClose = new JMenuItem("Close");
@@ -104,8 +110,8 @@ public class MenuBar extends JMenuBar {
 			
 			JMenuItem edEdit = new JMenuItem("Edit");
 			JMenuItem edDelete = new JMenuItem("Delete");
-			edEdit.setAccelerator(KeyStroke.getKeyStroke('E',MenuKeyEvent.CTRL_DOWN_MASK));
-			edEdit.setMnemonic(KeyEvent.VK_E);
+			edEdit.setAccelerator(KeyStroke.getKeyStroke('I',MenuKeyEvent.CTRL_DOWN_MASK));
+			edEdit.setMnemonic(KeyEvent.VK_I);
 			edDelete.setAccelerator(KeyStroke.getKeyStroke('D',MenuKeyEvent.CTRL_DOWN_MASK));
 			edDelete.setMnemonic(KeyEvent.VK_D);
 			
@@ -127,8 +133,8 @@ public class MenuBar extends JMenuBar {
 			JMenuItem heHelp = new JMenuItem("Help");
 			JMenuItem heAbout = new JMenuItem("About");
 			
-			heHelp.setAccelerator(KeyStroke.getKeyStroke('H',MenuKeyEvent.CTRL_DOWN_MASK));
-			heHelp.setMnemonic(KeyEvent.VK_H);
+			heHelp.setAccelerator(KeyStroke.getKeyStroke('L',MenuKeyEvent.CTRL_DOWN_MASK));
+			heHelp.setMnemonic(KeyEvent.VK_L);
 			heAbout.setAccelerator(KeyStroke.getKeyStroke('A',MenuKeyEvent.CTRL_DOWN_MASK));
 			heAbout.setMnemonic(KeyEvent.VK_A);
 			

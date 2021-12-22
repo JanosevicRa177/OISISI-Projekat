@@ -28,6 +28,11 @@ public class AbstractActionUpdate extends AbstractAction {
 			sd.setVisible(true);
 		
 		}
+		else if(TabsWithTabels.getInstance().getFocus().equals("Subjects"))
+		{
+			SubjectUpdateDialog sd = new SubjectUpdateDialog();
+			sd.setVisible(true);
+		}
 			
 		
 	}
