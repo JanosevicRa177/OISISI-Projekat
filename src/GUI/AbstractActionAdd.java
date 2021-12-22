@@ -23,8 +23,6 @@ public class AbstractActionAdd extends AbstractAction {
 		if(TabsWithTabels.getInstance().getFocus().equals("Professors")) {
 			ProfessorAddDialog dialog = new ProfessorAddDialog();
 			dialog.setVisible(true);
-		} else {
-			
 		}
 	}
 
