@@ -22,8 +22,8 @@ public class ProfessorBase {
 	private ProfessorBase() {
 		this.professors = new ArrayList<Professor>();
 		Professor professor = new Professor("mirko","mirkovic",LocalDate.of(2017, 1, 13),
-				new Address("ulica",5,"beograd","srbija"),060,"nekiMail@gmail.com",
-				new Address("ulica",5,"beograd","srbija"),567, "nastavnik",56.6);
+				new Address("ulica","5","beograd","srbija"),060,"nekiMail@gmail.com",
+				new Address("ulica","5","beograd","srbija"),567, "nastavnik",56.6);
 		professors.add(professor);
 		professors.add(professor);
 		professors.add(professor);

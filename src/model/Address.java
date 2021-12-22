@@ -3,13 +3,13 @@ package model;
 public class Address {
 
 	private String street;
-	private int number;
+	private String number;
 	private String city;
 	private String state;
 	
 	public Address() {
 	}
-	public Address(String street, int number, String city, String state) {
+	public Address(String street, String number, String city, String state) {
 		super();
 		this.street = street;
 		this.number = number;
@@ -22,10 +22,10 @@ public class Address {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	public String getCity() {
