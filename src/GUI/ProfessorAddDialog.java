@@ -236,11 +236,6 @@ public class ProfessorAddDialog extends JDialog{
 		return txtTitle;
 	}
 	
-	public JTextField getTxtExperienceYears() {
-		return txtExperienceYears;
-	}
-
-	
 	public class AddFocusListener implements FocusListener {
 		String focusedTxt;
 		@Override

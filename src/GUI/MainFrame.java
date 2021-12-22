@@ -45,6 +45,7 @@ public class MainFrame extends JFrame {
 	
 	TabsWithTabels twt = TabsWithTabels.getInstance();
 	add(twt,BorderLayout.CENTER);
+	twt.focusOnStudent();
 	this.validate();
 	}
 }
