@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import Professor.ProfessorTable;
+
 public class AbstractActionUpdate extends AbstractAction {
 	/**
 	 * 
@@ -26,11 +28,12 @@ public class AbstractActionUpdate extends AbstractAction {
 		if(TabsWithTabels.getInstance().getFocus().equals("Students")) {
 			StudentUpdateDialog sd = new StudentUpdateDialog();
 			sd.setVisible(true);
-		
-		}
+		}else if(TabsWithTabels.getInstance().getFocus().equals("Professors")) {
+			ProfessorUpdateDialog dialog = new ProfessorUpdateDialog();
+			if(ProfessorTable.getInstance().getSelectedRow() != -1)
+			dialog.setVisible(true);
 			
-		
+		}
 	}
-	
 
 }

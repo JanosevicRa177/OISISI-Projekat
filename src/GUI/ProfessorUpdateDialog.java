@@ -1,14 +1,12 @@
 package GUI;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -18,14 +16,16 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Controller.ProfessorController;
+import GUI.ProfessorAddDialog.AddFocusListener;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import model.Address;
 import model.Professor;
+import model.ProfessorBase;
 
-public class ProfessorAddDialog extends JDialog{
+public class ProfessorUpdateDialog extends JDialog{
 
-	private static final long serialVersionUID = -4151970749929099461L;
+	private static final long serialVersionUID = -5514489287735120552L;
 	
 	private JTextField txtName = new JTextField();
 	private JTextField txtSurname = new JTextField();
@@ -38,7 +38,7 @@ public class ProfessorAddDialog extends JDialog{
 	private JTextField txtTitle = new JTextField();
 	private JTextField txtExperienceYears = new JTextField();
 	
-	public ProfessorAddDialog() {
+	public ProfessorUpdateDialog() {
 		super(MainFrame.getInstance(), "Adding Professor", true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
@@ -46,117 +46,122 @@ public class ProfessorAddDialog extends JDialog{
 		int height = screenSize.height;
 		setSize(width*1/4+50, height*3/4-50);
 		setLocationRelativeTo(MainFrame.getInstance());
-		JPanel addProfessor = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		
+		JPanel updateProfessor = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		Dimension dim1 = new Dimension((width*1/4)/2, 30);
 		Dimension dim2 = new Dimension((width*1/4+25)/2, 20);
+		
+		int row = ProfessorTable.getInstance().getSelectedRow();
+		if(row == -1) return;
+		ProfessorBase professorsBase = ProfessorBase.getInstance();
+		List<Professor> professors = professorsBase.getProfessors();
 		
 		JPanel Name = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblName = new JLabel("Name*:");
 		lblName.setPreferredSize(dim1);
 		txtName.setPreferredSize(dim2);
 		txtName.setName("txtName");
-		txtName.addFocusListener(new AddFocusListener());
+		txtName.setText(professors.get(row).getName());
 		Name.add(lblName);
 		Name.add(txtName);
-		addProfessor.add(Name);
+		updateProfessor.add(Name);
 		
 		JPanel Surname = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblSurname = new JLabel("Surname*:");
 		lblSurname.setPreferredSize(dim1);
 		txtSurname.setPreferredSize(dim2);
 		txtSurname.setName("txtSurname");
-		txtSurname.addFocusListener(new AddFocusListener());
+		txtSurname.setText(professors.get(row).getSurname());
 		Surname.add(lblSurname);
 		Surname.add(txtSurname);
-		addProfessor.add(Surname);
+		updateProfessor.add(Surname);
 		
 		JPanel dateOfBirth = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblDateOfBirth = new JLabel("DateOfBirth*:");
 		lblDateOfBirth.setPreferredSize(dim1);
 		txtDateOfBirth.setPreferredSize(dim2);
 		txtDateOfBirth.setName("txtDateOfBirth");
-		txtDateOfBirth.addFocusListener(new AddFocusListener());
+		txtDateOfBirth.setText("" + professors.get(row).getDate_of_birth());
 		dateOfBirth.add(lblDateOfBirth);
 		dateOfBirth.add(txtDateOfBirth);
-		addProfessor.add(dateOfBirth);
+		updateProfessor.add(dateOfBirth);
 		
 		JPanel address = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblAddress = new JLabel("Address*:");
 		lblAddress.setPreferredSize(dim1);
 		txtAddress.setPreferredSize(dim2);
 		txtAddress.setName("txtAddress");
-		txtAddress.addFocusListener(new AddFocusListener());
+		txtAddress.setText(professors.get(row).getAdress());
 		address.add(lblAddress);
 		address.add(txtAddress);
-		addProfessor.add(address);
+		updateProfessor.add(address);
 		
 		JPanel phoneNumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblPhoneNumber = new JLabel("PhoneNumber*:");
 		lblPhoneNumber.setPreferredSize(dim1);
 		txtPhoneNumber.setPreferredSize(dim2);
 		txtPhoneNumber.setName("txtPhoneNumber");
-		txtPhoneNumber.addFocusListener(new AddFocusListener());
+		txtPhoneNumber.setText("" + professors.get(row).getMobile_phone());
 		phoneNumber.add(lblPhoneNumber);
 		phoneNumber.add(txtPhoneNumber);
-		addProfessor.add(phoneNumber);
+		updateProfessor.add(phoneNumber);
 		
 		JPanel email = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblEmail = new JLabel("Email*:");
 		lblEmail.setPreferredSize(dim1);
 		txtEmail.setPreferredSize(dim2);
 		txtEmail.setName("txtEmail");
-		txtEmail.addFocusListener(new AddFocusListener());
+		txtEmail.setText(professors.get(row).getEmail());
 		email.add(lblEmail);
 		email.add(txtEmail);
-		addProfessor.add(email);
+		updateProfessor.add(email);
 		
 		JPanel officeAddress = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblOfficeAddress = new JLabel("Office Address*:");
 		lblOfficeAddress.setPreferredSize(dim1);
 		txtOfficeAddress.setPreferredSize(dim2);
 		txtOfficeAddress.setName("txtOfficeAddress");
-		txtOfficeAddress.addFocusListener(new AddFocusListener());
+		txtOfficeAddress.setText(professors.get(row).getOfficeAddress());
 		officeAddress.add(lblOfficeAddress);
 		officeAddress.add(txtOfficeAddress);
-		addProfessor.add(officeAddress);
+		updateProfessor.add(officeAddress);
 		
 		JPanel iDnumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblIDnumber = new JLabel("ID number*:");
 		lblIDnumber.setPreferredSize(dim1);
 		txtIDnumber.setPreferredSize(dim2);
 		txtIDnumber.setName("txtIDnumber");
-		txtIDnumber.addFocusListener(new AddFocusListener());
+		txtIDnumber.setText("" + professors.get(row).getIDnumber());
 		iDnumber.add(lblIDnumber);
 		iDnumber.add(txtIDnumber);
-		addProfessor.add(iDnumber);
+		updateProfessor.add(iDnumber);
 		
 		JPanel title = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblTitle = new JLabel("Title*:");
 		lblTitle.setPreferredSize(dim1);
 		txtTitle.setPreferredSize(dim2);
 		txtTitle.setName("txtTitle");
-		txtTitle.addFocusListener(new AddFocusListener());
+		txtTitle.setText(professors.get(row).getTitle());
 		title.add(lblTitle);
 		title.add(txtTitle);
-		addProfessor.add(title);
+		updateProfessor.add(title);
 		
 		JPanel experienceYears = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel lblExperienceYears = new JLabel("Experience Years*:");
 		lblExperienceYears.setPreferredSize(dim1);
 		txtExperienceYears.setPreferredSize(dim2);
 		txtExperienceYears.setName("txtExperienceYears");
-		txtExperienceYears.addFocusListener(new AddFocusListener());
+		txtExperienceYears.setText("" + professors.get(row).getYears_of_experience());
 		experienceYears.add(lblExperienceYears);
 		experienceYears.add(txtExperienceYears);
-		addProfessor.add(experienceYears);
-		
+		updateProfessor.add(experienceYears);
 		
 		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		Dimension dim = new Dimension(100, 25);
-		JButton add = new JButton();
-		add.setText("Add");
-		add.setPreferredSize(dim);
-		add.addActionListener(new ActionListener() {
+		JButton update = new JButton();
+		update.setText("Update");
+		update.setPreferredSize(dim);
+		update.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -173,10 +178,9 @@ public class ProfessorAddDialog extends JDialog{
 				model.fireTableRowsInserted(row, row);
 				MainFrame.getInstance().validate();
 				setVisible(false);
-				
 			}
 		});
-		buttons.add(add);
+		buttons.add(update);
 		
 		buttons.add(Box.createHorizontalStrut(width/50));
 		
@@ -192,10 +196,10 @@ public class ProfessorAddDialog extends JDialog{
 		});
 		buttons.add(cancel);
 		
-		addProfessor.add(buttons);
-		this.add(addProfessor); 
+		updateProfessor.add(buttons);
+		this.add(updateProfessor); 
+		
 	}
-	
 	public JTextField getTxtName() {
 		return txtName;
 	}
@@ -235,32 +239,5 @@ public class ProfessorAddDialog extends JDialog{
 	public JTextField getTxtExperienceYears() {
 		return txtExperienceYears;
 	}
-	
-	public class AddFocusListener implements FocusListener {
-		String focusedTxt;
-		@Override
-		public void focusGained(FocusEvent arg0) {
 
-			JTextField txt = (JTextField) arg0.getComponent();
-			focusedTxt = txt.getName();
-			txt.setBackground(Color.WHITE);
-
-		}
-
-		@Override
-		public void focusLost(FocusEvent arg0) {
-			JTextField txt = (JTextField) arg0.getComponent();
-			txt.setBackground(Color.GRAY);
-			if (txt.getName().equals(focusedTxt)) {
-				if (txt.getText().trim().equals("") || txt.getText().trim().equals("Unesite Vrednost...")) {
-					txt.setText("Unesite Vrednost...");
-					txt.requestFocus();
-					txt.setForeground(Color.RED);
-				} else {
-					txt.setForeground(Color.BLACK);
-				}
-			}
-		}
-	}
-	
 }

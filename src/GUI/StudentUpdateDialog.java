@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Controller.StudentController;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import model.Address;
@@ -69,13 +68,10 @@ public class StudentUpdateDialog extends JFrame {
 			addStudent.add(Name);
 			this.add(addStudent);
 			
-			StudentBase sb = new StudentBase();
+			StudentBase sb = StudentBase.getInstance();
 			List<Student> students = new ArrayList<Student>();
 			for(Student st : sb.getAllStudents())
 			students.add(st);
-			
-			
-			
 			
 			
 			JPanel Surname = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -215,7 +211,7 @@ public class StudentUpdateDialog extends JFrame {
 					else if(godina[0].equals("Treca"))god = 3;
 					else god = 4;
 					
-					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), new Address(adresa[0],Integer.parseInt(adresa[1]),adresa[2],adresa[3]), Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat));
+					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), new Address(adresa[0],adresa[1],adresa[2],adresa[3]), Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat));
 					int row = StudentTable.getInstance().getSelectedRow();
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsUpdated(row, row);

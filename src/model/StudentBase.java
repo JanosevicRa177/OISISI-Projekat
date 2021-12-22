@@ -18,14 +18,14 @@ public class StudentBase {
 	private List<Student> students;
 	private List<String> colons;
 	
-	public StudentBase() {
+	private StudentBase() {
 		this.students = new ArrayList<Student>();
 		Student student = new Student("Pera","Peric",LocalDate.of(1994, 1, 20),
-				new Address("Nikole Tesle",5,"Novi Sad","Srbija"),0601241252,"mejlpera@gmail.com",
+				new Address("Nikole Tesle","5","Novi Sad","Srbija"),0601241252,"mejlpera@gmail.com",
 				"ra123", 2005,2,STATUS.B,9.32);
 		students.add(student);
 		Student studentt = new Student("Jova","Jovic",LocalDate.of(1994, 5, 5),
-				new Address("JJZ",7,"Novi Sad","Srbija"),0612145421,"mejljova@gmail.com",
+				new Address("JJZ","5","Novi Sad","Srbija"),0612145421,"mejljova@gmail.com",
 				"ra124", 2005,2,STATUS.S,9.12);
 		students.add(studentt);
 		this.colons = new ArrayList<String>();

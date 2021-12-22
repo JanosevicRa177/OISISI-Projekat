@@ -67,11 +67,11 @@ public class ProfessorController {
 			delete.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-		    	Professor professor = ProfessorBase.getInstance().getRow(rowSelectedIndex);
-		    	ProfessorBase.getInstance().deleteProfessor(professor.getIDnumber());
-				setVisible(false);
-			}
+					// TODO Auto-generated method stub
+			    	Professor professor = ProfessorBase.getInstance().getRow(rowSelectedIndex);
+			    	ProfessorBase.getInstance().deleteProfessor(professor.getIDnumber());
+					setVisible(false);
+				}
 			});
 			Buttons.add(delete);
 			JButton cancel = new JButton();

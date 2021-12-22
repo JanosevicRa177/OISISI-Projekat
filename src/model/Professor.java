@@ -21,8 +21,8 @@ public class Professor extends Person {
 		this.experienceYears = experienceYears;
 		professorsSubjects = new ArrayList<Subject>();
 	}
-	public Address getOfficeAddress() {
-		return officeAddress;
+	public String getOfficeAddress() {
+		return officeAddress.getStreet() + "," + officeAddress.getNumber() + "," + officeAddress.getCity() + "," + officeAddress.getState();
 	}
 	public void setOfficeAddress(Address officeAddress) {
 		this.officeAddress = officeAddress;

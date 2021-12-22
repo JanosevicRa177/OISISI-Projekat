@@ -186,7 +186,7 @@ public class StudentAddDialog extends JFrame  {
 					else god = 4;
 					int row = StudentTable.getInstance().getRowCount();
 					Student student = new Student(getInputName().getText(),getInputSurname().getText(),LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])),
-							new Address(adresa[0],Integer.parseInt(adresa[1]),adresa[2],adresa[3]),Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(), Integer.parseInt(getInputYear().getText()),god,temp.getEnumByString(stat),9.12);
+							new Address(adresa[0],adresa[1],adresa[2],adresa[3]),Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(), Integer.parseInt(getInputYear().getText()),god,temp.getEnumByString(stat),9.12);
 					StudentController.getInstance().addStudent(student);
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsInserted(row, row);
