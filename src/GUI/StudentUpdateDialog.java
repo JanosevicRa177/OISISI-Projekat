@@ -68,6 +68,7 @@ public class StudentUpdateDialog extends JFrame {
 			this.add(addStudent);
 			
 			List<Student> students = new ArrayList<Student>();
+			students = StudentBase.getInstance().getStudents();
 			JPanel Surname = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			JLabel labelSurname = new JLabel("Surname:");
 			labelSurname.setPreferredSize(labelDim);
