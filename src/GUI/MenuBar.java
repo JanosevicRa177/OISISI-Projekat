@@ -114,9 +114,14 @@ public class MenuBar extends JMenuBar {
       
 			edEdit.setAccelerator(KeyStroke.getKeyStroke('I',MenuKeyEvent.CTRL_DOWN_MASK));
 			edEdit.setMnemonic(KeyEvent.VK_I);
+			
+
+			edEdit.addActionListener(AbstractActionUpdate.getInstance());
 
 			edDelete.setAccelerator(KeyStroke.getKeyStroke('D',MenuKeyEvent.CTRL_DOWN_MASK));
 			edDelete.setMnemonic(KeyEvent.VK_D);
+
+			edDelete.addActionListener(AbstractActionDelete.getInstance());
 			
 			ImageIcon IconEdit = new ImageIcon("images/edit.jpg");
 			Image scaleedit = IconEdit.getImage().getScaledInstance(15, 15,Image.SCALE_DEFAULT);

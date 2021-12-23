@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,7 +31,7 @@ import model.StudentBase;
 import model.Subject;
 import model.SubjectBase;
 
-public class SubjectUpdateDialog extends JFrame {
+public class SubjectUpdateDialog extends JDialog {
 	/**
 	 * 
 	 */
@@ -46,6 +49,7 @@ public class SubjectUpdateDialog extends JFrame {
 	
 		
 		public SubjectUpdateDialog(){
+			super(MainFrame.getInstance(), "Update Subject", true);
 			
 			Toolkit kit = Toolkit.getDefaultToolkit();
 			Dimension screenSize = kit.getScreenSize();
@@ -176,6 +180,12 @@ public class SubjectUpdateDialog extends JFrame {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
+					if(getInputName().getText().equals("") | getInputEspb().getText().matches("[0-9]+") |!getInputID().getText().matches("[0-9]+") |  inputExecution.getText().equals("") )
+					{
+						InputErrorDialog dialog = new InputErrorDialog();
+						dialog.setVisible(true);
+						return;
+					}
 					Subject s = new Subject();
 					SubjectBase.getInstance().changeSubject(Integer.parseInt(inputID.getText()) , inputName.getText(),s.getEnum(comboSemester.getSelectedItem().toString()),Integer.parseInt(inputExecution.getText()), Integer.parseInt(inputEspb.getText()));
 					int row = SubjectTable.getInstance().getSelectedRow();
@@ -206,6 +216,16 @@ public class SubjectUpdateDialog extends JFrame {
 			
 			
 			
+		}
+		boolean isValidDate(String input) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		     try {
+		          format.parse(input);
+		          return true;
+		     }
+		     catch(ParseException e){
+		          return false;
+		     }
 		}
 
 		public JTextField getInputName() {

@@ -5,12 +5,15 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,7 +30,7 @@ import model.ProfessorBase;
 import model.Student;
 import model.Subject;
 
-public class SubjectAddDialog extends JFrame {
+public class SubjectAddDialog extends JDialog {
 
 	/**
 	 * 
@@ -46,6 +49,7 @@ public class SubjectAddDialog extends JFrame {
 	
 		
 		public SubjectAddDialog(){
+			super(MainFrame.getInstance(), "Adding Subject", true);
 			
 			Toolkit kit = Toolkit.getDefaultToolkit();
 			Dimension screenSize = kit.getScreenSize();
@@ -154,6 +158,12 @@ public class SubjectAddDialog extends JFrame {
 			add.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
+					if(getInputName().getText().equals("") | getInputEspb().getText().matches("[0-9]+") |!getInputID().getText().matches("[0-9]+") |  inputExecution.getText().equals("") )
+					{
+						InputErrorDialog dialog = new InputErrorDialog();
+						dialog.setVisible(true);
+						return;
+					}
 					Subject s = new Subject();
 					int row = StudentTable.getInstance().getRowCount();
 					Subject subject = new Subject(Integer.parseInt(inputID.getText()),inputName.getText(),s.getEnum(comboSemester.getSelectedItem().toString()),Integer.parseInt(inputExecution.getText()),Integer.parseInt(inputEspb.getText()));
@@ -184,6 +194,16 @@ public class SubjectAddDialog extends JFrame {
 			
 			
 			
+		}
+		boolean isValidDate(String input) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		     try {
+		          format.parse(input);
+		          return true;
+		     }
+		     catch(ParseException e){
+		          return false;
+		     }
 		}
 
 		public JTextField getInputName() {

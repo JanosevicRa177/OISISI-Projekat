@@ -1,7 +1,9 @@
 package GUI;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,7 +24,9 @@ public class StatusBar extends JPanel {
 
 	private static StatusBar instance = null;
 	
-	private String lbl = "";
+	private String lbl;
+	private static JPanel panLeft =new JPanel();
+	private static JLabel p = new JLabel("currentTab");
 
 	public static StatusBar getInstance() {
 		if (instance == null) {
@@ -33,40 +37,67 @@ public class StatusBar extends JPanel {
 	
 	private StatusBar()
 	{
-	
+	setLayout(new BorderLayout());
 	this.setBackground(new Color(42, 101, 159));
-	BoxLayout box=new BoxLayout(this, BoxLayout.X_AXIS);
-	this.setLayout(box);
-	Toolkit kit = Toolkit.getDefaultToolkit();
-	Dimension screenSize = kit.getScreenSize();
-	int width = screenSize.width;
-	int height = screenSize.height;
-	this.setPreferredSize(new Dimension(width,height*1/40));
-	String jlbl;
-	if(TabsWithTabels.getInstance().getFocus().equals("Students")) {
-		jlbl = "Studentska sluzba - Students";
-	}else if(TabsWithTabels.getInstance().getFocus().equals("Professors")) {
-		jlbl = "Studentska sluzba - Professors";
-	} else {
-		jlbl = "Studentska sluzba - Subjects";
-	}
+	//	Toolkit kit = Toolkit.getDefaultToolkit();
+//    Dimension screenSize = kit.getScreenSize();
+//    int width = screenSize.width;
+//    int height = screenSize.height;
+//    this.setPreferredSize(new Dimension(width,height*1/40));
+	
+	String jlbl = "Studentska sluzba - ";
+	
     JLabel label=new JLabel(jlbl);
-    label.setPreferredSize(new Dimension(200,20));
-    this.add(Box.createHorizontalStrut(10));
-    this.add(label);
-    this.add(Box.createHorizontalGlue());
-    String timeStamp = new SimpleDateFormat("HH:mm dd.MM.yyyy").format(Calendar.getInstance().getTime());
-    this.add(new JLabel(timeStamp));
-    this.add(Box.createHorizontalStrut(30));
+    panLeft.add(label);
+    panLeft.setBackground(new Color(42, 101, 159));
+    JPanel panRight =new JPanel();
+    add(panLeft,BorderLayout.WEST);
+    JLabel dateLabel = new JLabel();
+    JLabel timeLabel = new JLabel();
+    TimerThread tt = new TimerThread(dateLabel,timeLabel);
+    tt.start();
+    panRight.setBackground(new Color(42, 101, 159));
+    panRight.add(timeLabel);
+    panRight.add(dateLabel);
+    panRight.setBackground(new Color(42, 101, 159));
+    
+    add(Box.createHorizontalGlue());
+    
+    
+   
+    add(panRight,BorderLayout.EAST);
+    //this.add(Box.createHorizontalStrut(30));
+    //this.add(Box.createVerticalStrut(10));
 	
 	
-	
+	setLbl(1);
 	 
 	}
 	
-	public void setLbl(String newlbl)
+	public void setLbl(int newlbl)
 	{
-		lbl = newlbl;
+		System.out.println("Usao u funkciju");
+		String tmp = "";
+		switch(newlbl)
+		{
+		case 1:
+			tmp = "Students";
+			break;
+		case 2:
+			tmp = "Professors";
+			break;
+		case 3:
+			tmp = "Subjects";
+			break;
+		}
+		setCurrent(tmp);
+	}
+	public void setCurrent(String s)
+	{
+		panLeft.remove(p);
+		p = new JLabel(s);
+		panLeft.add(p,BorderLayout.WEST);
+		
 	}
 	
 	

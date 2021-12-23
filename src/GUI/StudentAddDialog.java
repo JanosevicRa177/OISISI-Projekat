@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -27,7 +30,7 @@ import model.Student;
 import model.StudentBase;
 
 
-public class StudentAddDialog extends JFrame  {
+public class StudentAddDialog extends JDialog  {
 	
 	/**
 	 * 
@@ -46,6 +49,8 @@ public class StudentAddDialog extends JFrame  {
 	
 		
 		public StudentAddDialog(){
+			super(MainFrame.getInstance(), "Adding Student", true);
+			
 			
 			Toolkit kit = Toolkit.getDefaultToolkit();
 			Dimension screenSize = kit.getScreenSize();
@@ -177,6 +182,13 @@ public class StudentAddDialog extends JFrame  {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
+					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+							!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
+							getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
+						InputErrorDialog dialog = new InputErrorDialog();
+						dialog.setVisible(true);
+						return;
+					}
 					String[] adresa = inputAddress.getText().split(",");
 					String cmb = currentList.getSelectedItem().toString();
 					String[] birth = inputBirth.getText().split("-");
@@ -224,6 +236,16 @@ public class StudentAddDialog extends JFrame  {
 			
 			
 			
+		}
+		boolean isValidDate(String input) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		     try {
+		          format.parse(input);
+		          return true;
+		     }
+		     catch(ParseException e){
+		          return false;
+		     }
 		}
 
 		public JTextField getInputName() {

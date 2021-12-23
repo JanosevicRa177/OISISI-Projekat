@@ -41,6 +41,7 @@ public class MainFrame extends JFrame {
 	
 	StatusBar sb = StatusBar.getInstance();
 	add(sb,BorderLayout.SOUTH);
+	sb.setLbl(1);
 	sb.setVisible(true);
 	
 	TabsWithTabels twt = TabsWithTabels.getInstance();
