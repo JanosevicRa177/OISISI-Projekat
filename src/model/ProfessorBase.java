@@ -23,13 +23,13 @@ public class ProfessorBase {
 		this.professors = new ArrayList<Professor>();
 		Professor professor1 = new Professor("mirko","mirkovic",LocalDate.of(2017, 1, 13),
 				new Address("ulica","5","beograd","srbija"),060,"nekiMail@gmail.com",
-				new Address("ulica","5","beograd","srbija"),568, "nastavnik",56.6);
+				new Address("ulica","5","beograd","srbija"),568, "nastavnik",56);
 		Professor professor2 = new Professor("mirko","mirkovic",LocalDate.of(2017, 1, 13),
 				new Address("ulica","5","beograd","srbija"),060,"nekiMail@gmail.com",
-				new Address("ulica","5","beograd","srbija"),567, "nastavnik",56.6);
+				new Address("ulica","5","beograd","srbija"),567, "nastavnik",56);
 		Professor professor3 = new Professor("mirko","mirkovic",LocalDate.of(2017, 1, 13),
 				new Address("ulica","5","beograd","srbija"),060,"nekiMail@gmail.com",
-				new Address("ulica","5","beograd","srbija"),569, "nastavnik",56.6);
+				new Address("ulica","5","beograd","srbija"),569, "nastavnik",56);
 		professors.add(professor1);
 		professors.add(professor2);
 		professors.add(professor3);
@@ -112,7 +112,7 @@ public class ProfessorBase {
 	}
 
 	public void changeProfessor(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, Address officeAddress, int iDnumber, String title, double experienceYears) {
+			String email, Address officeAddress, int iDnumber, String title, int experienceYears) {
 		for (Professor professor : professors) {
 			if (professor.getIDnumber() == iDnumber) {
 				professor.setName(name);

@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -37,17 +39,17 @@ public class ProfessorUpdateDialog extends JDialog{
 	private JTextField txtExperienceYears = new JTextField();
 	
 	public ProfessorUpdateDialog() {
-		super(MainFrame.getInstance(), "Adding Professor", true);
+		super(MainFrame.getInstance(), "Updating Professor", true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int width = screenSize.width;
 		int height = screenSize.height;
-		setSize(width*1/4+50, height*3/4-50);
+		setSize(width*1/3, height*3/4-50);
 		setLocationRelativeTo(MainFrame.getInstance());
 		
 		JPanel updateProfessor = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		Dimension dim1 = new Dimension((width*1/4)/2, 30);
-		Dimension dim2 = new Dimension((width*1/4+25)/2, 20);
+		Dimension dim1 = new Dimension((width*1/3)/2, 30);
+		Dimension dim2 = new Dimension((width*1/4)/2, 20);
 		
 		int row = ProfessorTable.getInstance().getSelectedRow();
 		if(row == -1) return;
@@ -75,7 +77,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		updateProfessor.add(Surname);
 		
 		JPanel dateOfBirth = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblDateOfBirth = new JLabel("DateOfBirth*:");
+		JLabel lblDateOfBirth = new JLabel("DateOfBirth* (year-month-day):");
 		lblDateOfBirth.setPreferredSize(dim1);
 		txtDateOfBirth.setPreferredSize(dim2);
 		txtDateOfBirth.setName("txtDateOfBirth");
@@ -85,7 +87,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		updateProfessor.add(dateOfBirth);
 		
 		JPanel address = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblAddress = new JLabel("Address*:");
+		JLabel lblAddress = new JLabel("Address* (Street,number,city,state):");
 		lblAddress.setPreferredSize(dim1);
 		txtAddress.setPreferredSize(dim2);
 		txtAddress.setName("txtAddress");
@@ -115,7 +117,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		updateProfessor.add(email);
 		
 		JPanel officeAddress = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblOfficeAddress = new JLabel("Office Address*:");
+		JLabel lblOfficeAddress = new JLabel("Office Address* (Street,number,city,state):");
 		lblOfficeAddress.setPreferredSize(dim1);
 		txtOfficeAddress.setPreferredSize(dim2);
 		txtOfficeAddress.setName("txtOfficeAddress");
@@ -163,14 +165,20 @@ public class ProfessorUpdateDialog extends JDialog{
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println(txtName.getText());
+				if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+						!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
+						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
+					InputErrorDialog dialog = new InputErrorDialog();
+					dialog.setVisible(true);
+					return;
+				}
 				String[] address = txtAddress.getText().split(",");
 				String[] oAddress = txtOfficeAddress.getText().split(",");
 				int row = ProfessorTable.getInstance().getSelectedRow();
 				ProfessorBase.getInstance().changeProfessor(getTxtName().getText(),getTxtSurname().getText(),LocalDate.parse(getTxtDateOfBirth().getText()),
 						new Address(address[0],address[1],address[2],address[3]),Integer.parseInt(getTxtPhoneNumber().getText()),
 						getTxtEmail().getText(),new Address(oAddress[0],oAddress[1],oAddress[2],oAddress[3]),Integer.parseInt(getTxtIDnumber().getText()),
-						getTxtTitle().getText(),Double.parseDouble(getTxtExperienceYears().getText()));
+						getTxtTitle().getText(),Integer.parseInt(getTxtExperienceYears().getText()));
 				AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();
 				model.fireTableRowsInserted(row, row);
 				MainFrame.getInstance().validate();
@@ -196,6 +204,16 @@ public class ProfessorUpdateDialog extends JDialog{
 		updateProfessor.add(buttons);
 		this.add(updateProfessor); 
 		
+	}
+	boolean isValidDate(String input) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+	     try {
+	          format.parse(input);
+	          return true;
+	     }
+	     catch(ParseException e){
+	          return false;
+	     }
 	}
 	public JTextField getTxtName() {
 		return txtName;

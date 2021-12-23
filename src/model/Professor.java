@@ -8,12 +8,12 @@ public class Professor extends Person {
 	private Address officeAddress;
 	private int iDnumber;
 	private String title;
-	private double experienceYears;
+	private int experienceYears;
 	List<Subject> professorsSubjects;
 	public Professor() {
 	}
 	public Professor(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, Address officeAddress, int iDnumber, String title, double experienceYears) {
+			String email, Address officeAddress, int iDnumber, String title, int experienceYears) {
 		super(name, surname, dateOfBirth, address, mobilePhone, email);
 		this.officeAddress = officeAddress;
 		this.iDnumber = iDnumber;
@@ -39,10 +39,10 @@ public class Professor extends Person {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public double getYears_of_experience() {
+	public int getYears_of_experience() {
 		return experienceYears;
 	}
-	public void setYears_of_experience(double experienceYears) {
+	public void setYears_of_experience(int experienceYears) {
 		this.experienceYears = experienceYears;
 	}
 	public List<Subject> getProfessors_subjects() {

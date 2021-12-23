@@ -12,18 +12,16 @@ public class ChangeListenerTabs implements ChangeListener {
 			 TabsWithTabels pane = (TabsWithTabels) e.getSource();
              if(pane.getTitleAt(pane.getSelectedIndex()) == "Professors") {
             	 TabsWithTabels.getInstance().focusOnProfessor();
+            	 StatusBar.getInstance().setLbl("Professors");
              }else if(pane.getTitleAt(pane.getSelectedIndex()) == "Students") {
             	 TabsWithTabels.getInstance().focusOnStudent();
+            	 StatusBar.getInstance().setLbl("Students");
              }else {
             	 TabsWithTabels.getInstance().focusOnSubject();
+            	 StatusBar.getInstance().setLbl("Subjects");
              }
-             System.out.println(TabsWithTabels.getInstance().getFocus());
-             StatusBar.getInstance().setLbl(TabsWithTabels.getInstance().getFocus());
+             MainFrame.getInstance().validate();
          }
-		 System.out.println(TabsWithTabels.getInstance().getFocus());
 	}
-
-
-
 	
 }

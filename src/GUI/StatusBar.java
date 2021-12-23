@@ -42,11 +42,16 @@ public class StatusBar extends JPanel {
 	int width = screenSize.width;
 	int height = screenSize.height;
 	this.setPreferredSize(new Dimension(width,height*1/40));
-	String jlbl = "Studentska sluzba - " + lbl;
-	
+	String jlbl;
+	if(TabsWithTabels.getInstance().getFocus().equals("Students")) {
+		jlbl = "Studentska sluzba - Students";
+	}else if(TabsWithTabels.getInstance().getFocus().equals("Professors")) {
+		jlbl = "Studentska sluzba - Professors";
+	} else {
+		jlbl = "Studentska sluzba - Subjects";
+	}
     JLabel label=new JLabel(jlbl);
-
-    label.setPreferredSize(new Dimension(150,20));
+    label.setPreferredSize(new Dimension(200,20));
     this.add(Box.createHorizontalStrut(10));
     this.add(label);
     this.add(Box.createHorizontalGlue());

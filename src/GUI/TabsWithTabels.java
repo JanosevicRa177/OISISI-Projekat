@@ -26,6 +26,7 @@ public class TabsWithTabels extends JTabbedPane {
 	
 	private TabsWithTabels() {
 		// TODO Auto-generated constructor stub
+		FocusTable = "Students";
 		addTab("Students",new JScrollPane(StudentTable.getInstance()));
 		addTab("Professors", new JScrollPane(ProfessorTable.getInstance()));
 		addTab("Subjects",new JScrollPane(SubjectTable.getInstance()));
