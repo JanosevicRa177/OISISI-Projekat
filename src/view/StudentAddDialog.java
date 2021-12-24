@@ -1,4 +1,4 @@
-package GUI;
+package view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -8,8 +8,6 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -19,14 +17,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Controller.StudentController;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import model.Address;
 import model.Student;
 import model.StudentBase;
 
-public class StudentUpdateDialog extends JDialog {
+
+public class StudentAddDialog extends JDialog  {
 	
+	/**
+	 * 
+	 */
 	
 	private static final long serialVersionUID = 1L;
 	private JTextField inputName = new JTextField();
@@ -40,8 +43,8 @@ public class StudentUpdateDialog extends JDialog {
 
 	
 		
-		public StudentUpdateDialog(){
-			super(MainFrame.getInstance(), "Update Student", true);
+		public StudentAddDialog(){
+			super(MainFrame.getInstance(), "Adding Student", true);
 			
 			
 			Toolkit kit = Toolkit.getDefaultToolkit();
@@ -50,7 +53,7 @@ public class StudentUpdateDialog extends JDialog {
 			int height = screenSize.height;
 			setSize(width*1/4 + 50,height*3/4 - 20);
 			setLocationRelativeTo(MainFrame.getInstance());
-			setTitle("Izmena Studenta");
+			setTitle("Dodavanje Studenta");
 			
 			JPanel addStudent = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			Dimension labelDim = new Dimension((width*1/4)/2, 30);
@@ -61,62 +64,43 @@ public class StudentUpdateDialog extends JDialog {
 			JLabel labelName = new JLabel("Name:");
 			labelName.setPreferredSize(labelDim);
 			inputName.setPreferredSize(inputDim);
-			int row = StudentTable.getInstance().getSelectedRow();
-			AbstractTableModelStudents model = (AbstractTableModelStudents) StudentTable.getInstance().getModel();
-			inputName.setText(model.getValueAt(row,1).toString());
 			Name.add(labelName);
 			Name.add(inputName);
 			addStudent.add(Name);
 			this.add(addStudent);
 			
-			List<Student> students = new ArrayList<Student>();
-			students = StudentBase.getInstance().getStudents();
 			JPanel Surname = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			JLabel labelSurname = new JLabel("Surname:");
 			labelSurname.setPreferredSize(labelDim);
 			inputSurname.setPreferredSize(inputDim);
-			inputSurname.setText(model.getValueAt(row,2).toString());
-			
 			Surname.add(labelSurname);
 			Surname.add(inputSurname);
 			addStudent.add(Surname);
 			this.add(addStudent);
 			
 			JPanel BirthDate = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
 			JLabel labelBirth = new JLabel("BirthDate:");
-
 			labelBirth.setPreferredSize(labelDim);
-
 			inputBirth.setPreferredSize(inputDim);
-
-			
-			inputBirth.setText(students.get(row).getDate_of_birth().toString());
-
 			BirthDate.add(labelBirth);
 			BirthDate.add(inputBirth);
 			addStudent.add(BirthDate);
 			this.add(addStudent);
-			
 			
 			JPanel Address = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			JLabel labelAddress = new JLabel("Address:");
 			labelAddress.setPreferredSize(labelDim);
 			JTextField inputAddress = new JTextField();
 			inputAddress.setPreferredSize(inputDim);
-			inputAddress.setText(students.get(row).getAdress());
 			Address.add(labelAddress);
 			Address.add(inputAddress);
 			addStudent.add(Address);
 			this.add(addStudent);
 			
-			
 			JPanel CellNumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			JLabel labelCell = new JLabel("Cell Phone:");
 			labelCell.setPreferredSize(labelDim);
 			inputCell.setPreferredSize(inputDim);
-
-			inputCell.setText("" + students.get(row).getMobile_phone());
 			CellNumber.add(labelCell);
 			CellNumber.add(inputCell);
 			addStudent.add(CellNumber);
@@ -126,7 +110,6 @@ public class StudentUpdateDialog extends JDialog {
 			JLabel labelEmail = new JLabel("Email:");
 			labelEmail.setPreferredSize(labelDim);
 			inputEmail.setPreferredSize(inputDim);
-			inputEmail.setText(students.get(row).getEmail());
 			Email.add(labelEmail);
 			Email.add(inputEmail);
 			addStudent.add(Email);
@@ -136,7 +119,6 @@ public class StudentUpdateDialog extends JDialog {
 			JLabel labelIndex = new JLabel("Index Number:");
 			labelIndex.setPreferredSize(labelDim);
 			inputIndex.setPreferredSize(inputDim);
-			inputIndex.setText(model.getValueAt(row,0).toString());
 			Index.add(labelIndex);
 			Index.add(inputIndex);
 			addStudent.add(Index);
@@ -146,8 +128,6 @@ public class StudentUpdateDialog extends JDialog {
 			JLabel labelYear = new JLabel("Year of sign:");
 			labelYear.setPreferredSize(labelDim);
 			inputYear.setPreferredSize(inputDim);
-
-			inputYear.setText("" + students.get(row).getEntryYear());
 			Year.add(labelYear);
 			Year.add(inputYear);
 			addStudent.add(Year);
@@ -159,8 +139,6 @@ public class StudentUpdateDialog extends JDialog {
 			labelCurrent.setPreferredSize(labelDim);
 			JComboBox<String> currentList = new JComboBox<String>(years);
 			currentList.setPreferredSize(inputDim);
-
-			currentList.setSelectedIndex(Integer.parseInt(model.getValueAt(row,3).toString()) - 1);
 			Current.add(labelCurrent);
 			Current.add(currentList);
 			addStudent.add(Current);
@@ -168,16 +146,10 @@ public class StudentUpdateDialog extends JDialog {
 			
 			JPanel Type = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			String[] types = { "Budzet","Samofinansiranje"};
-			JLabel labelType = new JLabel("Status:");
+			JLabel labelType = new JLabel("Current year:");
 			labelType.setPreferredSize(labelDim);
 			JComboBox<String> comboType = new JComboBox<String>(types);
 			comboType.setPreferredSize(inputDim);
-			String stat = "" + students.get(row).getStatus();
-			if(stat.equals("B"))
-				comboType.setSelectedIndex(0);
-			else
-				comboType.setSelectedIndex(1);
-			
 			Type.add(labelType);
 			Type.add(comboType);
 			addStudent.add(Type);
@@ -200,32 +172,41 @@ public class StudentUpdateDialog extends JDialog {
 			addStudent.add(buttons);
 			this.add(addStudent);
 			
+			
 			add.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
 							!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
-							getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
+							getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+") | StudentBase.getInstance().contains(getInputIndex().getText())) {
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);
 						return;
 					}
 					String[] adresa = inputAddress.getText().split(",");
-					String[] birth = inputBirth.getText().split("-");
 					String cmb = currentList.getSelectedItem().toString();
-					String[] godina = cmb.split(" ");
-					String stat = comboType.getSelectedItem().toString();
+					String[] birth = inputBirth.getText().split("-");
 					Student temp = new Student();
+					String stat = comboType.getSelectedItem().toString();
+					
+					
+					String[] godina = cmb.split(" ");
 					int god;
 					if(godina[0].equals("Prva"))god = 1;
 					else if(godina[0].equals("Druga"))god = 2;
 					else if(godina[0].equals("Treca"))god = 3;
 					else god = 4;
-					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), new Address(adresa[0],adresa[1],adresa[2],adresa[3]), Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat));
-					int row = StudentTable.getInstance().getSelectedRow();
+					int row = StudentTable.getInstance().getRowCount();
+					String date = "" + birth[0] + "-" + birth[1] + "-" + birth[2]; 
+					LocalDate localDate = LocalDate.parse(date); 
+					Student student = new Student(getInputName().getText(),getInputSurname().getText(),localDate,new Address(adresa[0],adresa[1],adresa[2],adresa[3]),
+							Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(),
+							Integer.parseInt(getInputYear().getText()),god,temp.getEnumByString(stat),9.12);
+					StudentController.getInstance().addStudent(student);
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
-					model.fireTableRowsUpdated(row, row);
+					model.fireTableRowsInserted(row, row);
+
 					MainFrame.getInstance().validate();
 					setVisible(false);
 					
@@ -251,7 +232,6 @@ public class StudentUpdateDialog extends JDialog {
 			
 			
 		}
-		
 		boolean isValidDate(String input) {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		     try {
@@ -317,6 +297,6 @@ public class StudentUpdateDialog extends JDialog {
 
 
 	
-
+	
 
 }

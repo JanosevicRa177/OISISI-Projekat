@@ -11,10 +11,10 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import GUI.MainFrame;
 import model.ProfessorBase;
 import model.Student;
 import model.StudentBase;
+import view.MainFrame;
 
 public class StudentController {
 	

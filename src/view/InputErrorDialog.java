@@ -1,4 +1,4 @@
-package GUI;
+package view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -25,12 +25,12 @@ public class InputErrorDialog extends JDialog{
 		setLocationRelativeTo(MainFrame.getInstance());
 		
 		JPanel error = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JLabel errorTxt = new JLabel("Input Error: Parameters not valid.");
+		JLabel errorTxt = new JLabel("Input Error: ID must be unique!");
 		error.add(errorTxt);
 		Dimension dim = new Dimension(100, 25);
 		JButton ok = new JButton();
 		ok.setText("Ok");
-		//ok.setPreferredSize(dim);
+		ok.setPreferredSize(dim);
 		ok.addActionListener(new ActionListener() {
 		
 		public void actionPerformed(ActionEvent e) {

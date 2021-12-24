@@ -1,10 +1,12 @@
-package GUI;
+package view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -22,6 +24,7 @@ import Professor.ProfessorTable;
 import model.Address;
 import model.Professor;
 import model.ProfessorBase;
+import view.ProfessorAddDialog.AddProfessorFocusListener;
 
 public class ProfessorUpdateDialog extends JDialog{
 
@@ -38,6 +41,8 @@ public class ProfessorUpdateDialog extends JDialog{
 	private JTextField txtTitle = new JTextField();
 	private JTextField txtExperienceYears = new JTextField();
 	public int oldID;
+	JButton update = new JButton();
+	
 	public ProfessorUpdateDialog() {
 		super(MainFrame.getInstance(), "Updating Professor", true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -64,6 +69,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtName.setText(professors.get(row).getName());
 		Name.add(lblName);
 		Name.add(txtName);
+		txtName.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(Name);
 		
 		JPanel Surname = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -74,6 +80,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtSurname.setText(professors.get(row).getSurname());
 		Surname.add(lblSurname);
 		Surname.add(txtSurname);
+		txtSurname.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(Surname);
 		
 		JPanel dateOfBirth = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -84,6 +91,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtDateOfBirth.setText("" + professors.get(row).getDate_of_birth());
 		dateOfBirth.add(lblDateOfBirth);
 		dateOfBirth.add(txtDateOfBirth);
+		txtDateOfBirth.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(dateOfBirth);
 		
 		JPanel address = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -94,6 +102,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtAddress.setText(professors.get(row).getAdress());
 		address.add(lblAddress);
 		address.add(txtAddress);
+		txtAddress.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(address);
 		
 		JPanel phoneNumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -104,6 +113,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtPhoneNumber.setText("" + professors.get(row).getMobile_phone());
 		phoneNumber.add(lblPhoneNumber);
 		phoneNumber.add(txtPhoneNumber);
+		txtPhoneNumber.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(phoneNumber);
 		
 		JPanel email = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -114,6 +124,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtEmail.setText(professors.get(row).getEmail());
 		email.add(lblEmail);
 		email.add(txtEmail);
+		txtEmail.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(email);
 		
 		JPanel officeAddress = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -124,6 +135,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtOfficeAddress.setText(professors.get(row).getOfficeAddress());
 		officeAddress.add(lblOfficeAddress);
 		officeAddress.add(txtOfficeAddress);
+		txtOfficeAddress.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(officeAddress);
 		
 		JPanel iDnumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -135,6 +147,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		oldID = professors.get(row).getIDnumber();
 		iDnumber.add(lblIDnumber);
 		iDnumber.add(txtIDnumber);
+		txtIDnumber.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(iDnumber);
 		
 		JPanel title = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -145,6 +158,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtTitle.setText(professors.get(row).getTitle());
 		title.add(lblTitle);
 		title.add(txtTitle);
+		txtTitle.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(title);
 		
 		JPanel experienceYears = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -155,11 +169,11 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtExperienceYears.setText("" + professors.get(row).getYears_of_experience());
 		experienceYears.add(lblExperienceYears);
 		experienceYears.add(txtExperienceYears);
+		txtExperienceYears.addFocusListener(new AddProfessorFocusListener());
 		updateProfessor.add(experienceYears);
 		
 		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		Dimension dim = new Dimension(100, 25);
-		JButton update = new JButton();
 		update.setText("Update");
 		update.setPreferredSize(dim);
 		update.addActionListener(new ActionListener() {
@@ -168,9 +182,14 @@ public class ProfessorUpdateDialog extends JDialog{
 				// TODO Auto-generated method stub
 				if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
 						!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
-						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")| ProfessorBase.getInstance().containsUpdate(Integer.parseInt(getTxtIDnumber().getText()),oldID)) {
+						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
+					update.setEnabled(false);
+					return;
+				}
+				if(ProfessorBase.getInstance().containsUpdate(Integer.parseInt(getTxtIDnumber().getText()),oldID)) {
 					InputErrorDialog dialog = new InputErrorDialog();
 					dialog.setVisible(true);
+					update.setEnabled(false);
 					return;
 				}
 				String[] address = txtAddress.getText().split(",");
@@ -205,6 +224,24 @@ public class ProfessorUpdateDialog extends JDialog{
 		updateProfessor.add(buttons);
 		this.add(updateProfessor); 
 		
+	}
+	public class AddProfessorFocusListener implements FocusListener {
+
+		@Override
+		public void focusGained(FocusEvent arg0) {
+		}
+
+		@Override
+		public void focusLost(FocusEvent arg0) {
+			if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+					!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
+					getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
+				update.setEnabled(false);
+				return;
+			}
+			
+			update.setEnabled(true);
+		}
 	}
 	boolean isValidDate(String input) {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
