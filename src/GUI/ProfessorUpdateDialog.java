@@ -37,7 +37,7 @@ public class ProfessorUpdateDialog extends JDialog{
 	private JTextField txtIDnumber = new JTextField();
 	private JTextField txtTitle = new JTextField();
 	private JTextField txtExperienceYears = new JTextField();
-	
+	public int oldID;
 	public ProfessorUpdateDialog() {
 		super(MainFrame.getInstance(), "Updating Professor", true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -132,6 +132,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		txtIDnumber.setPreferredSize(dim2);
 		txtIDnumber.setName("txtIDnumber");
 		txtIDnumber.setText("" + professors.get(row).getIDnumber());
+		oldID = professors.get(row).getIDnumber();
 		iDnumber.add(lblIDnumber);
 		iDnumber.add(txtIDnumber);
 		updateProfessor.add(iDnumber);
@@ -167,7 +168,7 @@ public class ProfessorUpdateDialog extends JDialog{
 				// TODO Auto-generated method stub
 				if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
 						!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
-						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
+						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")| ProfessorBase.getInstance().containsUpdate(Integer.parseInt(getTxtIDnumber().getText()),oldID)) {
 					InputErrorDialog dialog = new InputErrorDialog();
 					dialog.setVisible(true);
 					return;

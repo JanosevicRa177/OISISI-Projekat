@@ -8,19 +8,14 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
 
 import Controller.StudentController;
 import Student.AbstractTableModelStudents;
@@ -184,7 +179,7 @@ public class StudentAddDialog extends JDialog  {
 					// TODO Auto-generated method stub
 					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
 							!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
-							getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
+							getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+") | StudentBase.getInstance().contains(getInputIndex().getText())) {
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);
 						return;

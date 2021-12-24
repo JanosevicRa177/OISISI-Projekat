@@ -7,28 +7,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Controller.StudentController;
 import Controller.SubjectController;
-import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import Subject.AbstractTableModelSubjects;
 import Subject.SubjectTable;
-import model.Professor;
-import model.ProfessorBase;
-import model.Student;
 import model.Subject;
+import model.SubjectBase;
 
 public class SubjectAddDialog extends JDialog {
 
@@ -158,7 +151,7 @@ public class SubjectAddDialog extends JDialog {
 			add.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
-					if(getInputName().getText().equals("") | getInputEspb().getText().matches("[0-9]+") |!getInputID().getText().matches("[0-9]+") |  inputExecution.getText().equals("") )
+					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") | !getInputID().getText().matches("[0-9]+") |  inputExecution.getText().equals("") | SubjectBase.getInstance().contains(Integer.parseInt(inputID.getText())))
 					{
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);

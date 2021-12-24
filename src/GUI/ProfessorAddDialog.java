@@ -21,6 +21,7 @@ import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import model.Address;
 import model.Professor;
+import model.ProfessorBase;
 
 public class ProfessorAddDialog extends JDialog{
 
@@ -151,7 +152,7 @@ public class ProfessorAddDialog extends JDialog{
 				// TODO Auto-generated method stub
 				if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
 						!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
-						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
+						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+") | ProfessorBase.getInstance().contains(Integer.parseInt(getTxtIDnumber().getText()))) {
 					InputErrorDialog dialog = new InputErrorDialog();
 					dialog.setVisible(true);
 					return;

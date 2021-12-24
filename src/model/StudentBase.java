@@ -37,7 +37,14 @@ public class StudentBase {
 		this.colons.add("Prosek");
 
 	}
-
+	public boolean contains(String ID) {
+		for(Student st : students) {
+			if(st.getIndexNumber().equals(ID)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public int getColumnCount() {
 		return 6;
 	}

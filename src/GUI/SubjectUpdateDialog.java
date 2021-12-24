@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,19 +14,12 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Controller.SubjectController;
-import Student.AbstractTableModelStudents;
-import Student.StudentTable;
 import Subject.AbstractTableModelSubjects;
 import Subject.SubjectTable;
-import model.Address;
-import model.Student;
-import model.StudentBase;
 import model.Subject;
 import model.SubjectBase;
 
@@ -180,7 +172,7 @@ public class SubjectUpdateDialog extends JDialog {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					if(getInputName().getText().equals("") | getInputEspb().getText().matches("[0-9]+") |!getInputID().getText().matches("[0-9]+") |  inputExecution.getText().equals("") )
+					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") |!getInputID().getText().matches("[0-9]+") |  inputExecution.getText().equals("") )
 					{
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);

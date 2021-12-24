@@ -40,7 +40,25 @@ public class ProfessorBase {
 		this.colons.add("Email");
 
 	}
-
+	public boolean contains(int ID) {
+		for(Professor pr : professors) {
+			if(pr.getIDnumber() == ID) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean containsUpdate(int ID,int oldID) {
+		if(ID == oldID) {
+			return false;
+		}
+		for(Professor pr : professors) {
+			if(pr.getIDnumber() == ID) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public int getColumnCount() {
 		return 4;
 	}

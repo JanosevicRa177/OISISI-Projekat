@@ -31,6 +31,14 @@ public class SubjectBase {
 		this.colons.add("Year of execution");
 		this.colons.add("Kind of Semester");
 	}
+	public boolean contains(int ID) {
+		for(Subject sub : subjects) {
+			if(sub.getiDSubject() == ID) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public int getColumnCount() {
 		return 5;
 	}
