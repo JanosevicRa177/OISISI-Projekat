@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
@@ -31,7 +32,7 @@ public class ProfessorAddDialog extends JDialog{
 	
 	private JTextField txtName = new JTextField();
 	private JTextField txtSurname = new JTextField();
-	private JTextField txtDateOfBirth= new JTextField();
+	private JTextField txtDateOfBirth = new JTextField();
 	private JTextField txtAddress = new JTextField();
 	private JTextField txtPhoneNumber = new JTextField();
 	private JTextField txtOfficeAddress = new JTextField();
@@ -40,6 +41,8 @@ public class ProfessorAddDialog extends JDialog{
 	private JTextField txtTitle = new JTextField();
 	private JTextField txtExperienceYears = new JTextField();
 	private JButton add = new JButton();
+	
+	private static ProfessorAddDialog instance = null;
 	
 	public ProfessorAddDialog() {
 		super(MainFrame.getInstance(), "Adding Professor", true);
@@ -277,5 +280,4 @@ public class ProfessorAddDialog extends JDialog{
 
         return txtExperienceYears;
     }
-	
 }

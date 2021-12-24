@@ -18,7 +18,6 @@ public class AbstractActionAdd extends AbstractAction {
 		}
 		return instance;
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
