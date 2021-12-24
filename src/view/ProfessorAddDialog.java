@@ -1,10 +1,12 @@
-package GUI;
+package view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -37,9 +39,11 @@ public class ProfessorAddDialog extends JDialog{
 	private JTextField txtIDnumber = new JTextField();
 	private JTextField txtTitle = new JTextField();
 	private JTextField txtExperienceYears = new JTextField();
+	private JButton add = new JButton();
 	
 	public ProfessorAddDialog() {
 		super(MainFrame.getInstance(), "Adding Professor", true);
+		add.setEnabled(false);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int width = screenSize.width;
@@ -57,6 +61,7 @@ public class ProfessorAddDialog extends JDialog{
 		txtName.setName("txtName");
 		Name.add(lblName);
 		Name.add(txtName);
+		txtName.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(Name);
 		
 		JPanel Surname = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -66,6 +71,7 @@ public class ProfessorAddDialog extends JDialog{
 		txtSurname.setName("txtSurname");
 		Surname.add(lblSurname);
 		Surname.add(txtSurname);
+		txtSurname.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(Surname);
 		
 		JPanel dateOfBirth = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -75,6 +81,7 @@ public class ProfessorAddDialog extends JDialog{
 		txtDateOfBirth.setName("txtDateOfBirth");
 		dateOfBirth.add(lblDateOfBirth);
 		dateOfBirth.add(txtDateOfBirth);
+		txtDateOfBirth.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(dateOfBirth);
 		
 		JPanel address = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -84,6 +91,7 @@ public class ProfessorAddDialog extends JDialog{
 		txtAddress.setName("txtAddress");
 		address.add(lblAddress);
 		address.add(txtAddress);
+		txtAddress.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(address);
 		
 		JPanel phoneNumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -93,6 +101,7 @@ public class ProfessorAddDialog extends JDialog{
 		txtPhoneNumber.setName("txtPhoneNumber");
 		phoneNumber.add(lblPhoneNumber);
 		phoneNumber.add(txtPhoneNumber);
+		txtPhoneNumber.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(phoneNumber);
 		
 		JPanel email = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -102,6 +111,7 @@ public class ProfessorAddDialog extends JDialog{
 		txtEmail.setName("txtEmail");
 		email.add(lblEmail);
 		email.add(txtEmail);
+		txtEmail.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(email);
 		
 		JPanel officeAddress = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -111,6 +121,7 @@ public class ProfessorAddDialog extends JDialog{
 		txtOfficeAddress.setName("txtOfficeAddress");
 		officeAddress.add(lblOfficeAddress);
 		officeAddress.add(txtOfficeAddress);
+		txtOfficeAddress.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(officeAddress);
 		
 		JPanel iDnumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -120,6 +131,7 @@ public class ProfessorAddDialog extends JDialog{
 		txtIDnumber.setName("txtIDnumber");
 		iDnumber.add(lblIDnumber);
 		iDnumber.add(txtIDnumber);
+		txtIDnumber.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(iDnumber);
 		
 		JPanel title = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -129,6 +141,7 @@ public class ProfessorAddDialog extends JDialog{
 		txtTitle.setName("txtTitle");
 		title.add(lblTitle);
 		title.add(txtTitle);
+		txtTitle.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(title);
 		
 		JPanel experienceYears = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -138,29 +151,34 @@ public class ProfessorAddDialog extends JDialog{
 		txtExperienceYears.setName("txtExperienceYears");
 		experienceYears.add(lblExperienceYears);
 		experienceYears.add(txtExperienceYears);
+		txtExperienceYears.addFocusListener(new AddProfessorFocusListener());
 		addProfessor.add(experienceYears);
 		
 		
 		JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		Dimension dim = new Dimension(100, 25);
-		JButton add = new JButton();
 		add.setText("Add");
 		add.setPreferredSize(dim);
 		add.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
-						!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
-						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+") | ProfessorBase.getInstance().contains(Integer.parseInt(getTxtIDnumber().getText()))) {
-					InputErrorDialog dialog = new InputErrorDialog();
-					dialog.setVisible(true);
-					return;
-				}
 				System.out.println(txtName.getText());
 				String[] address = txtAddress.getText().split(",");
 				String[] oAddress = txtOfficeAddress.getText().split(",");
 				int row = ProfessorTable.getInstance().getRowCount();
+				if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+						!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
+						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
+					add.setEnabled(false);
+					return;
+				}
+				if(ProfessorBase.getInstance().contains(Integer.parseInt(getTxtIDnumber().getText()))){
+					InputErrorDialog dialog = new InputErrorDialog();
+					dialog.setVisible(true);
+					add.setEnabled(false);
+					return;
+				}
 				Professor professor = new Professor(getTxtName().getText(),getTxtSurname().getText(),LocalDate.parse(getTxtDateOfBirth().getText()),
 						new Address(address[0],address[1],address[2],address[3]),Integer.parseInt(getTxtPhoneNumber().getText()),
 						getTxtEmail().getText(),new Address(oAddress[0],oAddress[1],oAddress[2],oAddress[3]),Integer.parseInt(getTxtIDnumber().getText()),
@@ -170,7 +188,6 @@ public class ProfessorAddDialog extends JDialog{
 				model.fireTableRowsInserted(row, row);
 				MainFrame.getInstance().validate();
 				setVisible(false);
-				
 			}
 		});
 		buttons.add(add);
@@ -201,6 +218,24 @@ public class ProfessorAddDialog extends JDialog{
 	     catch(ParseException e){
 	          return false;
 	     }
+	}
+	public class AddProfessorFocusListener implements FocusListener {
+
+		@Override
+		public void focusGained(FocusEvent arg0) {
+		}
+
+		@Override
+		public void focusLost(FocusEvent arg0) {
+			JTextField txt = (JTextField) arg0.getComponent();
+			if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+					!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
+					getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
+				add.setEnabled(false);
+				return;
+			}
+			add.setEnabled(true);
+		}
 	}
 	public JTextField getTxtName() {
 		return txtName;

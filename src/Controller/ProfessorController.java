@@ -12,9 +12,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import GUI.MainFrame;
 import model.Professor;
 import model.ProfessorBase;
+import view.MainFrame;
 
 public class ProfessorController {
 
