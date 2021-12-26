@@ -118,6 +118,25 @@ public class StudentBase {
 			}
 		}
 	}
+	public boolean containsadd(String ID) {
+		for(Student st : students) {
+			if(st.getIndexNumber().equals(ID)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean containsUpdate(String ID,String oldID) {
+		if(ID.equals(oldID)) {
+			return false;
+		}
+		for(Student st : students) {
+			if(st.getIndexNumber().equals(ID)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public List<Student> getAllStudents()
 	{
 		return students;
@@ -131,9 +150,9 @@ public class StudentBase {
 	}
 
 	public void changeStudent(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, String indexNumber, int entryYear, int currentYear, STATUS status) {
+			String email, String indexNumber, int entryYear, int currentYear, STATUS status,String oldID) {
 		for (Student student : students) {
-			if (student.getIndexNumber().equals(indexNumber)) {
+			if (student.getIndexNumber().equals(oldID)) {
 				student.setName(name);
 				student.setSurname(surname);
 				student.setDate_of_birth(dateOfBirth);

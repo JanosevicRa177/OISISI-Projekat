@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+
 public class SubjectBase {
 
 	private static SubjectBase instance = null;
@@ -116,6 +118,7 @@ public class SubjectBase {
 		int eSPBvalue) {
 		for (Subject subject : subjects) {
 			if (subject.getiDSubject() == iDSubject) {
+				subject.setiDSubject(iDSubject);
 				subject.setSubjectName(subjectName);
 				subject.setSemesterKind(semesterKind);
 				subject.setsubjectYearExecution(subjectYearExecution);

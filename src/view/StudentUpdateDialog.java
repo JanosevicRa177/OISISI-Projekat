@@ -5,6 +5,8 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -22,8 +24,10 @@ import javax.swing.JTextField;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import model.Address;
+import model.ProfessorBase;
 import model.Student;
 import model.StudentBase;
+import view.ProfessorUpdateDialog.AddProfessorFocusListener;
 
 public class StudentUpdateDialog extends JDialog {
 	
@@ -36,6 +40,9 @@ public class StudentUpdateDialog extends JDialog {
 	private JTextField inputYear = new JTextField();
 	private JTextField inputCell = new JTextField();
 	private JTextField inputBirth = new JTextField();
+	private JTextField inputAddress = new JTextField();
+	private JButton add = new JButton();
+	private String oldID;
 	
 
 	
@@ -48,12 +55,12 @@ public class StudentUpdateDialog extends JDialog {
 			Dimension screenSize = kit.getScreenSize();
 			int width = screenSize.width;
 			int height = screenSize.height;
-			setSize(width*1/4 + 50,height*3/4 - 20);
+			setSize(width*1/3 + 50,height*3/4 - 20);
 			setLocationRelativeTo(MainFrame.getInstance());
 			setTitle("Izmena Studenta");
 			
 			JPanel addStudent = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			Dimension labelDim = new Dimension((width*1/4)/2, 30);
+			Dimension labelDim = new Dimension((width*1/3)/2, 30);
 			Dimension inputDim = new Dimension((width*1/4+25)/2, 20);
 			
 			
@@ -67,6 +74,8 @@ public class StudentUpdateDialog extends JDialog {
 			Name.add(labelName);
 			Name.add(inputName);
 			addStudent.add(Name);
+			inputName.addFocusListener(new AddStudentFocusListener());
+
 			this.add(addStudent);
 			
 			List<Student> students = new ArrayList<Student>();
@@ -80,11 +89,13 @@ public class StudentUpdateDialog extends JDialog {
 			Surname.add(labelSurname);
 			Surname.add(inputSurname);
 			addStudent.add(Surname);
+
+			inputSurname.addFocusListener(new AddStudentFocusListener());
 			this.add(addStudent);
 			
 			JPanel BirthDate = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-			JLabel labelBirth = new JLabel("BirthDate:");
+			JLabel labelBirth = new JLabel("BirthDate (yyyy-mm-dd):");
 
 			labelBirth.setPreferredSize(labelDim);
 
@@ -96,18 +107,21 @@ public class StudentUpdateDialog extends JDialog {
 			BirthDate.add(labelBirth);
 			BirthDate.add(inputBirth);
 			addStudent.add(BirthDate);
+
+			inputBirth.addFocusListener(new AddStudentFocusListener());
 			this.add(addStudent);
 			
 			
 			JPanel Address = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			JLabel labelAddress = new JLabel("Address:");
+			JLabel labelAddress = new JLabel("Address (Street,number,city,state):");
 			labelAddress.setPreferredSize(labelDim);
-			JTextField inputAddress = new JTextField();
 			inputAddress.setPreferredSize(inputDim);
 			inputAddress.setText(students.get(row).getAdress());
 			Address.add(labelAddress);
 			Address.add(inputAddress);
 			addStudent.add(Address);
+
+			inputAddress.addFocusListener(new AddStudentFocusListener());
 			this.add(addStudent);
 			
 			
@@ -120,6 +134,8 @@ public class StudentUpdateDialog extends JDialog {
 			CellNumber.add(labelCell);
 			CellNumber.add(inputCell);
 			addStudent.add(CellNumber);
+
+			inputCell.addFocusListener(new AddStudentFocusListener());
 			this.add(addStudent);
 			
 			JPanel Email = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -140,6 +156,9 @@ public class StudentUpdateDialog extends JDialog {
 			Index.add(labelIndex);
 			Index.add(inputIndex);
 			addStudent.add(Index);
+			oldID = students.get(row).getIndexNumber();
+
+			inputIndex.addFocusListener(new AddStudentFocusListener());
 			this.add(addStudent);
 			
 			JPanel Year = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -151,6 +170,8 @@ public class StudentUpdateDialog extends JDialog {
 			Year.add(labelYear);
 			Year.add(inputYear);
 			addStudent.add(Year);
+
+			inputYear.addFocusListener(new AddStudentFocusListener());
 			this.add(addStudent);
 			
 			JPanel Current = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -164,6 +185,7 @@ public class StudentUpdateDialog extends JDialog {
 			Current.add(labelCurrent);
 			Current.add(currentList);
 			addStudent.add(Current);
+
 			this.add(addStudent);
 			
 			JPanel Type = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -185,7 +207,6 @@ public class StudentUpdateDialog extends JDialog {
 			
 			JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			Dimension dim = new Dimension(100, 25);
-			JButton add = new JButton();
 			add.setText("Add");
 			add.setPreferredSize(dim);
 			buttons.add(add);
@@ -207,8 +228,14 @@ public class StudentUpdateDialog extends JDialog {
 					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
 							!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
 							getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
+						
+						add.setVisible(true);
+						return;
+					}
+					if(StudentBase.getInstance().containsUpdate(inputIndex.getText(),oldID)) {
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);
+						add.setEnabled(false);
 						return;
 					}
 					String[] adresa = inputAddress.getText().split(",");
@@ -222,7 +249,7 @@ public class StudentUpdateDialog extends JDialog {
 					else if(godina[0].equals("Druga"))god = 2;
 					else if(godina[0].equals("Treca"))god = 3;
 					else god = 4;
-					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), new Address(adresa[0],adresa[1],adresa[2],adresa[3]), Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat));
+					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), new Address(adresa[0],adresa[1],adresa[2],adresa[3]), Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat),oldID);
 					int row = StudentTable.getInstance().getSelectedRow();
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsUpdated(row, row);
@@ -250,6 +277,24 @@ public class StudentUpdateDialog extends JDialog {
 			
 			
 			
+		}
+		public class AddStudentFocusListener implements FocusListener {
+
+			@Override
+			public void focusGained(FocusEvent arg0) {
+			}
+
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+						!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
+						getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
+					add.setEnabled(false);
+					return;
+				}
+				
+				add.setEnabled(true);
+			}
 		}
 		
 		boolean isValidDate(String input) {
