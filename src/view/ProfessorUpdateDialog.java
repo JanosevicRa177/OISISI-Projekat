@@ -198,7 +198,7 @@ public class ProfessorUpdateDialog extends JDialog{
 				ProfessorBase.getInstance().changeProfessor(getTxtName().getText(),getTxtSurname().getText(),LocalDate.parse(getTxtDateOfBirth().getText()),
 						new Address(address[0],address[1],address[2],address[3]),Integer.parseInt(getTxtPhoneNumber().getText()),
 						getTxtEmail().getText(),new Address(oAddress[0],oAddress[1],oAddress[2],oAddress[3]),Integer.parseInt(getTxtIDnumber().getText()),
-						getTxtTitle().getText(),Integer.parseInt(getTxtExperienceYears().getText()));
+						getTxtTitle().getText(),Integer.parseInt(getTxtExperienceYears().getText()),oldID);
 				AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();
 				model.fireTableRowsInserted(row, row);
 				MainFrame.getInstance().validate();

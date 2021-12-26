@@ -130,19 +130,19 @@ public class ProfessorBase {
 	}
 
 	public void changeProfessor(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, Address officeAddress, int iDnumber, String title, int experienceYears) {
+			String email, Address officeAddress, int iDnumber, String title, int experienceYears,int oldID) {
 		for (Professor professor : professors) {
-			if (professor.getIDnumber() == iDnumber) {
+			if (professor.getIDnumber() == oldID) {
 				professor.setName(name);
 				professor.setSurname(surname);
 				professor.setDate_of_birth(dateOfBirth);
-				professor.setAdress(officeAddress);
-				professor.setMobile_phone(iDnumber);
+				professor.setAdress(address);
+				professor.setMobile_phone(mobilePhone);
 				professor.setEmail(email);
-				professor.setAdress(officeAddress);
+				professor.setOfficeAddress(officeAddress);
+				professor.setIDnumber(iDnumber);
 				professor.setTitle(title);
 				professor.setYears_of_experience(experienceYears);
-				professor.setOfficeAddress(officeAddress);
 			}
 		}
 	}
