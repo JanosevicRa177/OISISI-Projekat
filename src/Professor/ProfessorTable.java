@@ -29,8 +29,8 @@ public class ProfessorTable  extends JTable {
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfessors());
+		this.setAutoCreateRowSorter(true);
 		this.addMouseListener(new MouseAdapter() {
-
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
