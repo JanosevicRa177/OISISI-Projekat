@@ -19,12 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Base.ProfessorBase;
+import Controller.ProfessorController;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import model.Address;
 import model.Professor;
-import model.ProfessorBase;
-import view.ProfessorAddDialog.AddProfessorFocusListener;
 
 public class ProfessorUpdateDialog extends JDialog{
 
@@ -99,7 +99,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		lblAddress.setPreferredSize(dim1);
 		txtAddress.setPreferredSize(dim2);
 		txtAddress.setName("txtAddress");
-		txtAddress.setText(professors.get(row).getAdress());
+		txtAddress.setText(professors.get(row).getAddress());
 		address.add(lblAddress);
 		address.add(txtAddress);
 		txtAddress.addFocusListener(new AddProfessorFocusListener());
@@ -180,13 +180,14 @@ public class ProfessorUpdateDialog extends JDialog{
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
-						!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
-						getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
+				if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) |
+						!getTxtAddress().getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
+						!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
+						!getTxtIDnumber().getText().matches("[0-9]+") | getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
 					update.setEnabled(false);
 					return;
 				}
-				if(ProfessorBase.getInstance().containsUpdate(Integer.parseInt(getTxtIDnumber().getText()),oldID)) {
+				if(ProfessorController.getInstance().containsUpdateProfessor(Integer.parseInt(getTxtIDnumber().getText()),oldID)) {
 					InputErrorDialog dialog = new InputErrorDialog();
 					dialog.setVisible(true);
 					update.setEnabled(false);
@@ -233,8 +234,8 @@ public class ProfessorUpdateDialog extends JDialog{
 
 		@Override
 		public void focusLost(FocusEvent arg0) {
-			if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
-					!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
+			if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
+					!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
 					getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
 				update.setEnabled(false);
 				return;

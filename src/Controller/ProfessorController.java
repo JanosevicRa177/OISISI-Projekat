@@ -12,8 +12,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Base.ProfessorBase;
 import model.Professor;
-import model.ProfessorBase;
 import view.MainFrame;
 
 public class ProfessorController {
@@ -26,12 +26,17 @@ public class ProfessorController {
 		}
 		return instance;
 	}
-	
 	public ProfessorController() {
 		// TODO Auto-generated constructor stub
 	}
 	public void addProfessor(Professor professor) {
 			ProfessorBase.getInstance().addProfessor(professor);
+	}
+	public boolean containsProfessor(int id) {
+		return ProfessorBase.getInstance().contains(id);
+	}
+	public boolean containsUpdateProfessor(int id, int oldId) {
+		return ProfessorBase.getInstance().containsUpdate(id, oldId);
 	}
     public void deleteProfessor(int rowSelectedIndex) {
     	if (rowSelectedIndex < 0) {

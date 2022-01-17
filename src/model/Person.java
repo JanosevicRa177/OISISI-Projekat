@@ -11,12 +11,12 @@ public class Person {
 	private int mobilePhone;
 	private String email;
 	
-	public Person(String name, String surname, LocalDate date_of_birth, Address adress, int mobile_phone, String email) {
+	public Person(String name, String surname, LocalDate date_of_birth, Address address, int mobile_phone, String email) {
 		super();
 		this.name = name;
 		this.surname = surname;
 		dateOfBirth = date_of_birth;
-		address = adress;
+		this.address = address;
 		mobilePhone = mobile_phone;
 		this.email = email;
 	}
@@ -42,14 +42,11 @@ public class Person {
 	public void setDate_of_birth(LocalDate date_of_birth) {
 		dateOfBirth = date_of_birth;
 	}
-	public String getAdress() {
+	public String getAddress() {
 		return address.getStreet() + "," + address.getNumber() + "," + address.getCity() + "," + address.getState();
 	}
-	public void setAdress(Address address) {
-		address.setStreet(address.getStreet());
-		address.setNumber(address.getNumber());
-		address.setCity(address.getCity());
-		address.setState(address.getState());
+	public void setAddress(Address address) {
+		this.address = address;
 	}
 	public int getMobile_phone() {
 		return mobilePhone;

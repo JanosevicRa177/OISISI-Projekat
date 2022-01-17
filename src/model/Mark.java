@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class Mark {
 
-	private Student studentsPassed;
-	private Subject subject;
+	private int studentsPassed;
+	private int subject;
 	private int markValue;
 	private LocalDate date;
 	
@@ -13,7 +13,7 @@ public class Mark {
 		super();
 	}
 	
-	public Mark(Student studentsPassed, Subject subject, int markValue, LocalDate date) {
+	public Mark(int studentsPassed, int subject, int markValue, LocalDate date) {
 		super();
 		this.studentsPassed = studentsPassed;
 		this.subject = subject;
@@ -26,19 +26,19 @@ public class Mark {
 		this.date = date;
 	}
 
-	public Student getStudentWhichPassExam() {
+	public int getStudentWhichPassExam() {
 		return studentsPassed;
 	}
 
-	public void setStudentWhichPassExam(Student studentWhichPassExam) {
+	public void setStudentWhichPassExam(int studentWhichPassExam) {
 		studentsPassed = studentWhichPassExam;
 	}
 
-	public Subject get_Subject() {
+	public int get_Subject() {
 		return subject;
 	}
 
-	public void set_Subject(Subject _Subject) {
+	public void set_Subject(int _Subject) {
 		this.subject = _Subject;
 	}
 

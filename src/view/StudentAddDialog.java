@@ -24,8 +24,6 @@ import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import model.Address;
 import model.Student;
-import model.StudentBase;
-import view.StudentUpdateDialog.AddStudentFocusListener;
 
 
 public class StudentAddDialog extends JDialog  {
@@ -197,14 +195,15 @@ public class StudentAddDialog extends JDialog  {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) |
+							!inputAddress.getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
 							!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
 							getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
 						
 						add.setVisible(true);
 						return;
 					}
-					if(StudentBase.getInstance().containsadd(inputIndex.getText())) {
+					if(StudentController.getInstance().containsStudent(inputIndex.getText())) {
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);
 						add.setEnabled(false);
@@ -266,7 +265,7 @@ public class StudentAddDialog extends JDialog  {
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+				if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
 						!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
 						getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
 					add.setEnabled(false);

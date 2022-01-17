@@ -1,8 +1,12 @@
-package model;
+package Base;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Address;
+import model.Student;
+import model.StudentStatus;
 
 public class StudentBase {
 	
@@ -20,14 +24,6 @@ public class StudentBase {
 	
 	private StudentBase() {
 		this.students = new ArrayList<Student>();
-		Student student = new Student("Pera","Peric",LocalDate.of(1994, 1, 20),
-				new Address("Nikole Tesle","5","Novi Sad","Srbija"),0601241252,"mejlpera@gmail.com",
-				"ra123", 2005,2,STATUS.B,9.32);
-		students.add(student);
-		Student studentt = new Student("Jova","Jovic",LocalDate.of(1994, 5, 5),
-				new Address("JJZ","5","Novi Sad","Srbija"),0612145421,"mejljova@gmail.com",
-				"ra124", 2005,2,STATUS.S,9.12);
-		students.add(studentt);
 		this.colons = new ArrayList<String>();
 		this.colons.add("Index");
 		this.colons.add("Name");
@@ -36,6 +32,13 @@ public class StudentBase {
 		this.colons.add("Status");
 		this.colons.add("Prosek");
 
+	}
+	public void addUnpassedSubject(int student,int subject) {
+		students.get(student-1).addUnpassedSubject(subject);
+	}
+	
+	public void AddStudent(Student s) {
+		students.add(s);
 	}
 	public boolean contains(String ID) {
 		for(Student st : students) {
@@ -150,13 +153,13 @@ public class StudentBase {
 	}
 
 	public void changeStudent(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, String indexNumber, int entryYear, int currentYear, STATUS status,String oldID) {
+			String email, String indexNumber, int entryYear, int currentYear, StudentStatus status,String oldID) {
 		for (Student student : students) {
 			if (student.getIndexNumber().equals(oldID)) {
 				student.setName(name);
 				student.setSurname(surname);
 				student.setDate_of_birth(dateOfBirth);
-				student.setAdress(address);
+				student.setAddress(address);
 				student.setMobile_phone(mobilePhone);
 				student.setEmail(email);
 				student.setIndexNumber(indexNumber);

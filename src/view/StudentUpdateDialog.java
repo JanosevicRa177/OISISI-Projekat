@@ -21,13 +21,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Base.StudentBase;
+import Controller.StudentController;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import model.Address;
-import model.ProfessorBase;
 import model.Student;
-import model.StudentBase;
-import view.ProfessorUpdateDialog.AddProfessorFocusListener;
 
 public class StudentUpdateDialog extends JDialog {
 	
@@ -116,7 +115,7 @@ public class StudentUpdateDialog extends JDialog {
 			JLabel labelAddress = new JLabel("Address (Street,number,city,state):");
 			labelAddress.setPreferredSize(labelDim);
 			inputAddress.setPreferredSize(inputDim);
-			inputAddress.setText(students.get(row).getAdress());
+			inputAddress.setText(students.get(row).getAddress());
 			Address.add(labelAddress);
 			Address.add(inputAddress);
 			addStudent.add(Address);
@@ -225,14 +224,14 @@ public class StudentUpdateDialog extends JDialog {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
 							!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
 							getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
 						
 						add.setVisible(true);
 						return;
 					}
-					if(StudentBase.getInstance().containsUpdate(inputIndex.getText(),oldID)) {
+					if(StudentController.getInstance().containsUpdateStudent(inputIndex.getText(),oldID)) {
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);
 						add.setEnabled(false);
@@ -286,7 +285,7 @@ public class StudentUpdateDialog extends JDialog {
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )]+,[a-zA-Z0-9( )]+,[a-zA-Z( )]+,[a-zA-Z( )]+") |
+				if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
 						!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
 						getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
 					add.setEnabled(false);

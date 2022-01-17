@@ -1,10 +1,10 @@
-package model;
+package Base;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.SystemMenuBar;
+import model.KindOfSemester;
+import model.Subject;
 
 public class SubjectBase {
 
@@ -21,11 +21,6 @@ public class SubjectBase {
 	
 	private SubjectBase() {
 		this.subjects = new ArrayList<Subject>();
-		Professor professor = new Professor("mirko","mirkovic",LocalDate.of(2017, 1, 13),
-				new Address("ulica","5","beograd","srbija"),060,"nekiMail@gmail.com",
-				new Address("ulica","5","beograd","srbija"),567, "nastavnik",56);
-		Subject subject = new Subject(150,"Matematika",Kind_of_semester.Summer,2019,8);
-		subjects.add(subject);
 		this.colons = new ArrayList<String>();
 		this.colons.add("IDsubject");
 		this.colons.add("Subject Name");
@@ -33,9 +28,9 @@ public class SubjectBase {
 		this.colons.add("Year of execution");
 		this.colons.add("Kind of Semester");
 	}
-	public boolean contains(int ID) {
+	public boolean contains(String ID) {
 		for(Subject sub : subjects) {
-			if(sub.getiDSubject() == ID) {
+			if(sub.getiDSubject().equals(ID)) {
 				return true;
 			}
 		}
@@ -78,7 +73,7 @@ public class SubjectBase {
 			Subject subject = this.subjects.get(row);
 			switch (column) {
 			case 0:
-				return Long.toString(subject.getiDSubject());
+				return subject.getiDSubject();
 			case 1:
 				return subject.getSubjectName();
 			case 2:
@@ -86,7 +81,7 @@ public class SubjectBase {
 			case 3:
 				return Long.toString(subject.getsubjectYearExecution());
 			case 4:
-				if(subject.getSemesterkind() == Kind_of_semester.Summer) {
+				if(subject.getSemesterkind() == KindOfSemester.Summer) {
 					return "Summer";
 				}else {
 					return "Winter";
@@ -95,6 +90,9 @@ public class SubjectBase {
 				return null;
 			}
 		}
+	}
+	public void addUnpassedStudent(int student,int subject) {
+		subjects.get(subject-1).addStudentsWhoDidntPass(student);
 	}
 	public void setSubjects(List<Subject> subjects) {
 		this.subjects = subjects;
@@ -105,19 +103,19 @@ public class SubjectBase {
 		subjects.add(subject);
 	}
 
-	public void deleteSubject(long id) {
+	public void deleteSubject(String id) {
 		for (Subject subject : subjects) {
-			if (subject.getiDSubject() == id) {
+			if (subject.getiDSubject().equals(id)) {
 				subjects.remove(subject);
 				break;
 			}
 		}
 	}
 
-	public void changeSubject(int iDSubject, String subjectName, Kind_of_semester semesterKind, int subjectYearExecution,
+	public void changeSubject(String iDSubject, String subjectName, KindOfSemester semesterKind, int subjectYearExecution,
 		int eSPBvalue) {
 		for (Subject subject : subjects) {
-			if (subject.getiDSubject() == iDSubject) {
+			if (subject.getiDSubject().equals(iDSubject)) {
 				subject.setiDSubject(iDSubject);
 				subject.setSubjectName(subjectName);
 				subject.setSemesterKind(semesterKind);

@@ -4,21 +4,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-enum STATUS {B,S}
 public class Student extends Person {
 	
 
 	private String indexNumber;
 	private int entryYear;
 	private int currentYear;
-	private STATUS status;
+	private StudentStatus status;
 	private double avgMark;
-	private List<Mark> passedSubjects;
-	private List<Subject> unpassedSubjects;
+	private List<Integer> passedSubjects;
+	private List<Integer> unpassedSubjects;
 	
-	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
+	public Student(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
 			String email) {
-		super(name, surname, dateOfBirth, adress, mobilePhone, email);
+		super(name, surname, dateOfBirth, address, mobilePhone, email);
 	}
 	public Student()
 	{
@@ -26,16 +25,16 @@ public class Student extends Person {
 	}
 	
 	
-	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
-			String email, String indexNumber, int entryYear, int currentYear, STATUS status, double avgMark) {
-		super(name, surname, dateOfBirth, adress, mobilePhone, email);
+	public Student(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
+			String email, String indexNumber, int entryYear, int currentYear, StudentStatus status, double avgMark) {
+		super(name, surname, dateOfBirth, address, mobilePhone, email);
 		this.indexNumber = indexNumber;
 		this.entryYear = entryYear;
 		this.currentYear = currentYear;
 		this.status = status;
 		this.avgMark = avgMark;
-		passedSubjects = new ArrayList<Mark>();
-		unpassedSubjects = new ArrayList<Subject>();
+		passedSubjects = new ArrayList<Integer>();
+		unpassedSubjects = new ArrayList<Integer>();
 	}
 	
 //	public Student(String name, String surname, LocalDate dateOfBirth, Address adress, int mobilePhone,
@@ -57,13 +56,15 @@ public class Student extends Person {
 		return indexNumber;
 	}
 	
-	public STATUS getEnumByString(String s)
+	public StudentStatus getEnumByString(String s)
 	{
-		if(s.equals("Budzet"))return STATUS.B;
-		else return STATUS.S;
+		if(s.equals("Budzet"))return StudentStatus.B;
+		else return StudentStatus.S;
 		
 	}
-
+	public void addUnpassedSubject(int unpassedSubject) {
+		unpassedSubjects.add(unpassedSubject);
+	}
 
 	public void setIndexNumber(String indexNumber) {
 		this.indexNumber = indexNumber;
@@ -90,12 +91,12 @@ public class Student extends Person {
 	}
 
 
-	public STATUS getStatus() {
+	public StudentStatus getStatus() {
 		return status;
 	}
 
 
-	public void setStatus(STATUS status) {
+	public void setStatus(StudentStatus status) {
 		this.status = status;
 	}
 
@@ -110,22 +111,22 @@ public class Student extends Person {
 	}
 
 
-	public List<Mark> getPassedSubjects() {
+	public List<Integer> getPassedSubjects() {
 		return passedSubjects;
 	}
 
 
-	public void setPassedSubjects(List<Mark> passedSubjects) {
+	public void setPassedSubjects(List<Integer> passedSubjects) {
 		this.passedSubjects = passedSubjects;
 	}
 
 
-	public List<Subject> getUnpassedSubjects() {
+	public List<Integer> getUnpassedSubjects() {
 		return unpassedSubjects;
 	}
 
 
-	public void setUnpassedSubjects(List<Subject> unpassedSubjects) {
+	public void setUnpassedSubjects(List<Integer> unpassedSubjects) {
 		this.unpassedSubjects = unpassedSubjects;
 	}
 
