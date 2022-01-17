@@ -18,10 +18,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Base.SubjectBase;
 import Subject.AbstractTableModelSubjects;
 import Subject.SubjectTable;
 import model.Subject;
-import model.SubjectBase;
 
 public class SubjectUpdateDialog extends JDialog {
 	/**
@@ -172,14 +172,14 @@ public class SubjectUpdateDialog extends JDialog {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") |!getInputID().getText().matches("[0-9]+") |  inputExecution.getText().equals("") )
+					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") |!getInputID().getText().matches("[A-Za-z0-9]+") |  inputExecution.getText().equals("") )
 					{
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);
 						return;
 					}
 					Subject s = new Subject();
-					SubjectBase.getInstance().changeSubject(Integer.parseInt(inputID.getText()) , inputName.getText(),s.getEnum(comboSemester.getSelectedItem().toString()),Integer.parseInt(inputExecution.getText()), Integer.parseInt(inputEspb.getText()));
+					SubjectBase.getInstance().changeSubject(inputID.getText() , inputName.getText(),s.getEnum(comboSemester.getSelectedItem().toString()),Integer.parseInt(inputExecution.getText()), Integer.parseInt(inputEspb.getText()));
 					int row = SubjectTable.getInstance().getSelectedRow();
 					AbstractTableModelSubjects model = (AbstractTableModelSubjects)SubjectTable.getInstance().getModel();
 					model.fireTableRowsUpdated(row, row);

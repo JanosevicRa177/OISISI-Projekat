@@ -2,7 +2,7 @@ package Student;
 
 import javax.swing.table.AbstractTableModel;
 
-import model.StudentBase;
+import Base.StudentBase;
 
 public class AbstractTableModelStudents extends AbstractTableModel {
 	

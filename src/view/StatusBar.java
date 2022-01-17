@@ -18,7 +18,6 @@ public class StatusBar extends JPanel {
 
 	private static StatusBar instance = null;
 	
-	private String lbl;
 	private static JPanel panLeft =new JPanel();
 	private static JLabel p = new JLabel("currentTab");
 
@@ -70,7 +69,6 @@ public class StatusBar extends JPanel {
 	
 	public void setLbl(int newlbl)
 	{
-		System.out.println("Usao u funkciju");
 		String tmp = "";
 		switch(newlbl)
 		{

@@ -11,9 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import model.ProfessorBase;
+import Base.StudentBase;
 import model.Student;
-import model.StudentBase;
 import view.MainFrame;
 
 public class StudentController {
@@ -27,7 +26,9 @@ public class StudentController {
 		}
 		return instance;
 	}
-	
+	public void addUnpassedSubject(int student,int subject) {
+		StudentBase.getInstance().addUnpassedSubject(student, subject);
+	}
 	public StudentController() {
 		// TODO Auto-generated constructor stub
 	}
@@ -38,13 +39,18 @@ public class StudentController {
     	if (rowSelectedIndex < 0) {
 			return;
 		}
-
+    
         StudentDeleteDialog dialog = new StudentDeleteDialog(rowSelectedIndex);
         dialog.setVisible(true);
 //    	Student student = StudentBase.getInstance().getRow(rowSelectedIndex);
 //    	StudentBase.getInstance().deleteStudent(student.getIndexNumber());
 	}
-	
+	public boolean containsStudent(String id) {
+		return StudentBase.getInstance().containsadd(id);
+	}
+	public boolean containsUpdateStudent(String id, String oldId) {
+		return StudentBase.getInstance().containsUpdate(id, oldId);
+	}
 	 public class StudentDeleteDialog extends JDialog{
 
 	        private static final long serialVersionUID = 5312828189967818799L;

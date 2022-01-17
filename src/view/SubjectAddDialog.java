@@ -16,12 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Base.SubjectBase;
 import Controller.SubjectController;
 import Student.StudentTable;
 import Subject.AbstractTableModelSubjects;
 import Subject.SubjectTable;
 import model.Subject;
-import model.SubjectBase;
 
 public class SubjectAddDialog extends JDialog {
 
@@ -151,7 +151,7 @@ public class SubjectAddDialog extends JDialog {
 			add.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
-					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") | !getInputID().getText().matches("[0-9]+") |  inputExecution.getText().equals("") | SubjectBase.getInstance().contains(Integer.parseInt(inputID.getText())))
+					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") | !getInputID().getText().matches("[A-Za-z0-9]+") |  inputExecution.getText().equals("") | SubjectBase.getInstance().contains(inputID.getText()))
 					{
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);
@@ -159,7 +159,7 @@ public class SubjectAddDialog extends JDialog {
 					}
 					Subject s = new Subject();
 					int row = StudentTable.getInstance().getRowCount();
-					Subject subject = new Subject(Integer.parseInt(inputID.getText()),inputName.getText(),s.getEnum(comboSemester.getSelectedItem().toString()),Integer.parseInt(inputExecution.getText()),Integer.parseInt(inputEspb.getText()));
+					Subject subject = new Subject(inputID.getText(),inputName.getText(),s.getEnum(comboSemester.getSelectedItem().toString()),Integer.parseInt(inputExecution.getText()),Integer.parseInt(inputEspb.getText()),8);
 					SubjectController.getInstance().addSubject(subject);
 					AbstractTableModelSubjects model = (AbstractTableModelSubjects)SubjectTable.getInstance().getModel();
 					model.fireTableRowsInserted(row, row);

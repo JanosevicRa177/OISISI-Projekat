@@ -1,32 +1,37 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Desk {
 
-	private int deskCode;
+	private String deskCode;
 	private String deskName;
-	private Professor deskChief;
+	private int deskChief;
 	private List<Professor> professorsOnDesk;
 	
 	public Desk() {
 		super();
 	}
 	
-	public Desk(int deskCode, String deskName, Professor deskChief, List<Professor> professorsOnDesk) {
+	public Desk(String deskCode, String deskName, int deskChief) {
 		super();
 		this.deskCode = deskCode;
 		this.deskName = deskName;
 		this.deskChief = deskChief;
-		this.professorsOnDesk = professorsOnDesk;
-		professorsOnDesk.add(deskChief);
+		professorsOnDesk = new ArrayList<Professor>();
 	}
-
-	public int getDeskCode() {
+	public void addProfessor(Professor professor) {
+		professorsOnDesk.add(professor);
+	}
+	public void removeProfessor(Professor professor) {
+		professorsOnDesk.remove(professor);
+	}
+	public String getDeskCode() {
 		return deskCode;
 	}
 
-	public void setDeskCode(int deskCode) {
+	public void setDeskCode(String deskCode) {
 		this.deskCode = deskCode;
 	}
 
@@ -38,11 +43,11 @@ public class Desk {
 		this.deskName = deskName;
 	}
 
-	public Professor getDeskChief() {
+	public int getDeskChief() {
 		return deskChief;
 	}
 
-	public void setDeskChief(Professor deskChief) {
+	public void setDeskChief(int deskChief) {
 		this.deskChief = deskChief;
 	}
 
@@ -53,9 +58,4 @@ public class Desk {
 	public void setProfessorsOnDesk(List<Professor> professorsOnDesk) {
 		this.professorsOnDesk = professorsOnDesk;
 	}
-	
-	
-	
-	
-	
 }

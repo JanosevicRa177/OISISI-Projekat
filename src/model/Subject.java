@@ -3,46 +3,46 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-enum Kind_of_semester{Summer, Winter}
 
 public class Subject {
 	
-	private int iDSubject;
+	private String iDSubject;
 	private String subjectName;
-	private Kind_of_semester semesterKind;
+	private KindOfSemester semesterKind;
 	private int subjectYearExecution;
-	private Professor professorOfSubject;
+	private int professorOfSubject;
 	private int eSPBvalue;
-	private List<Student> studentsWhoPassed;
-	private List<Student> studentsWhoDidntPass;
+	private List<Integer> studentsWhoPassed;
+	private List<Integer> studentsWhoDidntPass;
 	
 	public Subject() {
 	}
-	public Subject(int iDSubject, String subjectName, Kind_of_semester semesterKind, int subjectYearExecution,
-			 int eSPBvalue) {
+	public Subject(String iDSubject, String subjectName, KindOfSemester semesterKind, int subjectYearExecution,
+			 int eSPBvalue,int professorOfSubject) {
 		super();
 		this.iDSubject = iDSubject;
 		this.subjectName = subjectName;
 		this.semesterKind = semesterKind;
+		this.professorOfSubject = professorOfSubject;
 
 		this.subjectYearExecution = subjectYearExecution;
 		//this.professorOfSubject = professorOfSubject;
 		this.eSPBvalue = eSPBvalue;
-		studentsWhoPassed = new ArrayList<Student>();
-		studentsWhoDidntPass = new ArrayList<Student>();
+		studentsWhoPassed = new ArrayList<Integer>();
+		studentsWhoDidntPass = new ArrayList<Integer>();
 	}
 	
-	public int getiDSubject() {
+	public String getiDSubject() {
 		return iDSubject;
 	}
 	
-	public void setiDSubject(int iDSubject) {
+	public void setiDSubject(String iDSubject) {
 		this.iDSubject = iDSubject;
 	}
-	public Kind_of_semester getEnum(String s)
+	public KindOfSemester getEnum(String s)
 	{
-		if(s.equals("Letnji"))return Kind_of_semester.Summer;
-		else return Kind_of_semester.Winter;
+		if(s.equals("Letnji"))return KindOfSemester.Summer;
+		else return KindOfSemester.Winter;
 	}
 	
 	public String getSubjectName() {
@@ -53,11 +53,11 @@ public class Subject {
 		this.subjectName = subjectName;
 	}
 
-	public Kind_of_semester getSemesterkind() {
+	public KindOfSemester getSemesterkind() {
 		return semesterKind;
 	}
 
-	public void setSemesterKind(Kind_of_semester semesterKind) {
+	public void setSemesterKind(KindOfSemester semesterKind) {
 		this.semesterKind = semesterKind;
 	}
 
@@ -69,11 +69,11 @@ public class Subject {
 		this.subjectYearExecution = subjectYearExecution;
 	}
 
-	public Professor getProfessorOfSubject() {
+	public int getProfessorOfSubject() {
 		return professorOfSubject;
 	}
 
-	public void setProfessor_of_Subject(Professor professorOfSubject) {
+	public void setProfessor_of_Subject(int professorOfSubject) {
 		this.professorOfSubject = professorOfSubject;
 	}
 
@@ -84,22 +84,22 @@ public class Subject {
 	public void setESPBvalue(int eSPBvalue) {
 		this.eSPBvalue = eSPBvalue;
 	}
-	public List<Student> getStudentsWhoPassed() {
+	public List<Integer> getStudentsWhoPassed() {
 		return studentsWhoPassed;
 	}
-	public void addStudentsWhoPassed(Student student) {
+	public void addStudentsWhoPassed(int student) {
 		studentsWhoPassed.add(student);
 	}
-	public void deleteStudentsWhoPassed(Student student) {
+	public void deleteStudentsWhoPassed(int student) {
 		studentsWhoPassed.remove(student);
 	}
-	public List<Student> getStudentsWhoDidntPass() {
+	public List<Integer> getStudentsWhoDidntPass() {
 		return studentsWhoDidntPass;
 	}
-	public void addStudentsWhoDidntPass(Student student) {
+	public void addStudentsWhoDidntPass(int student) {
 		studentsWhoDidntPass.add(student);
 	}
-	public void deleteStudentsWhoDidntPass(Student student) {
+	public void deleteStudentsWhoDidntPass(int student) {
 		studentsWhoDidntPass.remove(student);
 	}
 	

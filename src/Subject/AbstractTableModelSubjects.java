@@ -2,7 +2,7 @@ package Subject;
 
 import javax.swing.table.AbstractTableModel;
 
-import model.SubjectBase;
+import Base.SubjectBase;
 
 public class AbstractTableModelSubjects extends AbstractTableModel {
 

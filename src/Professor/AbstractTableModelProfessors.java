@@ -2,7 +2,7 @@ package Professor;
 
 import javax.swing.table.AbstractTableModel;
 
-import model.ProfessorBase;
+import Base.ProfessorBase;
 
 public class AbstractTableModelProfessors extends AbstractTableModel {
 

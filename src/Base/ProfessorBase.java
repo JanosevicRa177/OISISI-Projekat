@@ -1,8 +1,11 @@
-package model;
+package Base;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Address;
+import model.Professor;
 
 
 
@@ -21,18 +24,6 @@ public class ProfessorBase {
 	
 	private ProfessorBase() {
 		this.professors = new ArrayList<Professor>();
-		Professor professor1 = new Professor("mirko","mirkovic",LocalDate.of(2017, 1, 13),
-				new Address("ulica","5","beograd","srbija"),060,"nekiMail@gmail.com",
-				new Address("ulica","5","beograd","srbija"),568, "nastavnik",56);
-		Professor professor2 = new Professor("mirko","mirkovic",LocalDate.of(2017, 1, 13),
-				new Address("ulica","5","beograd","srbija"),060,"nekiMail@gmail.com",
-				new Address("ulica","5","beograd","srbija"),567, "nastavnik",56);
-		Professor professor3 = new Professor("mirko","mirkovic",LocalDate.of(2017, 1, 13),
-				new Address("ulica","5","beograd","srbija"),060,"nekiMail@gmail.com",
-				new Address("ulica","5","beograd","srbija"),569, "nastavnik",56);
-		professors.add(professor1);
-		professors.add(professor2);
-		professors.add(professor3);
 		this.colons = new ArrayList<String>();
 		this.colons.add("Name");
 		this.colons.add("Surname");
@@ -136,7 +127,7 @@ public class ProfessorBase {
 				professor.setName(name);
 				professor.setSurname(surname);
 				professor.setDate_of_birth(dateOfBirth);
-				professor.setAdress(address);
+				professor.setAddress(address);
 				professor.setMobile_phone(mobilePhone);
 				professor.setEmail(email);
 				professor.setOfficeAddress(officeAddress);

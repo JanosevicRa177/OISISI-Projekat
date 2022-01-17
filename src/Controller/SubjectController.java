@@ -11,8 +11,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Base.SubjectBase;
 import model.Subject;
-import model.SubjectBase;
 import view.MainFrame;
 
 public class SubjectController {
@@ -28,6 +28,9 @@ public class SubjectController {
 	
 	public SubjectController() {
 		// TODO Auto-generated constructor stub
+	}
+	public void addUnpassedStudent(int student,int subject) {
+		SubjectBase.getInstance().addUnpassedStudent(student, subject);
 	}
 	public void addSubject(Subject subject) {
 		SubjectBase.getInstance().addSubject(subject);
