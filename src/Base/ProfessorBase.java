@@ -119,7 +119,6 @@ public class ProfessorBase {
 			}
 		}
 	}
-
 	public void changeProfessor(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
 			String email, Address officeAddress, int iDnumber, String title, int experienceYears,int oldID) {
 		for (Professor professor : professors) {
