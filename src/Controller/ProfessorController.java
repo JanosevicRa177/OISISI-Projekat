@@ -30,6 +30,9 @@ public class ProfessorController {
 	public ProfessorController() {
 		// TODO Auto-generated constructor stub
 	}
+	public void searchProfessor(String search) {
+		ProfessorBase.getInstance().searchProfessor(search);
+	}
 	public void addProfessor(Professor professor) {
 			ProfessorBase.getInstance().addProfessor(professor);
 	}

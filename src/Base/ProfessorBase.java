@@ -2,10 +2,14 @@ package Base;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import Professor.AbstractTableModelProfessors;
+import Professor.ProfessorTable;
 import model.Address;
 import model.Professor;
+import view.MainFrame;
 
 
 
@@ -20,10 +24,14 @@ public class ProfessorBase {
 		return instance;
 	}
 	private List<Professor> professors;
+	private List<Professor> professorsNotVisible;
+	private List<Professor> professorsVisible;
 	private List<String> colons;
 	
 	private ProfessorBase() {
 		this.professors = new ArrayList<Professor>();
+		this.professorsNotVisible = new ArrayList<Professor>();
+		this.professorsVisible = new ArrayList<Professor>();
 		this.colons = new ArrayList<String>();
 		this.colons.add("Name");
 		this.colons.add("Surname");
@@ -39,6 +47,52 @@ public class ProfessorBase {
 		}
 		return false;
 	}
+	public void searchProfessor(String search) {
+		AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();
+		Iterator<Professor> it2 = professorsNotVisible.iterator();
+		int row = 0;
+		Professor prof;
+		while(it2.hasNext()) {
+			prof = it2.next();
+			professors.add(prof);
+			model.fireTableRowsInserted(professors.size(), professors.size());
+		}
+		professorsVisible = new ArrayList<Professor>();
+		professorsNotVisible = new ArrayList<Professor>();
+		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
+			Iterator<Professor> it1 = professors.iterator();
+			row = 0;
+			while(it1.hasNext()) {
+				prof = it1.next();
+				if(prof.getSurname().toLowerCase().matches(".*"+search.toLowerCase()+".*")) {
+					professorsVisible.add(prof);
+				} else {
+					professorsNotVisible.add(prof);
+					model.fireTableRowsDeleted(row, row);
+				}
+				row++;
+			}
+			professors = professorsVisible;
+		}else if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+( )[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
+			String[] search1 = search.split(" ");
+			Iterator<Professor> it1 = professors.iterator();
+			row = 0;
+			while(it1.hasNext()) {
+				prof = it1.next();
+				if(prof.getSurname().toLowerCase().matches(".*"+search1[0].toLowerCase()+".*") &&
+						prof.getName().toLowerCase().matches(".*"+search1[1].toLowerCase()+".*")) {
+					professorsVisible.add(prof);
+				} else {
+					professorsNotVisible.add(prof);
+					model.fireTableRowsDeleted(row, row);
+				}
+				row++;
+			}
+			professors = professorsVisible;
+		}
+		MainFrame.getInstance().validate();
+	}
+	
 	public boolean containsUpdate(int ID,int oldID) {
 		if(ID == oldID) {
 			return false;
@@ -112,9 +166,10 @@ public class ProfessorBase {
 	}
 
 	public void deleteProfessor(long id) {
-		for (Professor professor : professors) {
-			if (professor.getIDnumber() == id) {
-				professors.remove(professor);
+		Iterator<Professor> it1 = professors.iterator();
+		while(it1.hasNext()) {
+			if( it1.next().getIDnumber() == id) {
+				it1.remove();
 				break;
 			}
 		}

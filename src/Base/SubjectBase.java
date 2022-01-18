@@ -1,10 +1,17 @@
 package Base;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import Professor.AbstractTableModelProfessors;
+import Professor.ProfessorTable;
+import Subject.AbstractTableModelSubjects;
+import Subject.SubjectTable;
 import model.KindOfSemester;
+import model.Professor;
 import model.Subject;
+import view.MainFrame;
 
 public class SubjectBase {
 
@@ -17,10 +24,14 @@ public class SubjectBase {
 		return instance;
 	}
 	private List<Subject> subjects;
+	private List<Subject> subjectsNotVisible;
+	private List<Subject> subjectsVisible;
 	private List<String> colons;
 	
 	private SubjectBase() {
 		this.subjects = new ArrayList<Subject>();
+		this.subjectsNotVisible = new ArrayList<Subject>();
+		this.subjectsVisible = new ArrayList<Subject>();
 		this.colons = new ArrayList<String>();
 		this.colons.add("IDsubject");
 		this.colons.add("Subject Name");
@@ -35,6 +46,52 @@ public class SubjectBase {
 			}
 		}
 		return false;
+	}
+	public void searchSubject(String search) {
+		AbstractTableModelSubjects model = (AbstractTableModelSubjects) SubjectTable.getInstance().getModel();
+		Iterator<Subject> it2 = subjectsNotVisible.iterator();
+		int row = 0;
+		Subject subj;
+		while(it2.hasNext()) {
+			subj = it2.next();
+			subjects.add(subj);
+			model.fireTableRowsInserted(subjects.size(), subjects.size());
+		}
+		subjectsVisible = new ArrayList<Subject>();
+		subjectsNotVisible = new ArrayList<Subject>();
+		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
+			Iterator<Subject> it1 = subjects.iterator();
+			row = 0;
+			System.out.println("Ulaz");
+			while(it1.hasNext()) {
+				subj = it1.next();
+				if(subj.getiDSubject().toLowerCase().matches(".*"+search.toLowerCase()+".*")) {
+					subjectsVisible.add(subj);
+				} else {
+					subjectsNotVisible.add(subj);
+					model.fireTableRowsDeleted(row, row);
+				}
+				row++;
+			}
+			subjects = subjectsVisible;
+		}else if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+( )[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
+			String[] search1 = search.split(" ");
+			Iterator<Subject> it1 = subjects.iterator();
+			row = 0;
+			while(it1.hasNext()) {
+				subj = it1.next();
+				if(subj.getiDSubject().toLowerCase().matches(".*"+search1[0].toLowerCase()+".*") &&
+						subj.getSubjectName().toLowerCase().matches(".*"+search1[1].toLowerCase()+".*")) {
+					subjectsVisible.add(subj);
+				} else {
+					subjectsNotVisible.add(subj);
+					model.fireTableRowsDeleted(row, row);
+				}
+				row++;
+			}
+			subjects = subjectsVisible;
+		}
+		MainFrame.getInstance().validate();
 	}
 	public int getColumnCount() {
 		return 5;
