@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.List;
+
 import Base.MarkBase;
 import model.Mark;
 
@@ -25,5 +27,9 @@ public class MarkController {
 	}
 	public int getMarksLength() {
 		return MarkBase.getInstance().getMarksLength();
+	}
+	public List<Mark> getAllMarks()
+	{
+		return MarkBase.getInstance().getMarks();
 	}
 }

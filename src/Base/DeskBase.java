@@ -27,4 +27,8 @@ public class DeskBase {
 	public int getAddressesLength() {
 		return desks.size();
 	}
+	public List<Desk> getDesks()
+	{
+		return desks;
+	}
 }

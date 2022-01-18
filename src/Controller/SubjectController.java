@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -34,6 +35,10 @@ public class SubjectController {
 	}
 	public void addSubject(Subject subject) {
 		SubjectBase.getInstance().addSubject(subject);
+	}
+	public List<Subject> getAllSubjects()
+	{
+		return SubjectBase.getInstance().getSubjects();
 	}
 	public void deleteSubject(int rowSelectedIndex) {
     	if (rowSelectedIndex < 0) {

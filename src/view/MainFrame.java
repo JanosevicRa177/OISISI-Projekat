@@ -4,8 +4,16 @@ import java.awt.BorderLayout;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.IOException;
 
 import javax.swing.JFrame;
+
+import IOStream.OutputAddress;
+import IOStream.OutputDesk;
+import IOStream.OutputMarks;
+import IOStream.OutputProffesor;
+import IOStream.OutputStudent;
+import IOStream.OutputSubject;
 
 public class MainFrame extends JFrame {
 	/**
@@ -48,5 +56,23 @@ public class MainFrame extends JFrame {
 	add(twt,BorderLayout.CENTER);
 	twt.focusOnStudent();
 	this.validate();
+	
+	 addWindowListener(new java.awt.event.WindowAdapter() {
+         public void windowClosing(java.awt.event.WindowEvent e) {
+        	 try {
+				OutputStudent.getInstance().WriteStudent("Students.txt");
+				OutputProffesor.getInstance().WriteProffesor("Professors.txt");
+				OutputAddress.getInstance().WriteAddresses("Addresses.txt");
+				OutputDesk.getInstance().WriteDesk("Desks.txt");
+				OutputMarks.getInstance().WriteMarks("Marks.txt");
+				OutputSubject.getInstance().WriteSubjects("Subjects.txt");
+				//OutputUnpassed.getInstance().WriteUnpassed("UnpassedSubjects.txt");
+        	} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+             System.exit(0);
+         }
+     });
 	}
 }

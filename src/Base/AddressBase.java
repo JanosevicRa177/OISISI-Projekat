@@ -25,6 +25,9 @@ private static AddressBase instance = null;
 	public Address getAddress(int id) {
 		return addresses.get(id);
 	}
+	public List<Address> getListAddress() {
+		return addresses;
+	}
 	public int getAddressesLength() {
 		return addresses.size();
 	}

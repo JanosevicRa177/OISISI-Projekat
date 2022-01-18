@@ -1,12 +1,15 @@
  package view;
 
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.AbstractAction;
 
 import Controller.ProfessorController;
 import Controller.StudentController;
 import Controller.SubjectController;
+import IOStream.OutputAddress;
+import IOStream.OutputStudent;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import Student.AbstractTableModelStudents;
@@ -45,6 +48,7 @@ public class AbstractActionDelete extends AbstractAction  {
 			SubjectController.getInstance().deleteSubject(row);
 			AbstractTableModelSubjects model = (AbstractTableModelSubjects) SubjectTable.getInstance().getModel();
 			model.fireTableRowsDeleted(row, row);
+			
 			MainFrame.getInstance().validate();
 			
 		}else if(TabsWithTabels.getInstance().getFocus().equals("Students"))
@@ -53,6 +57,7 @@ public class AbstractActionDelete extends AbstractAction  {
 			StudentController.getInstance().deleteStudent(row);
 			AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 			model.fireTableRowsDeleted(row, row);
+			
 			MainFrame.getInstance().validate();
 		}
 		

@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -37,6 +38,10 @@ public class ProfessorController {
 	}
 	public boolean containsUpdateProfessor(int id, int oldId) {
 		return ProfessorBase.getInstance().containsUpdate(id, oldId);
+	}
+	public List<Professor> getAllProf()
+	{
+		return ProfessorBase.getInstance().getProfessors();
 	}
     public void deleteProfessor(int rowSelectedIndex) {
     	if (rowSelectedIndex < 0) {

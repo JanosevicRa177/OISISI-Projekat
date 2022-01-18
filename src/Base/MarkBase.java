@@ -27,5 +27,9 @@ private static MarkBase instance = null;
 	public int getMarksLength() {
 		return marks.size();
 	}
+	public List<Mark> getMarks()
+	{
+		return marks;
+	}
 
 }

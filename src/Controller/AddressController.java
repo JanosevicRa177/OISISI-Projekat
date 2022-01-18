@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.List;
+
 import Base.AddressBase;
 import model.Address;
 
@@ -24,5 +26,8 @@ public class AddressController {
 	}
 	public int getAddressesLength() {
 		return AddressBase.getInstance().getAddressesLength();
+	}
+	public List<Address> getAddrList() {
+		return AddressBase.getInstance().getListAddress();
 	}
 }

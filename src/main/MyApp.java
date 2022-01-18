@@ -20,6 +20,8 @@ public class MyApp {
 		InputProfessor.ReadProfessors("Professors.txt");
 		InputSubject.ReadSubject("Subjects.txt");
 		InputMark.ReadMarks("Marks.txt");
+		
+		
 		MainFrame.getInstance();
 	}
 }

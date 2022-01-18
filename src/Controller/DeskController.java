@@ -1,5 +1,7 @@
 package Controller;
 
+import java.util.List;
+
 import Base.DeskBase;
 import model.Desk;
 
@@ -24,5 +26,9 @@ public class DeskController {
 	}
 	public int getAddressesLength() {
 		return DeskBase.getInstance().getAddressesLength();
+	}
+	public List<Desk> getAllDesks()
+	{
+		return DeskBase.getInstance().getDesks();
 	}
 }

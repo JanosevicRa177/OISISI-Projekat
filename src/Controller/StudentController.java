@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -34,6 +35,9 @@ public class StudentController {
 	}
 	public void addStudent(Student student) {
 		StudentBase.getInstance().addStudent(student);
+	}
+	public List<Student> getStudents() {
+		return StudentBase.getInstance().getStudents();
 	}
 	public void deleteStudent(int rowSelectedIndex) {
     	if (rowSelectedIndex < 0) {
