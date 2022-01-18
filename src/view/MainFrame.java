@@ -1,7 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -30,6 +30,7 @@ public class MainFrame extends JFrame {
 	setSize(width*3/4,height*3/4);
 	setLocationRelativeTo(null);
 	setTitle("Studentska služba");
+	setBackground(new Color(42, 101, 159));
 	
 	MenuBar mb = MenuBar.getInstance();
 	this.setJMenuBar(mb);

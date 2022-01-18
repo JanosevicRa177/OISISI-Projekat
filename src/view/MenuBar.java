@@ -8,6 +8,8 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuKeyEvent;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 
@@ -39,6 +41,15 @@ public class MenuBar extends JMenuBar {
 			JMenuItem fiNew = new JMenuItem("New");
 			fiNew.addActionListener(AbstractActionAdd.getInstance());
 			JMenuItem fiClose = new JMenuItem("Close");
+			fiClose.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					 System.exit(0);
+				}
+				
+			});
 			JMenuItem fiSave = new JMenuItem("Save");
 			
 			JMenu open = new JMenu("Open");
@@ -84,18 +95,51 @@ public class MenuBar extends JMenuBar {
 			fiSave.setIcon(scaledSave);
 			fiSave.setMnemonic(KeyEvent.VK_S);
 			
-			JMenuItem fiSt = new JMenuItem("Studenti");
+			JMenuItem fiSt = new JMenuItem("Students");
+			fiSt.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					TabsWithTabels.getInstance().setSelectedIndex(0);
+					TabsWithTabels.getInstance().focusOnStudent();
+					MainFrame.getInstance().validate();
+				}
+				
+			});
 			fiSt.setAccelerator(KeyStroke.getKeyStroke('S',MenuKeyEvent.CTRL_DOWN_MASK));
 			fiSt.setMnemonic(KeyEvent.VK_S);
-			JMenuItem fiPre = new JMenuItem("Predmeti");
-			fiPre.setAccelerator(KeyStroke.getKeyStroke('P',MenuKeyEvent.CTRL_DOWN_MASK));
-			fiPre.setMnemonic(KeyEvent.VK_P);
-			JMenuItem fiPro = new JMenuItem("Profesori");
+			JMenuItem fiPre = new JMenuItem("Subjects");
+			fiPre.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					TabsWithTabels.getInstance().setSelectedIndex(2);
+					TabsWithTabels.getInstance().focusOnSubject();
+					MainFrame.getInstance().validate();
+				}
+				
+			});
+			fiPre.setAccelerator(KeyStroke.getKeyStroke('B',MenuKeyEvent.CTRL_DOWN_MASK));
+			fiPre.setMnemonic(KeyEvent.VK_B);
+			JMenuItem fiPro = new JMenuItem("Professors");
+			fiPro.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					TabsWithTabels.getInstance().setSelectedIndex(1);
+					TabsWithTabels.getInstance().focusOnProfessor();
+					MainFrame.getInstance().validate();
+				}
+				
+			});
 			fiPro.setAccelerator(KeyStroke.getKeyStroke('R',MenuKeyEvent.CTRL_DOWN_MASK));
 			fiPro.setMnemonic(KeyEvent.VK_R);
-			JMenuItem fiKa = new JMenuItem("Katedre");
-			fiKa.setAccelerator(KeyStroke.getKeyStroke('K',MenuKeyEvent.CTRL_DOWN_MASK));
-			fiKa.setMnemonic(KeyEvent.VK_K);
+			JMenuItem fiKa = new JMenuItem("Desks");
+			fiKa.setAccelerator(KeyStroke.getKeyStroke('D',MenuKeyEvent.CTRL_DOWN_MASK));
+			fiKa.setMnemonic(KeyEvent.VK_D);
 			
 			fiSt.setIcon(scaledArrow);
 			fiPre.setIcon(scaledArrow);

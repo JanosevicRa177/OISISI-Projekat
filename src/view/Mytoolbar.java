@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -13,6 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
+
+import Controller.ProfessorController;
+import Controller.SubjectController;
 
 public class Mytoolbar extends JToolBar {
 
@@ -96,7 +101,18 @@ public class Mytoolbar extends JToolBar {
 		panCenter.add(Box.createHorizontalStrut(10)); 
 		
 		JButton Search = new JButton();
-		
+		Search.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String search = Search_text_area.getText();
+				if(TabsWithTabels.getInstance().getFocus().equals("Professors")) {
+					ProfessorController.getInstance().searchProfessor(search);
+				}else if(TabsWithTabels.getInstance().getFocus().equals("Subjects")) {
+					SubjectController.getInstance().searchSubject(search);
+				}
+			}});
 		Search.setToolTipText("Search");
 		ImageIcon Search_icon = new ImageIcon("images/Search.png");
 		Image Scaled_Search_icon = Search_icon.getImage().getScaledInstance(23, 23, java.awt.Image.SCALE_SMOOTH);
