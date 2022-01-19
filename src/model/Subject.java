@@ -12,17 +12,19 @@ public class Subject {
 	private int subjectYearExecution;
 	private int professorOfSubject;
 	private int eSPBvalue;
+	private int iDIntSubject;
 	private List<Integer> studentsWhoPassed;
 	private List<Integer> studentsWhoDidntPass;
 	
 	public Subject() {
 	}
 	public Subject(String iDSubject, String subjectName, KindOfSemester semesterKind, int subjectYearExecution,
-			 int eSPBvalue,int professorOfSubject) {
+			 int eSPBvalue,int professorOfSubject,int iDIntSubject) {
 		super();
 		this.iDSubject = iDSubject;
 		this.subjectName = subjectName;
 		this.semesterKind = semesterKind;
+		this.setiDIntSubject(iDIntSubject);
 		this.professorOfSubject = professorOfSubject;
 
 		this.subjectYearExecution = subjectYearExecution;
@@ -101,6 +103,12 @@ public class Subject {
 	}
 	public void deleteStudentsWhoDidntPass(int student) {
 		studentsWhoDidntPass.remove(student);
+	}
+	public int getiDIntSubject() {
+		return iDIntSubject;
+	}
+	public void setiDIntSubject(int iDIntSubject) {
+		this.iDIntSubject = iDIntSubject;
 	}
 	
 	

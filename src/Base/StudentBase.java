@@ -2,11 +2,15 @@ package Base;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import model.Address;
 import model.Student;
 import model.StudentStatus;
+import model.Subject;
 
 public class StudentBase {
 	
@@ -36,7 +40,30 @@ public class StudentBase {
 	public void addUnpassedSubject(int student,int subject) {
 		students.get(student-1).addUnpassedSubject(subject);
 	}
+	public void sortByID() {
+		Collections.sort(students, new Comparator<Student>() {
+			  @Override
+			  public int compare(Student st1,Student st2) {
+			    return st1.getIdStudent() - st2.getIdStudent();
+			  }
+			});
+		Iterator<Student> it = students.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next());
+			}
+	}
 	
+	public int getID(){
+		int id = 1;
+		Iterator<Student> it = students.iterator();
+		while(it.hasNext()) {
+			if(it.next().getIdStudent() != id) {
+				break;
+			}
+			id++;
+		}
+		return id;
+	}
 	public void AddStudent(Student s) {
 		students.add(s);
 	}

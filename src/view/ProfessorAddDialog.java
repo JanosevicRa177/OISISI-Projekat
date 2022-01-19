@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Base.AddressBase;
+import Base.ProfessorBase;
 import Controller.ProfessorController;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
@@ -179,10 +181,15 @@ public class ProfessorAddDialog extends JDialog{
 					add.setEnabled(false);
 					return;
 				}
+				Address addressInsert = new Address(address[0],address[1],address[2],address[3]);
+				AddressBase.getInstance().addAddress(addressInsert);
+				Address oAddressInsert = new Address(oAddress[0],oAddress[1],oAddress[2],oAddress[3]);
+				AddressBase.getInstance().addAddress(oAddressInsert);
+				int idProf = ProfessorController.getInstance().getID();
 				Professor professor = new Professor(getTxtName().getText(),getTxtSurname().getText(),LocalDate.parse(getTxtDateOfBirth().getText()),
-						new Address(address[0],address[1],address[2],address[3]),Integer.parseInt(getTxtPhoneNumber().getText()),
-						getTxtEmail().getText(),new Address(oAddress[0],oAddress[1],oAddress[2],oAddress[3]),Integer.parseInt(getTxtIDnumber().getText()),
-						getTxtTitle().getText(),Integer.parseInt(getTxtExperienceYears().getText()));
+						addressInsert,Integer.parseInt(getTxtPhoneNumber().getText()),
+						getTxtEmail().getText(),oAddressInsert,Integer.parseInt(getTxtIDnumber().getText()),
+						getTxtTitle().getText(),Integer.parseInt(getTxtExperienceYears().getText()),idProf);
 				ProfessorController.getInstance().addProfessor(professor);
 				AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();
 				model.fireTableRowsInserted(row, row);

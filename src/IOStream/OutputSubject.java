@@ -52,9 +52,9 @@ public class OutputSubject {
 			else
 				line = line + "null"  + ",";
 			if(subjectList.get(j).getSemesterkind() == KindOfSemester.Winter)
-				line = line + "ZIMSKI ";
+				line = line + "ZIMSKI";
 			else
-				line = line + "LETNJI ";
+				line = line + "LETNJI";
 		
 		j++;
 		writer.write(line);

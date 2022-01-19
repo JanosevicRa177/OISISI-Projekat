@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Base.StudentBase;
+import Base.SubjectBase;
 import model.Student;
 import view.MainFrame;
 
@@ -32,6 +33,9 @@ public class StudentController {
 	}
 	public StudentController() {
 		// TODO Auto-generated constructor stub
+	}
+	public int getID() {
+		return StudentBase.getInstance().getID();
 	}
 	public void addStudent(Student student) {
 		StudentBase.getInstance().addStudent(student);

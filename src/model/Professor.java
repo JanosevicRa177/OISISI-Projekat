@@ -9,18 +9,21 @@ public class Professor extends Person {
 	private int iDnumber;
 	private String title;
 	private int experienceYears;
+	private int idProf;
 	List<Subject> professorsSubjects;
 	public Professor() {
 	}
 	public Professor(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, Address officeAddress, int iDnumber, String title, int experienceYears) {
+			String email, Address officeAddress, int iDnumber, String title, int experienceYears,int idProf) {
 		super(name, surname, dateOfBirth, address, mobilePhone, email);
 		this.officeAddress = officeAddress;
 		this.iDnumber = iDnumber;
 		this.title = title;
 		this.experienceYears = experienceYears;
+		this.setIdProf(idProf);
 		professorsSubjects = new ArrayList<Subject>();
 	}
+	
 	public String getOfficeAddress() {
 		return officeAddress.getStreet() + "," + officeAddress.getNumber() + "," + officeAddress.getCity() + "," + officeAddress.getState();
 	}
@@ -53,6 +56,12 @@ public class Professor extends Person {
 	}
 	public void delete_Professors_subject(Subject subject) {
 		professorsSubjects.remove(subject);
+	}
+	public int getIdProf() {
+		return idProf;
+	}
+	public void setIdProf(int idProf) {
+		this.idProf = idProf;
 	}
 
 }

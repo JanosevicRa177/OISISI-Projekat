@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Base.AddressBase;
 import Controller.StudentController;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
@@ -225,9 +226,12 @@ public class StudentAddDialog extends JDialog  {
 					int row = StudentTable.getInstance().getRowCount();
 					String date = "" + birth[0] + "-" + birth[1] + "-" + birth[2]; 
 					LocalDate localDate = LocalDate.parse(date); 
-					Student student = new Student(getInputName().getText(),getInputSurname().getText(),localDate,new Address(adresa[0],adresa[1],adresa[2],adresa[3]),
+					Address adresaInsert = new Address(adresa[0],adresa[1],adresa[2],adresa[3]);
+					AddressBase.getInstance().addAddress(adresaInsert);
+					int idStudent = StudentController.getInstance().getID();
+					Student student = new Student(getInputName().getText(),getInputSurname().getText(),localDate,adresaInsert,
 							Integer.parseInt(getInputCell().getText()),getInputEmail().getText(),getInputIndex().getText(),
-							Integer.parseInt(getInputYear().getText()),god,temp.getEnumByString(stat),9.12);
+							Integer.parseInt(getInputYear().getText()),god,temp.getEnumByString(stat),9.12,idStudent);
 					StudentController.getInstance().addStudent(student);
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsInserted(row, row);

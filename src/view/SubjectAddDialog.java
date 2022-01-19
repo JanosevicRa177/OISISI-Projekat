@@ -159,7 +159,8 @@ public class SubjectAddDialog extends JDialog {
 					}
 					Subject s = new Subject();
 					int row = StudentTable.getInstance().getRowCount();
-					Subject subject = new Subject(inputID.getText(),inputName.getText(),s.getEnum(comboSemester.getSelectedItem().toString()),Integer.parseInt(inputExecution.getText()),Integer.parseInt(inputEspb.getText()),8);
+					int idSubject = SubjectController.getInstance().getID();
+					Subject subject = new Subject(inputID.getText(),inputName.getText(),s.getEnum(comboSemester.getSelectedItem().toString()),Integer.parseInt(inputExecution.getText()),Integer.parseInt(inputEspb.getText()),0,idSubject);
 					SubjectController.getInstance().addSubject(subject);
 					AbstractTableModelSubjects model = (AbstractTableModelSubjects)SubjectTable.getInstance().getModel();
 					model.fireTableRowsInserted(row, row);

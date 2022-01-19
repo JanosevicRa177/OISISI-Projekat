@@ -9,16 +9,18 @@ public class Desk {
 	private String deskName;
 	private int deskChief;
 	private List<Professor> professorsOnDesk;
+	private int idDesk;
 	
 	public Desk() {
 		super();
 	}
 	
-	public Desk(String deskCode, String deskName, int deskChief) {
+	public Desk(String deskCode, String deskName, int deskChief, int idDesk) {
 		super();
 		this.deskCode = deskCode;
 		this.deskName = deskName;
 		this.deskChief = deskChief;
+		this.setIdDesk(idDesk);
 		professorsOnDesk = new ArrayList<Professor>();
 	}
 	public void addProfessor(Professor professor) {
@@ -57,5 +59,13 @@ public class Desk {
 
 	public void setProfessorsOnDesk(List<Professor> professorsOnDesk) {
 		this.professorsOnDesk = professorsOnDesk;
+	}
+
+	public int getIdDesk() {
+		return idDesk;
+	}
+
+	public void setIdDesk(int idDesk) {
+		this.idDesk = idDesk;
 	}
 }

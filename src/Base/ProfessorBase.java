@@ -2,6 +2,8 @@ package Base;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,6 +48,30 @@ public class ProfessorBase {
 			}
 		}
 		return false;
+	}
+	public void sortByID() {
+		Collections.sort(professors, new Comparator<Professor>() {
+			  @Override
+			  public int compare(Professor pr1,Professor pr2) {
+			    return pr1.getIdProf() - pr2.getIdProf();
+			  }
+			});
+		Iterator<Professor> it = professors.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next());
+			}
+	}
+	
+	public int getID(){
+		int id = 1;
+		Iterator<Professor> it = professors.iterator();
+		while(it.hasNext()) {
+			if(it.next().getIdProf() != id) {
+				break;
+			}
+			id++;
+		}
+		return id;
 	}
 	public void searchProfessor(String search) {
 		AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();

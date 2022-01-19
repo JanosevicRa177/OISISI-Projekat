@@ -60,18 +60,18 @@ public class MainFrame extends JFrame {
 	
 	 addWindowListener(new java.awt.event.WindowAdapter() {
          public void windowClosing(java.awt.event.WindowEvent e) {
-        	 try {
-				OutputStudent.getInstance().WriteStudent("Students.txt");
-				OutputProffesor.getInstance().WriteProffesor("Professors.txt");
-				OutputAddress.getInstance().WriteAddresses("Addresses.txt");
-				OutputDesk.getInstance().WriteDesk("Desks.txt");
-				OutputMarks.getInstance().WriteMarks("Marks.txt");
-				OutputSubject.getInstance().WriteSubjects("Subjects.txt");
-				//OutputUnpassed.getInstance().WriteUnpassed("UnpassedSubjects.txt");
-        	} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+//        	 try {
+//				OutputStudent.getInstance().WriteStudent("Students.txt");
+//				OutputProffesor.getInstance().WriteProffesor("Professors.txt");
+//				OutputAddress.getInstance().WriteAddresses("Addresses.txt");
+//				OutputDesk.getInstance().WriteDesk("Desks.txt");
+//				OutputMarks.getInstance().WriteMarks("Marks.txt");
+//				OutputSubject.getInstance().WriteSubjects("Subjects.txt");
+//				//OutputUnpassed.getInstance().WriteUnpassed("UnpassedSubjects.txt");
+//        	} catch (IOException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//			}
              System.exit(0);
          }
      });

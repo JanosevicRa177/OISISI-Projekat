@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Base.AddressBase;
 import Base.StudentBase;
 import Controller.StudentController;
 import Student.AbstractTableModelStudents;
@@ -248,7 +249,9 @@ public class StudentUpdateDialog extends JDialog {
 					else if(godina[0].equals("Druga"))god = 2;
 					else if(godina[0].equals("Treca"))god = 3;
 					else god = 4;
-					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), new Address(adresa[0],adresa[1],adresa[2],adresa[3]), Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat),oldID);
+					Address adresaInsert = new Address(adresa[0],adresa[1],adresa[2],adresa[3]);
+					AddressBase.getInstance().addAddress(adresaInsert);
+					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), adresaInsert, Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat),oldID);
 					int row = StudentTable.getInstance().getSelectedRow();
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsUpdated(row, row);
