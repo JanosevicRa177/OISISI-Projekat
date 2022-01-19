@@ -1,6 +1,8 @@
 package Base;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -46,6 +48,30 @@ public class SubjectBase {
 			}
 		}
 		return false;
+	}
+	public void sortByID() {
+		Collections.sort(subjects, new Comparator<Subject>() {
+			  @Override
+			  public int compare(Subject subj1,Subject subj2) {
+			    return subj1.getiDIntSubject() - subj2.getiDIntSubject();
+			  }
+			});
+		Iterator<Subject> it = subjects.iterator();
+		while(it.hasNext()) {
+			System.out.println(it.next());
+			}
+	}
+	
+	public int getID(){
+		int id = 1;
+		Iterator<Subject> it = subjects.iterator();
+		while(it.hasNext()) {
+			if(it.next().getiDIntSubject() != id) {
+				break;
+			}
+			id++;
+		}
+		return id;
 	}
 	public void searchSubject(String search) {
 		AbstractTableModelSubjects model = (AbstractTableModelSubjects) SubjectTable.getInstance().getModel();

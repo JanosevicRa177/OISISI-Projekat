@@ -18,13 +18,13 @@ public class InputDesk {
 	public static void ReadDesks(String file) throws IOException {
 		File f = new File(file);
 		String line = "";
-		Desk deskNull = new Desk("","",-1);
+		Desk deskNull = new Desk("","",-1,0);
 		DeskBase.getInstance().addDesk(deskNull);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f),"UTF8"));
 	try {
 		while((line = reader.readLine()) != null) {
 				String[] desk = line.split(",");
-				DeskController.getInstance().addDesk(new Desk(desk[0],desk[1],Integer.parseInt(desk[2])));
+				DeskController.getInstance().addDesk(new Desk(desk[1],desk[2],Integer.parseInt(desk[3]),Integer.parseInt(desk[0])));
 				}
 		} finally {
 			reader.close();

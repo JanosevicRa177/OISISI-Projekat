@@ -31,6 +31,9 @@ public class SubjectController {
 	public SubjectController() {
 		// TODO Auto-generated constructor stub
 	}
+	public int getID() {
+		return SubjectBase.getInstance().getID();
+	}
 	public void searchSubject(String search) {
 		SubjectBase.getInstance().searchSubject(search);
 	}

@@ -12,11 +12,12 @@ public class Student extends Person {
 	private int currentYear;
 	private StudentStatus status;
 	private double avgMark;
+	private int idStudent;
 	private List<Integer> passedSubjects;
 	private List<Integer> unpassedSubjects;
 	
 	public Student(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email) {
+			String email,int idStudent) {
 		super(name, surname, dateOfBirth, address, mobilePhone, email);
 	}
 	public Student()
@@ -26,13 +27,14 @@ public class Student extends Person {
 	
 	
 	public Student(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
-			String email, String indexNumber, int entryYear, int currentYear, StudentStatus status, double avgMark) {
+			String email, String indexNumber, int entryYear, int currentYear, StudentStatus status, double avgMark,int idStudent) {
 		super(name, surname, dateOfBirth, address, mobilePhone, email);
 		this.indexNumber = indexNumber;
 		this.entryYear = entryYear;
 		this.currentYear = currentYear;
 		this.status = status;
 		this.avgMark = avgMark;
+		this.setIdStudent(idStudent);
 		passedSubjects = new ArrayList<Integer>();
 		unpassedSubjects = new ArrayList<Integer>();
 	}
@@ -135,6 +137,12 @@ public class Student extends Person {
 		return "Student [indexNumber=" + indexNumber + ", entryYear=" + entryYear + ", currentYear=" + currentYear
 				+ ", status=" + status + ", avgMark=" + avgMark + ", passedSubjects=" + passedSubjects
 				+ ", unpassedSubjects=" + unpassedSubjects + "]";
+	}
+	public int getIdStudent() {
+		return idStudent;
+	}
+	public void setIdStudent(int idStudent) {
+		this.idStudent = idStudent;
 	}
 	
 	

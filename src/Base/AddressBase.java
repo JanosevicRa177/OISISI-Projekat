@@ -20,6 +20,7 @@ private static AddressBase instance = null;
 		this.addresses = new ArrayList<Address>();
 	}
 	public void addAddress(Address address) {
+		if(!addresses.contains(address))
 		addresses.add(address);
 	}
 	public Address getAddress(int id) {
