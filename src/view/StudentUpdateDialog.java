@@ -28,6 +28,7 @@ import Base.AddressBase;
 import Base.StudentBase;
 import Base.SubjectBase;
 import Controller.StudentController;
+import PassedSubjects.PassedSubjectTable;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
@@ -225,7 +226,7 @@ public class StudentUpdateDialog extends JDialog {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
+					if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z0-9( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+") |
 							!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
 							getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
 						
@@ -268,7 +269,9 @@ public class StudentUpdateDialog extends JDialog {
 			});
 		informations.add("Informations",addStudent);
 		JPanel unpassedSubjects = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel passedSubjects = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel buttonsUnassed = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel buttonsPassed = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
 		JButton addUnpassed = new JButton();
 		addUnpassed.setText("Add");
@@ -292,11 +295,43 @@ public class StudentUpdateDialog extends JDialog {
 			}
 			
 		});
+		JButton dec = new JButton();
+		dec.setText("Ponisti");
+		dec.setPreferredSize(dim);
+		dec.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int dec = PassedSubjectTable.getInstance().getSelectedRow();
+				StudentController.getInstance().unpassTest(dec);
+			}
+			
+		});
 		buttonsUnassed.add(pass);
+		buttonsPassed.add(dec);
 		unpassedSubjects.add(buttonsUnassed);
 		JScrollPane unpassedSubjectsTable =new JScrollPane(UnpassedSubjectTable.getInstance());
 		unpassedSubjects.add(unpassedSubjectsTable);
 		informations.addTab("Unpassed subjects",unpassedSubjects);
+		JScrollPane passedSubjectTable =new JScrollPane(PassedSubjectTable.getInstance());
+		passedSubjects.add(buttonsPassed);
+		passedSubjects.add(passedSubjectTable);
+		int l = PassedSubjectTable.getInstance().getESPB();
+		int ll = PassedSubjectTable.getInstance().getProsek();
+		String lbl1 = "Ukupno ESPB:";
+		String lbl2 = "Prosecna ocena:";
+		lbl2 = lbl2 + ll;
+		lbl1 = lbl1 + l;
+		JLabel lbl = new JLabel(lbl1);
+		JLabel lbl3 = new JLabel(lbl2);
+		passedSubjects.add(lbl);
+		passedSubjects.add(lbl3);
+		informations.addTab("Passed subjects",passedSubjects);
+		
+		//PassedSubjectTable.getInstance().getValueAt(row, column)
+		
+
 		this.add(informations);
 			
 		}
@@ -308,7 +343,7 @@ public class StudentUpdateDialog extends JDialog {
 
 			@Override
 			public void focusLost(FocusEvent arg0) {
-				if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
+				if(getInputName().getText().equals("") | getInputSurname().getText().equals("") | !isValidDate(inputBirth.getText()) | !inputAddress.getText().matches("[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z0-9( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+") |
 						!getInputCell().getText().matches("[0-9]+") |  getInputEmail().getText().equals("") |
 						getInputIndex().getText().equals("")| !getInputYear().getText().matches("[0-9]+")) {
 					add.setEnabled(false);

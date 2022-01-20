@@ -29,6 +29,7 @@ public class Mark {
 	public int getStudentWhichPassExam() {
 		return studentsPassed;
 	}
+	
 
 	public void setStudentWhichPassExam(int studentWhichPassExam) {
 		studentsPassed = studentWhichPassExam;
