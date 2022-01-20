@@ -56,10 +56,6 @@ public class ProfessorBase {
 			    return pr1.getIdProf() - pr2.getIdProf();
 			  }
 			});
-		Iterator<Professor> it = professors.iterator();
-		while(it.hasNext()) {
-			System.out.println(it.next());
-			}
 	}
 	
 	public int getID(){
@@ -81,8 +77,9 @@ public class ProfessorBase {
 		while(it2.hasNext()) {
 			prof = it2.next();
 			professors.add(prof);
-			model.fireTableRowsInserted(professors.size(), professors.size());
+			model.fireTableRowsInserted(professors.size()-1, professors.size()-1);
 		}
+		sortByID();
 		professorsVisible = new ArrayList<Professor>();
 		professorsNotVisible = new ArrayList<Professor>();
 		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
@@ -116,6 +113,7 @@ public class ProfessorBase {
 			}
 			professors = professorsVisible;
 		}
+		model.fireTableDataChanged();
 		MainFrame.getInstance().validate();
 	}
 	

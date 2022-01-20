@@ -37,6 +37,15 @@ public class StudentBase {
 		this.colons.add("Prosek");
 
 	}
+	public Student getStudentByIndex(String index) {
+		Student student = new Student();
+		for(Student st : students) {
+			if(st.getIndexNumber().equals(index)) {
+				student = st;
+			}
+		}
+		return student;
+	}
 	public void addUnpassedSubject(int student,int subject) {
 		students.get(student-1).addUnpassedSubject(subject);
 	}
@@ -47,10 +56,6 @@ public class StudentBase {
 			    return st1.getIdStudent() - st2.getIdStudent();
 			  }
 			});
-		Iterator<Student> it = students.iterator();
-		while(it.hasNext()) {
-			System.out.println(it.next());
-			}
 	}
 	
 	public int getID(){

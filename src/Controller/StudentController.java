@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import Base.StudentBase;
 import Base.SubjectBase;
+import Student.StudentTable;
 import model.Student;
 import view.MainFrame;
 
@@ -33,6 +34,12 @@ public class StudentController {
 	}
 	public StudentController() {
 		// TODO Auto-generated constructor stub
+	}
+	public Student findSelectedStudent(int row) {
+		return StudentBase.getInstance().getAllStudents().get(row);
+	}
+	public void passTest(int subject) {
+		StudentBase.getInstance().getAllStudents().get(StudentTable.getInstance().getSelectedRow()).passSubject(subject);
 	}
 	public int getID() {
 		return StudentBase.getInstance().getID();

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,13 +20,18 @@ import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import Base.AddressBase;
 import Base.StudentBase;
+import Base.SubjectBase;
 import Controller.StudentController;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
+import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
+import UnpassedSubjects.UnpassedSubjectTable;
 import model.Address;
 import model.Student;
 
@@ -44,13 +50,20 @@ public class StudentUpdateDialog extends JDialog {
 	private JButton add = new JButton();
 	private String oldID;
 	
+	private static StudentUpdateDialog instance = null;
 
+	public static StudentUpdateDialog getInstance() {
+		if (instance == null) {
+			instance = new StudentUpdateDialog();
+		}
+		return instance;
+	}
 	
 		
 		public StudentUpdateDialog(){
 			super(MainFrame.getInstance(), "Update Student", true);
-			
-			
+			Box addStudent = Box.createVerticalBox();
+			JTabbedPane informations = new JTabbedPane();
 			Toolkit kit = Toolkit.getDefaultToolkit();
 			Dimension screenSize = kit.getScreenSize();
 			int width = screenSize.width;
@@ -59,12 +72,11 @@ public class StudentUpdateDialog extends JDialog {
 			setLocationRelativeTo(MainFrame.getInstance());
 			setTitle("Izmena Studenta");
 			
-			JPanel addStudent = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			Dimension labelDim = new Dimension((width*1/3)/2, 30);
 			Dimension inputDim = new Dimension((width*1/4+25)/2, 20);
 			
 			
-			JPanel Name = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Name = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelName = new JLabel("Name:");
 			labelName.setPreferredSize(labelDim);
 			inputName.setPreferredSize(inputDim);
@@ -75,12 +87,10 @@ public class StudentUpdateDialog extends JDialog {
 			Name.add(inputName);
 			addStudent.add(Name);
 			inputName.addFocusListener(new AddStudentFocusListener());
-
-			this.add(addStudent);
 			
 			List<Student> students = new ArrayList<Student>();
 			students = StudentBase.getInstance().getStudents();
-			JPanel Surname = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Surname = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelSurname = new JLabel("Surname:");
 			labelSurname.setPreferredSize(labelDim);
 			inputSurname.setPreferredSize(inputDim);
@@ -91,9 +101,8 @@ public class StudentUpdateDialog extends JDialog {
 			addStudent.add(Surname);
 
 			inputSurname.addFocusListener(new AddStudentFocusListener());
-			this.add(addStudent);
 			
-			JPanel BirthDate = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel BirthDate = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
 			JLabel labelBirth = new JLabel("BirthDate (yyyy-mm-dd):");
 
@@ -109,10 +118,9 @@ public class StudentUpdateDialog extends JDialog {
 			addStudent.add(BirthDate);
 
 			inputBirth.addFocusListener(new AddStudentFocusListener());
-			this.add(addStudent);
 			
 			
-			JPanel Address = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Address = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelAddress = new JLabel("Address (Street,number,city,state):");
 			labelAddress.setPreferredSize(labelDim);
 			inputAddress.setPreferredSize(inputDim);
@@ -122,10 +130,9 @@ public class StudentUpdateDialog extends JDialog {
 			addStudent.add(Address);
 
 			inputAddress.addFocusListener(new AddStudentFocusListener());
-			this.add(addStudent);
 			
 			
-			JPanel CellNumber = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel CellNumber = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelCell = new JLabel("Cell Phone:");
 			labelCell.setPreferredSize(labelDim);
 			inputCell.setPreferredSize(inputDim);
@@ -136,9 +143,8 @@ public class StudentUpdateDialog extends JDialog {
 			addStudent.add(CellNumber);
 
 			inputCell.addFocusListener(new AddStudentFocusListener());
-			this.add(addStudent);
 			
-			JPanel Email = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Email = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelEmail = new JLabel("Email:");
 			labelEmail.setPreferredSize(labelDim);
 			inputEmail.setPreferredSize(inputDim);
@@ -146,9 +152,8 @@ public class StudentUpdateDialog extends JDialog {
 			Email.add(labelEmail);
 			Email.add(inputEmail);
 			addStudent.add(Email);
-			this.add(addStudent);
 			
-			JPanel Index = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Index = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelIndex = new JLabel("Index Number:");
 			labelIndex.setPreferredSize(labelDim);
 			inputIndex.setPreferredSize(inputDim);
@@ -159,9 +164,8 @@ public class StudentUpdateDialog extends JDialog {
 			oldID = students.get(row).getIndexNumber();
 
 			inputIndex.addFocusListener(new AddStudentFocusListener());
-			this.add(addStudent);
 			
-			JPanel Year = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Year = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelYear = new JLabel("Year of sign:");
 			labelYear.setPreferredSize(labelDim);
 			inputYear.setPreferredSize(inputDim);
@@ -172,9 +176,8 @@ public class StudentUpdateDialog extends JDialog {
 			addStudent.add(Year);
 
 			inputYear.addFocusListener(new AddStudentFocusListener());
-			this.add(addStudent);
 			
-			JPanel Current = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Current = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			String[] years = { "Prva (1)","Druga (2)", "Treca (3)", "Cetvrta (4)" };
 			JLabel labelCurrent = new JLabel("Current year:");
 			labelCurrent.setPreferredSize(labelDim);
@@ -186,9 +189,8 @@ public class StudentUpdateDialog extends JDialog {
 			Current.add(currentList);
 			addStudent.add(Current);
 
-			this.add(addStudent);
 			
-			JPanel Type = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Type = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			String[] types = { "Budzet","Samofinansiranje"};
 			JLabel labelType = new JLabel("Status:");
 			labelType.setPreferredSize(labelDim);
@@ -203,7 +205,6 @@ public class StudentUpdateDialog extends JDialog {
 			Type.add(labelType);
 			Type.add(comboType);
 			addStudent.add(Type);
-			this.add(addStudent);
 			
 			JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			Dimension dim = new Dimension(100, 25);
@@ -219,7 +220,6 @@ public class StudentUpdateDialog extends JDialog {
 			buttons.add(cancel);
 			
 			addStudent.add(buttons);
-			this.add(addStudent);
 			
 			add.addActionListener(new ActionListener() {
 				
@@ -256,28 +256,48 @@ public class StudentUpdateDialog extends JDialog {
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsUpdated(row, row);
 					MainFrame.getInstance().validate();
-					setVisible(false);
-					
-					
-			
-					
+					setVisible(false);	
 				}
 			});
 			cancel.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					setVisible(false);
-					
-					
-			
-					
+					setVisible(false);			
 				}
 			});
+		informations.add("Informations",addStudent);
+		JPanel unpassedSubjects = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JPanel buttonsUnassed = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		
+		JButton addUnpassed = new JButton();
+		addUnpassed.setText("Add");
+		addUnpassed.setPreferredSize(dim);
+		buttonsUnassed.add(addUnpassed);
+		
+		JButton deleteUnpassed = new JButton();
+		deleteUnpassed.setText("Delete");
+		deleteUnpassed.setPreferredSize(dim);
+		buttonsUnassed.add(deleteUnpassed);
+		
+		JButton pass = new JButton();
+		pass.setText("Pass");
+		pass.setPreferredSize(dim);
+		pass.addActionListener(new ActionListener() {
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int pass = UnpassedSubjectTable.getInstance().getSelectedRow();
+				StudentController.getInstance().passTest(pass);
+			}
 			
-			
-			
+		});
+		buttonsUnassed.add(pass);
+		unpassedSubjects.add(buttonsUnassed);
+		JScrollPane unpassedSubjectsTable =new JScrollPane(UnpassedSubjectTable.getInstance());
+		unpassedSubjects.add(unpassedSubjectsTable);
+		informations.addTab("Unpassed subjects",unpassedSubjects);
+		this.add(informations);
 			
 		}
 		public class AddStudentFocusListener implements FocusListener {

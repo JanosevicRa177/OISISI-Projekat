@@ -9,6 +9,7 @@ import IOStream.InputMark;
 import IOStream.InputProfessor;
 import IOStream.InputStudent;
 import IOStream.InputSubject;
+import IOStream.InputUnpassedSubject;
 import view.MainFrame;
 
 public class MyApp {
@@ -20,7 +21,7 @@ public class MyApp {
 		InputProfessor.ReadProfessors("Professors.txt");
 		InputSubject.ReadSubject("Subjects.txt");
 		InputMark.ReadMarks("Marks.txt");
-		
+		InputUnpassedSubject.ReadSubject("UnpassedSubjects.txt");
 		
 		MainFrame.getInstance();
 	}

@@ -1,4 +1,4 @@
-package Subject;
+package UnpassedSubjects;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -9,34 +9,35 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-public class SubjectTable  extends JTable {
+import Subject.AbstractTableModelSubjects;
+import Subject.SubjectTable;
 
-	private static final long serialVersionUID = 8594197354973187868L;
+public class UnpassedSubjectTable extends JTable {
+
+	private static final long serialVersionUID = 1L;
 	
-	private static SubjectTable instance = null;
+	private static UnpassedSubjectTable instance = null;
 	
-	public static SubjectTable getInstance() {
+	public static UnpassedSubjectTable getInstance() {
 		if (instance == null) {
-			instance = new SubjectTable();
+			instance = new UnpassedSubjectTable();
 		}
 		return instance;
 	}
 	
-	public SubjectTable() {
-		// TODO Auto-generated constructor stub
+	private UnpassedSubjectTable() {
 		this.setRowSelectionAllowed(true);
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		this.setModel(new AbstractTableModelSubjects());
-		this.setAutoCreateRowSorter(true);
+		this.setModel(new AbstractTableModelUnpassedSubjects());
 		this.addMouseListener(new MouseAdapter() {
-
+		
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
 				super.mouseReleased(e);
-				int row = SubjectTable.getInstance().rowAtPoint(e.getPoint());
-				SubjectTable.getInstance().setRowSelectionInterval(row,row);
+				int row = UnpassedSubjectTable.getInstance().rowAtPoint(e.getPoint());
+				UnpassedSubjectTable.getInstance().setRowSelectionInterval(row,row);
 			}
 		});
 	}
@@ -52,6 +53,6 @@ public class SubjectTable  extends JTable {
 			}
 		}
 		return c;
+	
 	}
-
 }
