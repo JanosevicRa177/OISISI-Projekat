@@ -12,6 +12,7 @@ import Subject.AbstractTableModelSubjects;
 import Subject.SubjectTable;
 import model.KindOfSemester;
 import model.Professor;
+import model.Student;
 import model.Subject;
 import view.MainFrame;
 
@@ -56,10 +57,6 @@ public class SubjectBase {
 			    return subj1.getiDIntSubject() - subj2.getiDIntSubject();
 			  }
 			});
-		Iterator<Subject> it = subjects.iterator();
-		while(it.hasNext()) {
-			System.out.println(it.next());
-			}
 	}
 	
 	public int getID(){
@@ -73,6 +70,15 @@ public class SubjectBase {
 		}
 		return id;
 	}
+	public Subject getStudentByID(int id) {
+		Subject subject = new Subject();
+		for(Subject sub : subjects) {
+			if(sub.getiDIntSubject() == id) {
+				subject = sub;
+			}
+		}
+		return subject;
+	}
 	public void searchSubject(String search) {
 		AbstractTableModelSubjects model = (AbstractTableModelSubjects) SubjectTable.getInstance().getModel();
 		Iterator<Subject> it2 = subjectsNotVisible.iterator();
@@ -81,8 +87,9 @@ public class SubjectBase {
 		while(it2.hasNext()) {
 			subj = it2.next();
 			subjects.add(subj);
-			model.fireTableRowsInserted(subjects.size(), subjects.size());
+			model.fireTableRowsInserted(subjects.size()-1, subjects.size()-1);
 		}
+		sortByID();
 		subjectsVisible = new ArrayList<Subject>();
 		subjectsNotVisible = new ArrayList<Subject>();
 		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
@@ -117,6 +124,7 @@ public class SubjectBase {
 			}
 			subjects = subjectsVisible;
 		}
+		model.fireTableDataChanged();
 		MainFrame.getInstance().validate();
 	}
 	public int getColumnCount() {

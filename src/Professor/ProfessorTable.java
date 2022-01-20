@@ -29,7 +29,7 @@ public class ProfessorTable  extends JTable {
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfessors());
-//		this.setAutoCreateRowSorter(true);
+		this.setAutoCreateRowSorter(true);
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseReleased(MouseEvent e) {
@@ -38,7 +38,6 @@ public class ProfessorTable  extends JTable {
 				int row = ProfessorTable.getInstance().rowAtPoint(e.getPoint());
 				ProfessorTable.getInstance().setRowSelectionInterval(row,row);
 			}
-			
 		});
 	}
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {

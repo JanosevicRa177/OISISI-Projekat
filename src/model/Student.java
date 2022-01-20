@@ -4,6 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Professor.AbstractTableModelProfessors;
+import Professor.ProfessorTable;
+import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
+import UnpassedSubjects.UnpassedSubjectTable;
+import view.MainFrame;
+
 public class Student extends Person {
 	
 
@@ -24,7 +30,23 @@ public class Student extends Person {
 	{
 		
 	}
-	
+	public void passSubject(int subject) {
+		int sub = 0;
+		int row = 0;
+		for(int sub1 : unpassedSubjects) {
+			if(subject == sub1) {
+				sub = sub1;
+				unpassedSubjects.remove(sub1);
+				System.out.println("ulaz");
+				break;
+			}
+			row++;
+		}
+		passedSubjects.add(sub);
+		AbstractTableModelUnpassedSubjects model = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
+		model.fireTableRowsDeleted(row, row);
+		MainFrame.getInstance().validate();
+	}
 	
 	public Student(String name, String surname, LocalDate dateOfBirth, Address address, int mobilePhone,
 			String email, String indexNumber, int entryYear, int currentYear, StudentStatus status, double avgMark,int idStudent) {

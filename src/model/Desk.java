@@ -8,7 +8,7 @@ public class Desk {
 	private String deskCode;
 	private String deskName;
 	private int deskChief;
-	private List<Professor> professorsOnDesk;
+	private List<Integer> professorsOnDesk;
 	private int idDesk;
 	
 	public Desk() {
@@ -21,12 +21,12 @@ public class Desk {
 		this.deskName = deskName;
 		this.deskChief = deskChief;
 		this.setIdDesk(idDesk);
-		professorsOnDesk = new ArrayList<Professor>();
+		professorsOnDesk = new ArrayList<Integer>();
 	}
-	public void addProfessor(Professor professor) {
+	public void addProfessor(int professor) {
 		professorsOnDesk.add(professor);
 	}
-	public void removeProfessor(Professor professor) {
+	public void removeProfessor(int professor) {
 		professorsOnDesk.remove(professor);
 	}
 	public String getDeskCode() {
@@ -53,11 +53,11 @@ public class Desk {
 		this.deskChief = deskChief;
 	}
 
-	public List<Professor> getProfessorsOnDesk() {
+	public List<Integer> getProfessorsOnDesk() {
 		return professorsOnDesk;
 	}
 
-	public void setProfessorsOnDesk(List<Professor> professorsOnDesk) {
+	public void setProfessorsOnDesk(List<Integer> professorsOnDesk) {
 		this.professorsOnDesk = professorsOnDesk;
 	}
 
