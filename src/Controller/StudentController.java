@@ -41,6 +41,9 @@ public class StudentController {
 	public void passTest(int subject) {
 		StudentBase.getInstance().getAllStudents().get(StudentTable.getInstance().getSelectedRow()).passSubject(subject);
 	}
+	public void unpassTest(int subject) {
+		StudentBase.getInstance().getAllStudents().get(StudentTable.getInstance().getSelectedRow()).unpassSubject(subject);
+	}
 	public int getID() {
 		return StudentBase.getInstance().getID();
 	}

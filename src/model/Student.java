@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import PassedSubjects.AbstractTableModelPassedSubjects;
+import PassedSubjects.PassedSubjectTable;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
@@ -44,6 +46,23 @@ public class Student extends Person {
 		}
 		passedSubjects.add(sub);
 		AbstractTableModelUnpassedSubjects model = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
+		model.fireTableRowsDeleted(row, row);
+		MainFrame.getInstance().validate();
+	}
+	public void unpassSubject(int subject) {
+		int sub = 0;
+		int row = 0;
+		for(int sub1 : passedSubjects) {
+			if(subject == sub1) {
+				sub = sub1;
+				passedSubjects.remove(sub1);
+				System.out.println("ulaz");
+				break;
+			}
+			row++;
+		}
+		unpassedSubjects.add(sub);
+		AbstractTableModelPassedSubjects model = (AbstractTableModelPassedSubjects) PassedSubjectTable.getInstance().getModel();
 		model.fireTableRowsDeleted(row, row);
 		MainFrame.getInstance().validate();
 	}
