@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,12 +25,10 @@ import javax.swing.JTextField;
 
 import Base.AddressBase;
 import Base.StudentBase;
-import Base.SubjectBase;
 import Controller.StudentController;
 import PassedSubjects.PassedSubjectTable;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
-import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
 import UnpassedSubjects.UnpassedSubjectTable;
 import model.Address;
 import model.Student;
@@ -71,7 +68,7 @@ public class StudentUpdateDialog extends JDialog {
 			int height = screenSize.height;
 			setSize(width*1/3 + 50,height*3/4 - 20);
 			setLocationRelativeTo(MainFrame.getInstance());
-			setTitle("Izmena Studenta");
+			setTitle("Update Student");
 			
 			Dimension labelDim = new Dimension((width*1/3)/2, 30);
 			Dimension inputDim = new Dimension((width*1/4+25)/2, 20);

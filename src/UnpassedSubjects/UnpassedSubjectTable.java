@@ -9,9 +9,6 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
 
-import Subject.AbstractTableModelSubjects;
-import Subject.SubjectTable;
-
 public class UnpassedSubjectTable extends JTable {
 
 	private static final long serialVersionUID = 1L;

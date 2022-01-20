@@ -33,20 +33,11 @@ public class Student extends Person {
 		
 	}
 	public void passSubject(int subject) {
-		int sub = 0;
-		int row = 0;
-		for(int sub1 : unpassedSubjects) {
-			if(subject == sub1) {
-				sub = sub1;
-				unpassedSubjects.remove(sub1);
-				System.out.println("ulaz");
-				break;
-			}
-			row++;
-		}
+		int sub = unpassedSubjects.get(subject);
+		unpassedSubjects.remove(subject);
 		passedSubjects.add(sub);
 		AbstractTableModelUnpassedSubjects model = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
-		model.fireTableRowsDeleted(row, row);
+		model.fireTableRowsDeleted(subject, subject);
 		MainFrame.getInstance().validate();
 	}
 	public void unpassSubject(int subject) {

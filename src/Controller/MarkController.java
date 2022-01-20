@@ -3,6 +3,7 @@ package Controller;
 import java.util.List;
 
 import Base.MarkBase;
+import Base.StudentBase;
 import model.Mark;
 
 public class MarkController {

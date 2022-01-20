@@ -60,7 +60,7 @@ public class SubjectUpdateDialog extends JDialog {
 			JLabel labelID = new JLabel("Subject ID:");
 			labelID.setPreferredSize(labelDim);
 			inputID.setPreferredSize(inputDim);
-			int row = SubjectTable.getInstance().getSelectedRow();
+			int row = SubjectTable.getInstance().getSelectedIndex();
 			AbstractTableModelSubjects model = (AbstractTableModelSubjects) SubjectTable.getInstance().getModel();
 			inputID.setText(model.getValueAt(row,0).toString());
 			
