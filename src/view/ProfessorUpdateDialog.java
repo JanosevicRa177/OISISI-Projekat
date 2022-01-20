@@ -57,7 +57,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		Dimension dim1 = new Dimension((width*1/3)/2, 30);
 		Dimension dim2 = new Dimension((width*1/4)/2, 20);
 		
-		int row = ProfessorTable.getInstance().getSelectedRow();
+		int row = ProfessorTable.getInstance().getSelectedIndex();
 		if(row == -1) return;
 		ProfessorBase professorsBase = ProfessorBase.getInstance();
 		List<Professor> professors = professorsBase.getProfessors();

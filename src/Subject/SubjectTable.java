@@ -8,12 +8,19 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
+
+import Professor.AbstractTableModelProfessors;
 
 public class SubjectTable  extends JTable {
 
 	private static final long serialVersionUID = 8594197354973187868L;
 	
 	private static SubjectTable instance = null;
+	public static JTable subjectTable;
+	public static int rowSelectedIndex = -1;
+	public static TableRowSorter<AbstractTableModelSubjects> subjectSort;
+	public static AbstractTableModelSubjects subjectAbstractTable;
 	
 	public static SubjectTable getInstance() {
 		if (instance == null) {
@@ -21,7 +28,9 @@ public class SubjectTable  extends JTable {
 		}
 		return instance;
 	}
-	
+	public int getSelectedIndex() {
+        return rowSelectedIndex;
+    }
 	public SubjectTable() {
 		// TODO Auto-generated constructor stub
 		this.setRowSelectionAllowed(true);
@@ -29,16 +38,23 @@ public class SubjectTable  extends JTable {
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelSubjects());
 		this.setAutoCreateRowSorter(true);
+		
+		subjectAbstractTable = new AbstractTableModelSubjects();
+		subjectAbstractTable = (AbstractTableModelSubjects)this.getModel();
+		
 		this.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				super.mouseReleased(e);
-				int row = SubjectTable.getInstance().rowAtPoint(e.getPoint());
-				SubjectTable.getInstance().setRowSelectionInterval(row,row);
+				subjectTable = (JTable) e.getComponent();
+				if(subjectTable.getSelectedRow() != -1) {
+					rowSelectedIndex = subjectTable.convertRowIndexToModel(subjectTable.getSelectedRow());
+				}
 			}
 		});
+		subjectSort = new TableRowSorter<AbstractTableModelSubjects>(subjectAbstractTable);
+		this.setRowSorter(subjectSort);
 	}
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
 		Component c = super.prepareRenderer(renderer, row, column);
