@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import Controller.ProfessorController;
+
 public class Desk {
 
 	private String deskCode;
@@ -22,6 +24,29 @@ public class Desk {
 		this.deskChief = deskChief;
 		this.setIdDesk(idDesk);
 		professorsOnDesk = new ArrayList<Integer>();
+	}
+	public List<Integer> getNeeded()
+	{
+		
+		List<Integer> retList = new ArrayList();
+		List<Professor> profList = ProfessorController.getInstance().getAllProf();
+		for(Professor p :profList)
+		{
+			if(p.getYears_of_experience() >= 5)
+			{
+				if(p.getTitle().equals("REDOVNI_PROFESOR") || p.getTitle().equals("VANREDNI_PROFESOR"))
+				{
+						if(p.getIdProf() != deskChief)
+						retList.add(p.getIdProf());
+					
+				}
+			}
+			
+		}
+		
+		return retList;
+		
+		
 	}
 	public void addProfessor(int professor) {
 		professorsOnDesk.add(professor);

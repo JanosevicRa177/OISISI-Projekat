@@ -140,6 +140,17 @@ public class MenuBar extends JMenuBar {
 			JMenuItem fiKa = new JMenuItem("Desks");
 			fiKa.setAccelerator(KeyStroke.getKeyStroke('D',MenuKeyEvent.CTRL_DOWN_MASK));
 			fiKa.setMnemonic(KeyEvent.VK_D);
+			fiKa.addActionListener(new ActionListener()
+					{
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							// TODO Auto-generated method stub
+							AddDepartmentDialog add = new AddDepartmentDialog();
+							add.setVisible(true);
+						}
+				
+					});
 			
 			fiSt.setIcon(scaledArrow);
 			fiPre.setIcon(scaledArrow);

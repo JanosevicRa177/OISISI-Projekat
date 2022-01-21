@@ -150,7 +150,7 @@ public class StudentBase {
 			}
 			students = studentsVisible;
 		}
-		else{
+		else if(search.matches("[a-zA-Z0-9 \\/]+( )[a-zA-ZŠĆĐŽČšćžđč]+( )[a-zA-ZŠĆĐŽČšćžđč]+")){
 			String[] search2 = search.split(" ");
 			Iterator<Student> it1 = students.iterator();
 			row = 0;

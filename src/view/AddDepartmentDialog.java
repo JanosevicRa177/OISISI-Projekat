@@ -10,28 +10,16 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import AddSubjectToProf.SubjProfTable;
-import AddSubjects.AbstractAddSubjectsTable;
 import AddSubjects.AddSubjectsTable;
-import Controller.ProfessorController;
-import Controller.StudentController;
-import Professor.ProfessorTable;
-import ProffessorSubjects.AbstractTableProffSubjects;
-import ProffessorSubjects.ProffSubjectsTable;
-import Student.StudentTable;
-import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
-import UnpassedSubjects.UnpassedSubjectTable;
+import DepTables.DepartmentTable;
 
-public class AddDialogSubject extends JDialog 
-{
-	/**
-	 * 
-	 */
+public class AddDepartmentDialog extends JDialog {
+	
 	private static final long serialVersionUID = -9162250925534372358L;
 
-	public AddDialogSubject() {
+	public AddDepartmentDialog() {
 		// TODO Auto-generated constructor stub
-		super(MainFrame.getInstance(), "Add Subject", true);
+		super(MainFrame.getInstance(), "Departments", true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int width = screenSize.width;
@@ -39,7 +27,7 @@ public class AddDialogSubject extends JDialog
 		Dimension dim = new Dimension(100,25);
 		setSize(width*1/6, height*3/8);
 		setLocationRelativeTo(MainFrame.getInstance());
-		setTitle("Add Subject");
+		setTitle("Departments");
 		JPanel jp = new JPanel();
 		JButton add = new JButton();
 		add.addActionListener(new ActionListener()
@@ -47,19 +35,14 @@ public class AddDialogSubject extends JDialog
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
-						StudentController.getInstance().findSelectedStudent(StudentTable.getInstance().getSelectedRow()).addUnpassedSubject(StudentController.getInstance().findSelectedStudent(StudentTable.getInstance().getSelectedRow()).getForAddSubjects().get(AddSubjectsTable.getInstance().getSelectedRow()));
-						AbstractTableModelUnpassedSubjects model = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
-						model.fireTableDataChanged();
-
-						setVisible(false);
-						MainFrame.getInstance().validate();
-					}
+						AddBossDialog bd = new AddBossDialog();
+						bd.setVisible(true);
+										}
 			
 				});
 		add.setText("Add");
 		add.setPreferredSize(dim);
-		JScrollPane addsubpan =new JScrollPane(AddSubjectsTable.getInstance());
+		JScrollPane addsubpan =new JScrollPane(DepartmentTable.getInstance());
 		addsubpan.setPreferredSize(new Dimension(200, 200));
 		JButton cancel = new JButton();
 		cancel.setText("Cancel");
@@ -85,7 +68,5 @@ public class AddDialogSubject extends JDialog
 		
 		
 	}
-		
-
 
 }

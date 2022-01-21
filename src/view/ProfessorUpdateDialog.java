@@ -21,12 +21,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import AddSubjectToProf.SubjProfTable;
 import Base.AddressBase;
 import Base.ProfessorBase;
 import Controller.ProfessorController;
+import Controller.SubjectController;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
+import ProffessorSubjects.AbstractTableProffSubjects;
 import ProffessorSubjects.ProffSubjectsTable;
+import Subject.SubjectTable;
 import UnpassedSubjects.UnpassedSubjectTable;
 import model.Address;
 import model.Professor;
@@ -236,6 +240,41 @@ public class ProfessorUpdateDialog extends JDialog{
 		informations.add("Informations",updateProfessor);
 		JPanel Subjects = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JScrollPane ProffSub =new JScrollPane(ProffSubjectsTable.getInstance());
+		
+		JPanel butons = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JButton addSub = new JButton();
+		addSub.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				AddDialogSubjectProf ads = new AddDialogSubjectProf();
+				ads.setVisible(true);
+			}
+		
+		});
+		addSub.setText("Add");
+		addSub.setPreferredSize(dim);
+		JButton denie = new JButton();
+		denie.setText("Remove");
+		denie.setPreferredSize(dim);
+		denie.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				ProfessorController.getInstance().findSelectedProffessor(ProfessorTable.getInstance().getSelectedIndex()).delete_Professors_subject(SubjectController.getInstance().findSelectedSubject(ProffSubjectsTable.getInstance().getSelectedRow()));
+				AbstractTableProffSubjects model = (AbstractTableProffSubjects) ProffSubjectsTable.getInstance().getModel();
+				model.fireTableDataChanged();
+
+				MainFrame.getInstance().validate();
+
+			}
+			
+		});
+		butons.add(addSub);
+		butons.add(denie);
+		Subjects.add(butons);
 		Subjects.add(ProffSub);
 		informations.addTab("Subjects",Subjects);
 		this.add(informations); 

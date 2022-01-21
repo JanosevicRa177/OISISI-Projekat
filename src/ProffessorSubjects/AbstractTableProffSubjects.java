@@ -9,6 +9,7 @@ import Controller.ProfessorController;
 import Controller.StudentController;
 import Professor.ProfessorTable;
 import Student.StudentTable;
+import Subject.SubjectTable;
 import model.Mark;
 import model.Subject;
 
@@ -28,7 +29,7 @@ public class AbstractTableProffSubjects extends AbstractTableModel{
 	}
 	public String getColumnName(int column) {
 		
-		return ProfessorBase.getInstance().getColumnName(column);
+		return SubjectTable.getInstance().getColumnName(column);
 	}
 	public Object getValueAt(int row, int column) {
 		if (row >= ProfessorController.getInstance().findSelectedProffessor(ProfessorTable.getInstance().getSelectedRow()).getProfessors_subjects().size()) {
@@ -47,6 +48,7 @@ public class AbstractTableProffSubjects extends AbstractTableModel{
 		
 		} else {
 			Subject subject = ProfessorController.getInstance().findSelectedProffessor(ProfessorTable.getInstance().getSelectedRow()).getProfessors_subjects().get(row);
+
 			switch (column) {
 			case 0:
 				return subject.getiDSubject();
