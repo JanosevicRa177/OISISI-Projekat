@@ -57,9 +57,31 @@ public class StudentBase {
 		}
 		return student;
 	}
+	public Student getStudentByID(int studentInt) {
+		Student student = new Student();
+
+		for (Student st : students) {
+			if (st.getIdStudent() == studentInt) {
+				students.remove(st);
+				student = st;
+				return student;
+			}
+		}
+		return student;
+	}
 	
-	public void addUnpassedSubject(int student,int subject) {
-		students.get(student-1).addUnpassedSubject(subject);
+	public void addPassedSubject(int studentInt,int subject) {
+		Student student = StudentBase.getInstance().getStudentByID(studentInt);
+		student.addPassedSubject(subject);
+		students.add(student);
+		SubjectBase.getInstance().sortByID();
+	}
+	
+	public void addUnpassedSubject(int studentInt,int subject) {
+		Student student = StudentBase.getInstance().getStudentByID(studentInt);
+		student.addUnpassedSubject(subject);
+		students.add(student);
+		StudentBase.getInstance().sortByID();
 	}
 	public void sortByID() {
 		Collections.sort(students, new Comparator<Student>() {
@@ -146,9 +168,6 @@ public class StudentBase {
 		}
 		return id;
 	}
-	public void AddStudent(Student s) {
-		students.add(s);
-	}
 	public boolean contains(String ID) {
 		for(Student st : students) {
 			if(st.getIndexNumber().equals(ID)) {
@@ -224,9 +243,7 @@ public class StudentBase {
 	public int getYear()
 	{
 		return StudentController.getInstance().findSelectedStudent(StudentTable.getInstance().getSelectedRow()).getCurrentYear();
-		
 	}
-
 	public void deleteStudent(String index) {
 		for (Student student : students) {
 			if (student.getIndexNumber() == index) {

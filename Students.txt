@@ -23,4 +23,4 @@
 23 SW17/2015 Mirko Alicic 3 21.07.1999. 11 012/1122-368 mirko.alicic@mailinator.com S 2015
 24 SW17/2016 Milisav Perković 4 28.09.1998. 12 012/1122-369 milisav.pejkovic@mailinator.com S 2016
 25 SW27/2018 Purisa Djordjević 2 29.02.2000. 3 011/1543-370 purisa.djordjevic@mailinator.com B 2018
-27 RA226/2017 Mikica Kovacević 3 23.03.1999. 5 011/1992-371 mikica.kovacevic@mailinator.com S 2017
+26 RA226/2017 Mikica Kovacević 3 23.03.1999. 5 011/1992-371 mikica.kovacevic@mailinator.com S 2017

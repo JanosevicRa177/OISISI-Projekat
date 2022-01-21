@@ -46,6 +46,7 @@ private static final long serialVersionUID = 1L;
 		{
 			String value = "" + getValueAt(i,2);
 			s = s + Integer.parseInt(value);
+			i++;
 		}
 		return s;
 	}
@@ -58,6 +59,7 @@ private static final long serialVersionUID = 1L;
 		{
 			String value = "" + getValueAt(i,3);
 			s = s + Integer.parseInt(value);
+			i++;
 		}
 		if(getRowCount() != 0)
 		s = s / getRowCount();

@@ -6,10 +6,12 @@ import java.util.List;
 
 import Controller.StudentController;
 import Controller.SubjectController;
+import Controller.MarkController;
 import PassedSubjects.AbstractTableModelPassedSubjects;
 import PassedSubjects.PassedSubjectTable;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
+import Student.StudentTable;
 import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
 import UnpassedSubjects.UnpassedSubjectTable;
 import view.MainFrame;
@@ -38,25 +40,23 @@ public class Student extends Person {
 		int sub = unpassedSubjects.get(subject);
 		unpassedSubjects.remove(subject);
 		passedSubjects.add(sub);
-		AbstractTableModelUnpassedSubjects model = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
-		model.fireTableRowsDeleted(subject, subject);
+		AbstractTableModelUnpassedSubjects model1 = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
+		model1.fireTableRowsDeleted(UnpassedSubjectTable.getInstance().getSelectedRow(), UnpassedSubjectTable.getInstance().getSelectedRow());
+		AbstractTableModelPassedSubjects model2 = (AbstractTableModelPassedSubjects) PassedSubjectTable.getInstance().getModel();
+		model2.fireTableRowsInserted(UnpassedSubjectTable.getInstance().getSelectedRow()+1, UnpassedSubjectTable.getInstance().getSelectedRow()+1);
 		MainFrame.getInstance().validate();
 	}
 	public void unpassSubject(int subject) {
-		int sub = 0;
-		int row = 0;
-		for(int sub1 : passedSubjects) {
-			if(subject == sub1) {
-				sub = sub1;
-				passedSubjects.remove(sub1);
-				System.out.println("ulaz");
-				break;
-			}
-			row++;
-		}
+		int sub = passedSubjects.get(subject);
+		passedSubjects.remove(subject);
 		unpassedSubjects.add(sub);
-		AbstractTableModelPassedSubjects model = (AbstractTableModelPassedSubjects) PassedSubjectTable.getInstance().getModel();
-		model.fireTableRowsDeleted(row, row);
+		int studentNum = StudentTable.getInstance().getSelectedRow();
+		int studentID = StudentBase.getInstance().getAllStudents().get(studentNum).getIdStudent();
+		MarkController.getInstance().removeMark(studentID,sub);
+		AbstractTableModelUnpassedSubjects model1 = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
+		model1.fireTableRowsInserted(UnpassedSubjectTable.getInstance().getSelectedRow()+1, UnpassedSubjectTable.getInstance().getSelectedRow()+1);
+		AbstractTableModelPassedSubjects model2 = (AbstractTableModelPassedSubjects) PassedSubjectTable.getInstance().getModel();
+		model2.fireTableRowsDeleted(UnpassedSubjectTable.getInstance().getSelectedRow(), UnpassedSubjectTable.getInstance().getSelectedRow());
 		MainFrame.getInstance().validate();
 	}
 	
@@ -68,7 +68,7 @@ public class Student extends Person {
 		this.currentYear = currentYear;
 		this.status = status;
 		this.avgMark = avgMark;
-		this.setIdStudent(idStudent);
+		this.idStudent = idStudent;
 		passedSubjects = new ArrayList<Integer>();
 		unpassedSubjects = new ArrayList<Integer>();
 	}
@@ -101,7 +101,9 @@ public class Student extends Person {
 	public void addUnpassedSubject(int unpassedSubject) {
 		unpassedSubjects.add(unpassedSubject);
 	}
-
+	public void addPassedSubject(int passedSubject) {
+		passedSubjects.add(passedSubject);
+	}
 	public void setIndexNumber(String indexNumber) {
 		this.indexNumber = indexNumber;
 	}
