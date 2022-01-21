@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JTable;
@@ -40,7 +41,6 @@ public class SubjectTable  extends JTable {
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelSubjects());
-		this.setAutoCreateRowSorter(true);
 		
 		subjectAbstractTable = new AbstractTableModelSubjects();
 		subjectAbstractTable = (AbstractTableModelSubjects)this.getModel();
@@ -57,6 +57,39 @@ public class SubjectTable  extends JTable {
 			}
 		});
 		subjectSort = new TableRowSorter<AbstractTableModelSubjects>(subjectAbstractTable);
+		subjectSort.setComparator(0, new Comparator<String>() {
+
+            @Override
+            public int compare(String st1, String st2) {
+
+                String st11 = st1.replaceAll("\\d", "");
+                String st21 = st2.replaceAll("\\d", "");
+
+
+                if(st11.equalsIgnoreCase(st21))
+                {
+                    return extractInt(st1) - extractInt(st2);
+                }
+                return st1.compareTo(st2);
+            }
+
+            int extractInt(String s) {
+                String num = s.replaceAll("\\D", "");
+                return num.isEmpty() ? 0 : Integer.parseInt(num);
+            }
+
+
+        });
+		subjectSort.setComparator(2, new Comparator<String>() {
+
+            @Override
+            public int compare(String sub1, String sub2) {
+            	int int1 = Integer.parseInt(sub1);
+            	int int2 = Integer.parseInt(sub2);
+                return  int1 - int2;
+            }
+
+        });
 		this.setRowSorter(subjectSort);
 	}
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
@@ -72,6 +105,5 @@ public class SubjectTable  extends JTable {
 		}
 		return c;
 	}
-	
 
 }
