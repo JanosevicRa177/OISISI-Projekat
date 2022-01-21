@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Base.MarkBase;
 import Base.StudentBase;
 import Base.SubjectBase;
 import Student.StudentTable;
@@ -29,6 +30,9 @@ public class StudentController {
 		}
 		return instance;
 	}
+	public void addPassedSubject(int student,int subject) {
+		StudentBase.getInstance().addPassedSubject(student, subject);
+	}
 	public void addUnpassedSubject(int student,int subject) {
 		StudentBase.getInstance().addUnpassedSubject(student, subject);
 	}
@@ -39,10 +43,14 @@ public class StudentController {
 		return StudentBase.getInstance().getAllStudents().get(row);
 	}
 	public void passTest(int subject) {
-		StudentBase.getInstance().getAllStudents().get(StudentTable.getInstance().getSelectedRow()).passSubject(subject);
+		int studentNum = StudentTable.getInstance().getSelectedRow();
+		StudentBase.getInstance().getAllStudents().get(studentNum).passSubject(subject);
+		SubjectBase.getInstance().getSubjects().get(subject).addStudentsWhoPassed(StudentBase.getInstance().getAllStudents().get(studentNum).getIdStudent());
 	}
 	public void unpassTest(int subject) {
-		StudentBase.getInstance().getAllStudents().get(StudentTable.getInstance().getSelectedRow()).unpassSubject(subject);
+		int studentNum = StudentTable.getInstance().getSelectedRow();
+		StudentBase.getInstance().getAllStudents().get(studentNum).unpassSubject(subject);
+		SubjectBase.getInstance().getSubjects().get(subject).addStudentsWhoDidntPass(StudentBase.getInstance().getAllStudents().get(studentNum).getIdStudent());
 	}
 	public int getID() {
 		return StudentBase.getInstance().getID();
@@ -60,8 +68,8 @@ public class StudentController {
     
         StudentDeleteDialog dialog = new StudentDeleteDialog(rowSelectedIndex);
         dialog.setVisible(true);
-//    	Student student = StudentBase.getInstance().getRow(rowSelectedIndex);
-//    	StudentBase.getInstance().deleteStudent(student.getIndexNumber());
+    	Student student = StudentBase.getInstance().getRow(rowSelectedIndex);
+    	StudentBase.getInstance().deleteStudent(student.getIndexNumber());
 	}
 	public boolean containsStudent(String id) {
 		return StudentBase.getInstance().containsadd(id);

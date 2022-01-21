@@ -95,7 +95,6 @@ public class SubjectBase {
 		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
 			Iterator<Subject> it1 = subjects.iterator();
 			row = 0;
-			System.out.println("Ulaz");
 			while(it1.hasNext()) {
 				subj = it1.next();
 				if(subj.getiDSubject().toLowerCase().matches(".*"+search.toLowerCase()+".*")) {
@@ -182,8 +181,26 @@ public class SubjectBase {
 			}
 		}
 	}
-	public void addUnpassedStudent(int student,int subject) {
-		subjects.get(subject-1).addStudentsWhoDidntPass(student);
+	public Subject getSubjectByID(int subjectInt) {
+		for (Subject subject : subjects) {
+			if (subject.getiDIntSubject() == subjectInt) {
+				subjects.remove(subject);
+				return subject;
+			}
+		}
+		return null;
+	}
+	public void addUnpassedStudent(int student,int subjectInt) {
+		Subject subject = SubjectBase.getInstance().getSubjectByID(subjectInt);
+		subject.addStudentsWhoDidntPass(student);
+		subjects.add(subject);
+		SubjectBase.getInstance().sortByID();
+	}
+	public void addPassedStudent(int student,int subjectInt) {
+		Subject subject = SubjectBase.getInstance().getSubjectByID(subjectInt);
+		subject.addStudentsWhoPassed(student);
+		subjects.add(subject);
+		SubjectBase.getInstance().sortByID();
 	}
 	public void setSubjects(List<Subject> subjects) {
 		this.subjects = subjects;

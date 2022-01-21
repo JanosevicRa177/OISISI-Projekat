@@ -7,10 +7,11 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import Student.AbstractTableModelStudents;
+import Student.StudentTable;
 import model.Address;
 import model.Student;
 import model.StudentStatus;
-import model.Subject;
 
 public class StudentBase {
 	
@@ -46,8 +47,31 @@ public class StudentBase {
 		}
 		return student;
 	}
-	public void addUnpassedSubject(int student,int subject) {
-		students.get(student-1).addUnpassedSubject(subject);
+	public Student getStudentByID(int studentInt) {
+		Student student = new Student();
+
+		for (Student st : students) {
+			if (st.getIdStudent() == studentInt) {
+				students.remove(st);
+				student = st;
+				return student;
+			}
+		}
+		return student;
+	}
+	
+	public void addPassedSubject(int studentInt,int subject) {
+		Student student = StudentBase.getInstance().getStudentByID(studentInt);
+		student.addPassedSubject(subject);
+		students.add(student);
+		SubjectBase.getInstance().sortByID();
+	}
+	
+	public void addUnpassedSubject(int studentInt,int subject) {
+		Student student = StudentBase.getInstance().getStudentByID(studentInt);
+		student.addUnpassedSubject(subject);
+		students.add(student);
+		StudentBase.getInstance().sortByID();
 	}
 	public void sortByID() {
 		Collections.sort(students, new Comparator<Student>() {
@@ -68,9 +92,6 @@ public class StudentBase {
 			id++;
 		}
 		return id;
-	}
-	public void AddStudent(Student s) {
-		students.add(s);
 	}
 	public boolean contains(String ID) {
 		for(Student st : students) {
@@ -144,7 +165,6 @@ public class StudentBase {
 	public void addStudent(Student student) {
 		students.add(student);
 	}
-
 	public void deleteStudent(String index) {
 		for (Student student : students) {
 			if (student.getIndexNumber() == index) {
