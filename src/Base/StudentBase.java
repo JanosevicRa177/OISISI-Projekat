@@ -7,10 +7,17 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import Controller.StudentController;
+import Professor.AbstractTableModelProfessors;
+import Professor.ProfessorTable;
+import Student.AbstractTableModelStudents;
+import Student.StudentTable;
 import model.Address;
+import model.Professor;
 import model.Student;
 import model.StudentStatus;
 import model.Subject;
+import view.MainFrame;
 
 public class StudentBase {
 	
@@ -25,10 +32,14 @@ public class StudentBase {
 	}
 	private List<Student> students;
 	private List<String> colons;
+	private List<Student> studentsNotVisible;
+	private List<Student> studentsVisible;
 	
 	private StudentBase() {
 		this.students = new ArrayList<Student>();
 		this.colons = new ArrayList<String>();
+		this.studentsNotVisible = new ArrayList<Student>();
+		this.studentsVisible = new ArrayList<Student>();
 		this.colons.add("Index");
 		this.colons.add("Name");
 		this.colons.add("Surname");
@@ -46,6 +57,7 @@ public class StudentBase {
 		}
 		return student;
 	}
+	
 	public void addUnpassedSubject(int student,int subject) {
 		students.get(student-1).addUnpassedSubject(subject);
 	}
@@ -56,6 +68,71 @@ public class StudentBase {
 			    return st1.getIdStudent() - st2.getIdStudent();
 			  }
 			});
+	}
+	public void searchStudents(String search) {
+		AbstractTableModelStudents model = (AbstractTableModelStudents) StudentTable.getInstance().getModel();
+		Iterator<Student> it2 = studentsNotVisible.iterator();
+		int row = 0;
+		Student st;
+		while(it2.hasNext()) {
+			st = it2.next();
+			students.add(st);
+			model.fireTableRowsInserted(students.size()-1, students.size()-1);
+		}
+		sortByID();
+		studentsVisible = new ArrayList<Student>();
+		studentsNotVisible = new ArrayList<Student>();
+		if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+			Iterator<Student> it1 = students.iterator();
+			row = 0;
+			while(it1.hasNext()) {
+				st = it1.next();
+				if(st.getSurname().toLowerCase().matches(".*"+search.toLowerCase()+".*")) {
+					studentsVisible.add(st);
+				} else {
+					studentsNotVisible.add(st);
+					model.fireTableRowsDeleted(row, row);
+				}
+				row++;
+			}
+			students = studentsVisible;
+		}else if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+( )[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+			String[] search1 = search.split(" ");
+			Iterator<Student> it1 = students.iterator();
+			row = 0;
+			while(it1.hasNext()) {
+				st = it1.next();
+				if(st.getSurname().toLowerCase().matches(".*"+search1[0].toLowerCase()+".*") &&
+						st.getName().toLowerCase().matches(".*"+search1[1].toLowerCase()+".*")) {
+					studentsVisible.add(st);
+				} else {
+					studentsNotVisible.add(st);
+					model.fireTableRowsDeleted(row, row);
+				}
+				row++;
+			}
+			students = studentsVisible;
+		}
+		else{
+			String[] search2 = search.split(" ");
+			Iterator<Student> it1 = students.iterator();
+			row = 0;
+			while(it1.hasNext()) {
+				st = it1.next();
+				if(st.getIndexNumber().toLowerCase().matches(".*"+search2[0].toLowerCase()+".*")&&
+						st.getSurname().toLowerCase().matches(".*"+search2[2].toLowerCase()+".*") &&
+						st.getName().toLowerCase().matches(".*"+search2[1].toLowerCase()+".*")) {
+					studentsVisible.add(st);
+				} else {
+					studentsNotVisible.add(st);
+					model.fireTableRowsDeleted(row, row);
+				}
+				row++;
+			}
+			students = studentsVisible;
+		}
+		model.fireTableDataChanged();
+		MainFrame.getInstance().validate();
 	}
 	
 	public int getID(){
@@ -143,6 +220,11 @@ public class StudentBase {
 	
 	public void addStudent(Student student) {
 		students.add(student);
+	}
+	public int getYear()
+	{
+		return StudentController.getInstance().findSelectedStudent(StudentTable.getInstance().getSelectedRow()).getCurrentYear();
+		
 	}
 
 	public void deleteStudent(String index) {

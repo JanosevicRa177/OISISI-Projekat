@@ -17,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
 import Base.AddressBase;
@@ -24,6 +26,8 @@ import Base.ProfessorBase;
 import Controller.ProfessorController;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
+import ProffessorSubjects.ProffSubjectsTable;
+import UnpassedSubjects.UnpassedSubjectTable;
 import model.Address;
 import model.Professor;
 
@@ -48,6 +52,7 @@ public class ProfessorUpdateDialog extends JDialog{
 		super(MainFrame.getInstance(), "Updating Professor", true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
+		JTabbedPane informations = new JTabbedPane();
 		int width = screenSize.width;
 		int height = screenSize.height;
 		setSize(width*1/3, height*3/4-50);
@@ -196,7 +201,7 @@ public class ProfessorUpdateDialog extends JDialog{
 				}
 				String[] address = txtAddress.getText().split(",");
 				String[] oAddress = txtOfficeAddress.getText().split(",");
-				int row = ProfessorTable.getInstance().getSelectedRow();
+				int row = ProfessorTable.getInstance().getSelectedIndex();
 				Address addressInsert = new Address(address[0],address[1],address[2],address[3]);
 				AddressBase.getInstance().addAddress(addressInsert);
 				Address oAddressInsert = new Address(oAddress[0],oAddress[1],oAddress[2],oAddress[3]);
@@ -206,7 +211,7 @@ public class ProfessorUpdateDialog extends JDialog{
 						getTxtEmail().getText(),oAddressInsert,Integer.parseInt(getTxtIDnumber().getText()),
 						getTxtTitle().getText(),Integer.parseInt(getTxtExperienceYears().getText()),oldID);
 				AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();
-				model.fireTableRowsInserted(row, row);
+				model.fireTableRowsUpdated(row, row);
 				MainFrame.getInstance().validate();
 				setVisible(false);
 			}
@@ -228,7 +233,12 @@ public class ProfessorUpdateDialog extends JDialog{
 		buttons.add(cancel);
 		
 		updateProfessor.add(buttons);
-		this.add(updateProfessor); 
+		informations.add("Informations",updateProfessor);
+		JPanel Subjects = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		JScrollPane ProffSub =new JScrollPane(ProffSubjectsTable.getInstance());
+		Subjects.add(ProffSub);
+		informations.addTab("Subjects",Subjects);
+		this.add(informations); 
 		
 	}
 	public class AddProfessorFocusListener implements FocusListener {
@@ -239,8 +249,8 @@ public class ProfessorUpdateDialog extends JDialog{
 
 		@Override
 		public void focusLost(FocusEvent arg0) {
-			if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
-					!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
+			if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z0-9( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+") |
+					!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z0-9( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
 					getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
 				update.setEnabled(false);
 				return;

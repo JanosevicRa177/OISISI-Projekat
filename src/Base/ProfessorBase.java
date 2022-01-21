@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import Controller.SubjectController;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import model.Address;
@@ -40,6 +41,17 @@ public class ProfessorBase {
 		this.colons.add("Title");
 		this.colons.add("Email");
 
+	}
+	public void addSubjToProff(int i,int j)
+	{
+		for(Professor p : professors)
+		{
+			if(p.getIdProf() == i)
+			{
+				p.add_Professors_subject(SubjectBase.getInstance().getStudentByID(j));
+			}
+		}
+		
 	}
 	public boolean contains(int ID) {
 		for(Professor pr : professors) {
@@ -82,7 +94,7 @@ public class ProfessorBase {
 		sortByID();
 		professorsVisible = new ArrayList<Professor>();
 		professorsNotVisible = new ArrayList<Professor>();
-		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
+		if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
 			Iterator<Professor> it1 = professors.iterator();
 			row = 0;
 			while(it1.hasNext()) {
@@ -96,7 +108,7 @@ public class ProfessorBase {
 				row++;
 			}
 			professors = professorsVisible;
-		}else if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+( )[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
+		}else if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+( )[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
 			String[] search1 = search.split(" ");
 			Iterator<Professor> it1 = professors.iterator();
 			row = 0;

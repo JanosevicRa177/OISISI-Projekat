@@ -14,7 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Base.ProfessorBase;
+import Base.StudentBase;
 import model.Professor;
+import model.Student;
 import view.MainFrame;
 
 public class ProfessorController {
@@ -32,6 +34,13 @@ public class ProfessorController {
 	}
 	public int getID() {
 		return ProfessorBase.getInstance().getID();
+	}
+	public void addSubjProff(int i, int j)
+	{
+		ProfessorBase.getInstance().addSubjToProff(i, j);
+	}
+	public Professor findSelectedProffessor(int row) {
+		return ProfessorBase.getInstance().getProfessors().get(row);
 	}
 	public void searchProfessor(String search) {
 		ProfessorBase.getInstance().searchProfessor(search);

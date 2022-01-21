@@ -13,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Base.ProfessorBase;
+import Base.StudentBase;
 import Base.SubjectBase;
+import model.Student;
 import model.Subject;
 import view.MainFrame;
 
@@ -30,6 +32,9 @@ public class SubjectController {
 	
 	public SubjectController() {
 		// TODO Auto-generated constructor stub
+	}
+	public Subject findSelectedSubject(int row) {
+		return SubjectBase.getInstance().getSubjects().get(row);
 	}
 	public int getID() {
 		return SubjectBase.getInstance().getID();

@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Base.ProfessorBase;
 import Base.StudentBase;
 import Base.SubjectBase;
 import Student.StudentTable;
@@ -32,6 +33,10 @@ public class StudentController {
 	public void addUnpassedSubject(int student,int subject) {
 		StudentBase.getInstance().addUnpassedSubject(student, subject);
 	}
+	public int getYear()
+	{
+		return StudentBase.getInstance().getYear();
+	}
 	public StudentController() {
 		// TODO Auto-generated constructor stub
 	}
@@ -43,6 +48,9 @@ public class StudentController {
 	}
 	public void unpassTest(int subject) {
 		StudentBase.getInstance().getAllStudents().get(StudentTable.getInstance().getSelectedRow()).unpassSubject(subject);
+	}
+	public void searchStudent(String search) {
+		StudentBase.getInstance().searchStudents(search);
 	}
 	public int getID() {
 		return StudentBase.getInstance().getID();
