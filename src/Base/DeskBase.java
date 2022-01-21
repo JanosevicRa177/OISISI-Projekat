@@ -24,6 +24,14 @@ public class DeskBase {
 	public Desk getAddress(int id) {
 		return desks.get(id);
 	}
+	public boolean contains(int idProf) {
+		for(Desk d : desks) {
+			if(idProf == d.getDeskChief()) {
+			return true;
+			}
+		}
+		return false;
+	}
 	public int getAddressesLength() {
 		return desks.size();
 	}

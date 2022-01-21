@@ -18,6 +18,9 @@ public class DeskController {
 	private DeskController() {
 		// TODO Auto-generated constructor stub
 	}
+	public boolean contains(int idProf) {
+		return DeskBase.getInstance().contains(idProf);
+	}
 	public void addDesk(Desk desk) {
 		DeskBase.getInstance().addDesk(desk);
 	}
