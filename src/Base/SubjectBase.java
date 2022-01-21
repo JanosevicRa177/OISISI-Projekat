@@ -92,7 +92,7 @@ public class SubjectBase {
 		sortByID();
 		subjectsVisible = new ArrayList<Subject>();
 		subjectsNotVisible = new ArrayList<Subject>();
-		if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
 			Iterator<Subject> it1 = subjects.iterator();
 			row = 0;
 			while(it1.hasNext()) {
@@ -106,7 +106,7 @@ public class SubjectBase {
 				row++;
 			}
 			subjects = subjectsVisible;
-		}else if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+( )[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+		}else if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+( )[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
 			String[] search1 = search.split(" ");
 			Iterator<Subject> it1 = subjects.iterator();
 			row = 0;
@@ -185,6 +185,14 @@ public class SubjectBase {
 		for (Subject subject : subjects) {
 			if (subject.getiDIntSubject() == subjectInt) {
 				subjects.remove(subject);
+				return subject;
+			}
+		}
+		return null;
+	}
+	public Subject getSubjectByIDNonRemove(int subjectInt) {
+		for (Subject subject : subjects) {
+			if (subject.getiDIntSubject() == subjectInt) {
 				return subject;
 			}
 		}

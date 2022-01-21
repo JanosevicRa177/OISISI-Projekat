@@ -151,7 +151,7 @@ public class SubjectAddDialog extends JDialog {
 			add.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
-					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") | !getInputID().getText().matches("[A-Za-z0-9]+") |  inputExecution.getText().equals("") | SubjectBase.getInstance().contains(inputID.getText()))
+					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") | !getInputID().getText().matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+") |  inputExecution.getText().equals("") | SubjectBase.getInstance().contains(inputID.getText()))
 					{
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);

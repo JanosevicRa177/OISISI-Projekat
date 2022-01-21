@@ -12,6 +12,7 @@ import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import model.Address;
 import model.Professor;
+import model.Subject;
 import view.MainFrame;
 
 
@@ -85,7 +86,14 @@ public class ProfessorBase {
 		}
 		return lp;
 	}
-	
+	public void removeSubjectofProfessor(Subject subject) {
+		int prof = subject.getProfessorOfSubject();
+		for(Professor pr : professors) {
+			if(pr.getIdProf() == prof) {
+				pr.getProfessors_subjects().remove(subject);
+			}
+		}
+	}
 	public int getID(){
 		int id = 1;
 		Iterator<Professor> it = professors.iterator();
@@ -110,7 +118,7 @@ public class ProfessorBase {
 		sortByID();
 		professorsVisible = new ArrayList<Professor>();
 		professorsNotVisible = new ArrayList<Professor>();
-		if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
 			Iterator<Professor> it1 = professors.iterator();
 			row = 0;
 			while(it1.hasNext()) {
@@ -124,7 +132,7 @@ public class ProfessorBase {
 				row++;
 			}
 			professors = professorsVisible;
-		}else if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+( )[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+		}else if(search.matches("[A-Za-zŠĆĐŽČšćžđč]+( )[A-Za-zŠĆĐŽČšćžđč]+")) {
 			String[] search1 = search.split(" ");
 			Iterator<Professor> it1 = professors.iterator();
 			row = 0;

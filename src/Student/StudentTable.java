@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Comparator;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -59,6 +60,39 @@ public static AbstractTableModelStudents studentAbstractTable;
 			
 		});
 		studentSort =new TableRowSorter<AbstractTableModelStudents>(studentAbstractTable);
+		studentSort.setComparator(0, new Comparator<String>() {
+
+            @Override
+            public int compare(String st1, String st2) {
+
+                String st11 = st1.replaceAll("\\d", "");
+                String st21 = st2.replaceAll("\\d", "");
+
+
+                if(st11.equalsIgnoreCase(st21))
+                {
+                    return extractInt(st1) - extractInt(st2);
+                }
+                return st1.compareTo(st2);
+            }
+
+            int extractInt(String s) {
+                String num = s.replaceAll("\\D", "");
+                return num.isEmpty() ? 0 : Integer.parseInt(num);
+            }
+
+
+        });
+		studentSort.setComparator(5, new Comparator<String>() {
+
+            @Override
+            public int compare(String sub1, String sub2) {
+            	Float float1 = Float.parseFloat(sub1);
+            	Float float2 = Float.parseFloat(sub2);
+            	return  float1.compareTo(float2);
+            }
+
+        });
 		this.setRowSorter(studentSort);
 	}
 	public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {

@@ -12,10 +12,12 @@ import PassedSubjects.AbstractTableModelPassedSubjects;
 import PassedSubjects.PassedSubjectTable;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
+import Student.AbstractTableModelStudents;
 import Student.StudentTable;
 import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
 import UnpassedSubjects.UnpassedSubjectTable;
 import view.MainFrame;
+import view.StudentUpdateDialog;
 
 public class Student extends Person {
 	
@@ -41,16 +43,20 @@ public class Student extends Person {
 		int sub = unpassedSubjects.get(subject);
 		unpassedSubjects.remove(subject);
 		passedSubjects.add(sub);
+		StudentBase.getInstance().calculateAvgGrade();
 		AbstractTableModelUnpassedSubjects model1 = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
 		model1.fireTableRowsDeleted(UnpassedSubjectTable.getInstance().getSelectedRow(), UnpassedSubjectTable.getInstance().getSelectedRow());
 		AbstractTableModelPassedSubjects model2 = (AbstractTableModelPassedSubjects) PassedSubjectTable.getInstance().getModel();
 		model2.fireTableRowsInserted(UnpassedSubjectTable.getInstance().getSelectedRow()+1, UnpassedSubjectTable.getInstance().getSelectedRow()+1);
+		AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
+		model.fireTableRowsUpdated(StudentTable.getInstance().getSelectedIndex(),StudentTable.getInstance().getSelectedIndex());
 		MainFrame.getInstance().validate();
 	}
 	public void unpassSubject(int subject) {
 		int sub = passedSubjects.get(subject);
 		passedSubjects.remove(subject);
 		unpassedSubjects.add(sub);
+		StudentBase.getInstance().calculateAvgGrade();
 		int studentNum = StudentTable.getInstance().getSelectedRow();
 		int studentID = StudentBase.getInstance().getAllStudents().get(studentNum).getIdStudent();
 		MarkController.getInstance().removeMark(studentID,sub);
@@ -58,6 +64,8 @@ public class Student extends Person {
 		model1.fireTableRowsInserted(UnpassedSubjectTable.getInstance().getSelectedRow()+1, UnpassedSubjectTable.getInstance().getSelectedRow()+1);
 		AbstractTableModelPassedSubjects model2 = (AbstractTableModelPassedSubjects) PassedSubjectTable.getInstance().getModel();
 		model2.fireTableRowsDeleted(UnpassedSubjectTable.getInstance().getSelectedRow(), UnpassedSubjectTable.getInstance().getSelectedRow());
+		AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
+		model.fireTableRowsUpdated(StudentTable.getInstance().getSelectedIndex(),StudentTable.getInstance().getSelectedIndex());
 		MainFrame.getInstance().validate();
 	}
 	

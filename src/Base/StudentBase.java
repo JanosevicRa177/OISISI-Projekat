@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
+import Controller.MarkController;
 import Controller.StudentController;
 import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
@@ -18,6 +19,7 @@ import model.Student;
 import model.StudentStatus;
 import model.Subject;
 import view.MainFrame;
+import view.StudentUpdateDialog;
 
 public class StudentBase {
 	
@@ -56,6 +58,19 @@ public class StudentBase {
 			}
 		}
 		return student;
+	}
+	public void calculateAvgGrade() {
+		for(Student st : students) {
+			double grades = 0;
+			double i = 0;
+			for(int sub : st.getPassedSubjects()) {
+				grades += MarkController.getInstance().getGrade(st.getIdStudent(), sub);
+				i++;
+			}
+			if(i != 0) {
+			st.setAvgMark(grades/i);
+			}
+		}
 	}
 	public Student getStudentByID(int studentInt) {
 		Student student = new Student();
@@ -104,7 +119,7 @@ public class StudentBase {
 		sortByID();
 		studentsVisible = new ArrayList<Student>();
 		studentsNotVisible = new ArrayList<Student>();
-		if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
 			Iterator<Student> it1 = students.iterator();
 			row = 0;
 			while(it1.hasNext()) {
@@ -118,7 +133,7 @@ public class StudentBase {
 				row++;
 			}
 			students = studentsVisible;
-		}else if(search.matches("[a-zA-ZŠĆĐŽČšćžđč]+( )[a-zA-ZŠĆĐŽČšćžđč]+")) {
+		}else if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+( )[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
 			String[] search1 = search.split(" ");
 			Iterator<Student> it1 = students.iterator();
 			row = 0;

@@ -15,8 +15,13 @@ import javax.swing.JPanel;
 
 import Base.ProfessorBase;
 import Base.StudentBase;
+import Base.SubjectBase;
+import Professor.ProfessorTable;
+import Subject.SubjectTable;
 import model.Professor;
 import model.Student;
+import model.Subject;
+import view.ErrorDialogProfessorsChiefDialog;
 import view.MainFrame;
 
 public class ProfessorController {
@@ -31,6 +36,9 @@ public class ProfessorController {
 	}
 	public ProfessorController() {
 		// TODO Auto-generated constructor stub
+	}
+	public void removeSubjectofProfessor(Subject subject) {
+		ProfessorBase.getInstance().removeSubjectofProfessor(subject);
 	}
 	public int getID() {
 		return ProfessorBase.getInstance().getID();
@@ -98,7 +106,13 @@ public class ProfessorController {
 			
 			public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-			    	Professor professor = ProfessorBase.getInstance().getRow(rowSelectedIndex);
+					Professor professor = ProfessorBase.getInstance().getProfessors().get(ProfessorTable.getInstance().getSelectedIndex());
+					if(DeskController.getInstance().contains(professor.getIdProf())) {
+						ErrorDialogProfessorsChiefDialog dialog = new ErrorDialogProfessorsChiefDialog();
+						dialog.setVisible(true);
+						setVisible(false);
+						return;
+						}
 			    	ProfessorBase.getInstance().deleteProfessor(professor.getIDnumber());
 					setVisible(false);
 				}

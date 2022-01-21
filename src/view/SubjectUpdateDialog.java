@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -18,9 +20,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Base.ProfessorBase;
 import Base.SubjectBase;
+import Controller.ProfessorController;
+import Controller.SubjectController;
 import Subject.AbstractTableModelSubjects;
 import Subject.SubjectTable;
+import model.Professor;
 import model.Subject;
 
 public class SubjectUpdateDialog extends JDialog {
@@ -36,10 +42,18 @@ public class SubjectUpdateDialog extends JDialog {
 	private JTextField inputNotpass = new JTextField();
 	private JTextField inputProf = new JTextField();
 	private JTextField inputSemester = new JTextField();
-	
-
+	private JTextField inputprofessor = new JTextField();
 	
 		
+	private static SubjectUpdateDialog instance = null;
+
+	public static SubjectUpdateDialog getInstance() {
+		if (instance == null) {
+			instance = new SubjectUpdateDialog();
+		}
+		return instance;
+	}
+	
 		public SubjectUpdateDialog(){
 			super(MainFrame.getInstance(), "Update Subject", true);
 			
@@ -51,12 +65,11 @@ public class SubjectUpdateDialog extends JDialog {
 			setLocationRelativeTo(MainFrame.getInstance());
 			setTitle("Dodavanje Predmeta");
 			
-			JPanel addStudent = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			Dimension labelDim = new Dimension((width*1/4)/2, 30);
-			Dimension inputDim = new Dimension((width*1/4+25)/2, 20);
+			JPanel updateSubject = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			Dimension labelDim = new Dimension((width*1/10)/2, 30);
+			Dimension inputDim = new Dimension((width*1/3)/2, 20);
 			
-
-			JPanel ID = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel ID = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelID = new JLabel("Subject ID:");
 			labelID.setPreferredSize(labelDim);
 			inputID.setPreferredSize(inputDim);
@@ -66,10 +79,10 @@ public class SubjectUpdateDialog extends JDialog {
 			
 			ID.add(labelID);
 			ID.add(inputID);
-			addStudent.add(ID);
-			this.add(addStudent);
+			updateSubject.add(ID);
+			this.add(updateSubject);
 			
-			JPanel Name = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Name = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelName = new JLabel("Name:");
 			labelName.setPreferredSize(labelDim);
 			inputName.setPreferredSize(inputDim);
@@ -77,15 +90,15 @@ public class SubjectUpdateDialog extends JDialog {
 			
 			Name.add(labelName);
 			Name.add(inputName);
-			addStudent.add(Name);
-			this.add(addStudent);
+			updateSubject.add(Name);
+			this.add(updateSubject);
 			List<Subject> subjects = new ArrayList<Subject>();
 			for(Subject st : SubjectBase.getInstance().getSubjects())
 				subjects.add(st);
 			
 			
 			
-			JPanel Semester = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Semester = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelSemester = new JLabel("Semester:");
 			String[] types = { "Letnji", "Zimski"};
 			labelSemester.setPreferredSize(labelDim);
@@ -101,10 +114,10 @@ public class SubjectUpdateDialog extends JDialog {
 			
 			Semester.add(labelSemester);
 			Semester.add(comboSemester);
-			addStudent.add(Semester);
-			this.add(addStudent);
+			updateSubject.add(Semester);
+			this.add(updateSubject);
 
-			JPanel Execution = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			JPanel Execution = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelExecution = new JLabel("Execution:");
 			labelExecution.setPreferredSize(labelDim);
 			JTextField inputExecution = new JTextField();
@@ -113,19 +126,10 @@ public class SubjectUpdateDialog extends JDialog {
 			
 			Execution.add(labelExecution);
 			Execution.add(inputExecution);
-			addStudent.add(Execution);
-			this.add(addStudent);
-			
-//			JPanel Prof = new JPanel(new FlowLayout(FlowLayout.LEFT));
-//			JLabel labelProf = new JLabel("Proffesor:");
-//			labelProf.setPreferredSize(labelDim);
-//			inputProf.setPreferredSize(inputDim);
-//			Prof.add(labelProf);
-//			Prof.add(inputProf);
-//			addStudent.add(Prof);
-//			this.add(addStudent);
-//			
-			JPanel Espb = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			updateSubject.add(Execution);
+			this.add(updateSubject);
+					
+			JPanel Espb = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			JLabel labelEspb = new JLabel("Espb:");
 			labelEspb.setPreferredSize(labelDim);
 			inputEspb.setPreferredSize(inputDim);
@@ -133,46 +137,80 @@ public class SubjectUpdateDialog extends JDialog {
 			
 			Espb.add(labelEspb);
 			Espb.add(inputEspb);
-			addStudent.add(Espb);
-			this.add(addStudent);
+			updateSubject.add(Espb);
+			this.add(updateSubject);
+			
+//			Box professorOfSubject = Box.createVerticalBox();
+			JPanel professorOfSubject = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			JPanel buttonsAddProfessor = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			
+			Dimension inputDim2 = new Dimension((width*1/5)/2, 20);
+			JPanel professor = new JPanel(new FlowLayout(FlowLayout.CENTER));
+			JLabel labelProfessor = new JLabel("Professor:");
+			labelProfessor.setPreferredSize(labelDim);
+			inputprofessor.setPreferredSize(inputDim2);
+			int subject = SubjectTable.getInstance().getSelectedIndex();
+			Subject sub = SubjectBase.getInstance().getSubjects().get(subject);
+			int profInt = sub.getProfessorOfSubject();
+			if(profInt != 0) {
+			Professor prof = ProfessorBase.getInstance().getProfessors().get(profInt-1);
+			inputprofessor.setText(prof.getName() + " " + prof.getSurname());
+			}
+			professor.add(labelProfessor);
+			professor.add(Box.createHorizontalStrut(20));
+			professor.add(inputprofessor);
+			inputprofessor.setEnabled(false);
+			updateSubject.add(professor);
+
+			JButton Add = new JButton();
+			ImageIcon Add_icon = new ImageIcon("images/Add.png");
+			Image Scaled_Add_icon = Add_icon.getImage().getScaledInstance(15, 15, java.awt.Image.SCALE_SMOOTH);
+			ImageIcon Add_icon_real = new ImageIcon(Scaled_Add_icon);
+			Add.setIcon(Add_icon_real);
+			Add.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					ChooseProfessorDialog dialog = new ChooseProfessorDialog();
+					dialog.setVisible(true);
+				}
+			});
+			JButton Remove = new JButton();
+			ImageIcon Remove_icon = new ImageIcon("images/Minus.png");
+			Image Scaled_Remove_icon = Remove_icon.getImage().getScaledInstance(20, 15, java.awt.Image.SCALE_SMOOTH);
+			ImageIcon Remove_icon_real = new ImageIcon(Scaled_Remove_icon);
+			Remove.setIcon(Remove_icon_real);
+			Remove.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					int subject = SubjectTable.getInstance().getSelectedIndex();
+					ProfessorController.getInstance().getAllProf().get(SubjectBase.getInstance().getSubjects().get(subject).getProfessorOfSubject()).add_Professors_subject(SubjectController.getInstance().getAllSubjects().get(subject));
+					SubjectBase.getInstance().getSubjects().get(subject).removeProfessor();
+					inputprofessor.setText("");
+					
+				}
+				
+			});
+			buttonsAddProfessor.add(Add);
+			buttonsAddProfessor.add(Remove);
+			professorOfSubject.add(buttonsAddProfessor);
+			updateSubject.add(professorOfSubject);
 			
 			
 			
-			
-//			JPanel Pass = new JPanel(new FlowLayout(FlowLayout.LEFT));
-//
-//			JLabel labelPass = new JLabel("Pass:");
-//			labelPass.setPreferredSize(labelDim);
-//			JComboBox<String> comboPass = new JComboBox<String>();
-//			comboPass.setPreferredSize(inputDim);
-//			Pass.add(labelPass);
-//			Pass.add(comboPass);
-//			addStudent.add(Pass);
-//			this.add(addStudent);
-//			
-//			
 			JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
-			Dimension dim = new Dimension(100, 25);
+			Dimension dim = new Dimension(60, 25);
+			
 			JButton add = new JButton();
-			add.setText("Add");
-			add.setPreferredSize(dim);
-			buttons.add(add);
-			
-			buttons.add(Box.createHorizontalStrut(width/50));
-			
-			JButton cancel = new JButton();
-			cancel.setText("Cancel");
-			cancel.setPreferredSize(dim);
-			buttons.add(cancel);
-			
-			addStudent.add(buttons);
-			this.add(addStudent);
-			
+			add.setText("Update");
+			add.setSize(dim);
 			add.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") |!getInputID().getText().matches("[A-Za-z0-9]+") |  inputExecution.getText().equals("") )
+					if(getInputName().getText().equals("") | !getInputEspb().getText().matches("[0-9]+") |!getInputID().getText().matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+") |  inputExecution.getText().equals("") )
 					{
 						InputErrorDialog dialog = new InputErrorDialog();
 						dialog.setVisible(true);
@@ -184,30 +222,33 @@ public class SubjectUpdateDialog extends JDialog {
 					AbstractTableModelSubjects model = (AbstractTableModelSubjects)SubjectTable.getInstance().getModel();
 					model.fireTableRowsUpdated(row, row);
 					MainFrame.getInstance().validate();
-					setVisible(false);
-					
-////					
-					
-			
-					
+					setVisible(false);	
 				}
 			});
+			buttons.add(add);
+			
+			buttons.add(Box.createHorizontalStrut(20));
+			
+			JButton cancel = new JButton();
+			cancel.setText("Cancel");
+			cancel.setSize(dim);
+			this.add(updateSubject);
+			
 			cancel.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					setVisible(false);
-					
-					
-			
-					
+		
 				}
 			});
-
+			buttons.add(cancel);
 			
-			
-			
-			
+			updateSubject.add(buttons);
+	
+		}
+		public void setProfessor(Professor prof) {
+			inputprofessor.setText(prof.getName() + " " + prof.getSurname());
 		}
 		boolean isValidDate(String input) {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");

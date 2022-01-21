@@ -16,6 +16,7 @@ import Base.ProfessorBase;
 import Base.StudentBase;
 import Base.SubjectBase;
 import model.Professor;
+import Subject.SubjectTable;
 import model.Student;
 import model.Subject;
 import view.MainFrame;
@@ -91,7 +92,8 @@ public class SubjectController {
 			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-		    	Subject subject = SubjectBase.getInstance().getRow(rowSelectedIndex);
+		    	Subject subject = SubjectBase.getInstance().getSubjects().get(SubjectTable.getInstance().getSelectedIndex());
+		    	ProfessorController.getInstance().removeSubjectofProfessor(subject);
 		    	SubjectBase.getInstance().deleteSubject(subject.getiDSubject());
 				setVisible(false);
 			}
@@ -103,7 +105,6 @@ public class SubjectController {
 			cancel.addActionListener(new ActionListener() {
 				
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
 					setVisible(false);
 				}
 			});

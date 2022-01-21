@@ -37,7 +37,6 @@ public class ProfessorTable  extends JTable {
 		this.setColumnSelectionAllowed(true);
 		this.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		this.setModel(new AbstractTableModelProfessors());
-		this.setAutoCreateRowSorter(true);
 		
 		professorAbstractTable = new AbstractTableModelProfessors();
 		professorAbstractTable = (AbstractTableModelProfessors)this.getModel();

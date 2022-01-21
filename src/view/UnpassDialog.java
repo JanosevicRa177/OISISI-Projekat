@@ -54,14 +54,14 @@ public class UnpassDialog extends JDialog{
 				setVisible(false);
 			}
 		});
-		Box unpassButtosBox = Box.createHorizontalBox();
-		unpassButtosBox.add(Box.createVerticalStrut(20));
-		unpassButtosBox.add(Box.createHorizontalGlue());
-		unpassButtosBox.add(ok);
-		unpassButtosBox.add(Box.createHorizontalStrut(10));
-		unpassButtosBox.add(cancel);
-		unpassButtosBox.add(Box.createHorizontalGlue());
-		unpass.add(unpassButtosBox);
+		Box unpassButtonsBox = Box.createHorizontalBox();
+		unpassButtonsBox.add(Box.createVerticalStrut(20));
+		unpassButtonsBox.add(Box.createHorizontalGlue());
+		unpassButtonsBox.add(ok);
+		unpassButtonsBox.add(Box.createHorizontalStrut(10));
+		unpassButtonsBox.add(cancel);
+		unpassButtonsBox.add(Box.createHorizontalGlue());
+		unpass.add(unpassButtonsBox);
 		this.add(unpass);
 	}
 

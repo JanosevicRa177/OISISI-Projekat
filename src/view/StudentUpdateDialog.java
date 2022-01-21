@@ -215,7 +215,7 @@ public class StudentUpdateDialog extends JDialog {
 			
 			JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER));
 			Dimension dim = new Dimension(100, 25);
-			add.setText("Add");
+			add.setText("Update");
 			add.setPreferredSize(dim);
 			buttons.add(add);
 			
@@ -258,7 +258,8 @@ public class StudentUpdateDialog extends JDialog {
 					else god = 4;
 					Address adresaInsert = new Address(adresa[0],adresa[1],adresa[2],adresa[3]);
 					AddressBase.getInstance().addAddress(adresaInsert);
-					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), adresaInsert, Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat),oldID);
+					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(),LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), 
+							adresaInsert, Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat),oldID);
 					int row = StudentTable.getInstance().getSelectedIndex();
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsUpdated(row, row);
@@ -323,8 +324,11 @@ public class StudentUpdateDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int pass = UnpassedSubjectTable.getInstance().getSelectedRow();
-				StudentController.getInstance().passTest(pass);
+				if(UnpassedSubjectTable.getInstance().getSelectedRow() != -1)
+				{
+				PassDialog dialog = new PassDialog();
+				dialog.setVisible(true);
+				}
 			}
 			
 		});
@@ -338,8 +342,11 @@ public class StudentUpdateDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(PassedSubjectTable.getInstance().getSelectedRow() != -1)
+				{
 				UnpassDialog dialog = new UnpassDialog();
 				dialog.setVisible(true);
+				}
 			}
 			
 		});

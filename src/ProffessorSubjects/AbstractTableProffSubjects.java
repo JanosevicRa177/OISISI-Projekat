@@ -48,7 +48,7 @@ public class AbstractTableProffSubjects extends AbstractTableModel{
 		
 		} else {
 			Subject subject = ProfessorController.getInstance().findSelectedProffessor(ProfessorTable.getInstance().getSelectedRow()).getProfessors_subjects().get(row);
-			
+
 			switch (column) {
 			case 0:
 				return subject.getiDSubject();

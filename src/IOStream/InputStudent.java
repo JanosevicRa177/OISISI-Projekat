@@ -40,21 +40,21 @@ public class InputStudent {
 					if(student[6].equals("null")) {
 						StudentController.getInstance().addStudent(new Student(student[2],student[3],localDate,
 							address,finalPhone,student[8],student[1], Integer.parseInt(student[10]),
-							Integer.parseInt(student[4]),StudentStatus.B,9.32,Integer.parseInt(student[0])));
+							Integer.parseInt(student[4]),StudentStatus.B,0.0,Integer.parseInt(student[0])));
 					} else {
 						StudentController.getInstance().addStudent(new Student(student[2],student[3],localDate,
 						AddressController.getInstance().getAddress(Integer.parseInt(student[6])-1),finalPhone,student[8],
-						student[1], Integer.parseInt(student[10]),Integer.parseInt(student[4]),StudentStatus.B,9.32,Integer.parseInt(student[0])));
+						student[1], Integer.parseInt(student[10]),Integer.parseInt(student[4]),StudentStatus.B,0.0,Integer.parseInt(student[0])));
 					}
 				} else {
 					if(student[6].equals("null")) {
 						StudentController.getInstance().addStudent(new Student(student[2],student[3],localDate,
 							address,finalPhone,student[8],student[1], Integer.parseInt(student[10]),
-							Integer.parseInt(student[4]),StudentStatus.B,9.32,Integer.parseInt(student[0])));
+							Integer.parseInt(student[4]),StudentStatus.B,0.0,Integer.parseInt(student[0])));
 					} else {
 					StudentController.getInstance().addStudent(new Student(student[2],student[3],localDate,
 						AddressController.getInstance().getAddress(Integer.parseInt(student[6])-1),finalPhone,student[8],
-						student[1], Integer.parseInt(student[10]),Integer.parseInt(student[4]),StudentStatus.S,9.32,Integer.parseInt(student[0])));
+						student[1], Integer.parseInt(student[10]),Integer.parseInt(student[4]),StudentStatus.S,0.0,Integer.parseInt(student[0])));
 						}
 				}
 			}
