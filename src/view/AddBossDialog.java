@@ -61,7 +61,6 @@ public class AddBossDialog extends JDialog {
 				// TODO Auto-generated method stub
 				setVisible(false);
 			}
-			
 		});
 		cancel.setPreferredSize(dim);
 		
