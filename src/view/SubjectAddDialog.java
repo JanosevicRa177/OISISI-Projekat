@@ -16,11 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Base.SubjectBase;
 import Controller.SubjectController;
-import Student.StudentTable;
-import Subject.AbstractTableModelSubjects;
-import Subject.SubjectTable;
 import model.Subject;
 
 public class SubjectAddDialog extends JDialog {

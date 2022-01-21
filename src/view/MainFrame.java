@@ -8,14 +8,6 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import IOStream.OutputAddress;
-import IOStream.OutputDesk;
-import IOStream.OutputMarks;
-import IOStream.OutputProffesor;
-import IOStream.OutputStudent;
-import IOStream.OutputSubject;
-import IOStream.OutputUnpassed;
-
 public class MainFrame extends JFrame {
 	/**
 	 * 

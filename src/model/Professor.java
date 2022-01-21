@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import Base.ProfessorBase;
 import Controller.StudentController;
 import Controller.SubjectController;
+import view.ProfessorBase;
 
 public class Professor extends Person {
 	private Address officeAddress;

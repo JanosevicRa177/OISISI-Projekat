@@ -4,13 +4,13 @@ package main;
 import java.io.IOException;
 
 import Controller.StudentController;
-import IOStream.InputAddress;
-import IOStream.InputDesk;
-import IOStream.InputMark;
-import IOStream.InputProfessor;
-import IOStream.InputStudent;
-import IOStream.InputSubject;
-import IOStream.InputUnpassedSubject;
+import view.InputAddress;
+import view.InputDesk;
+import view.InputMark;
+import view.InputProfessor;
+import view.InputStudent;
+import view.InputSubject;
+import view.InputUnpassedSubject;
 import view.MainFrame;
 
 public class MyApp {

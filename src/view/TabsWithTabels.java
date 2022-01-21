@@ -5,10 +5,6 @@ import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
-import Professor.ProfessorTable;
-import Student.StudentTable;
-import Subject.SubjectTable;
-
 
 public class TabsWithTabels extends JTabbedPane {
 

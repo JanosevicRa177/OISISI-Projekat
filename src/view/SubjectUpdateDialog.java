@@ -20,12 +20,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Base.ProfessorBase;
-import Base.SubjectBase;
 import Controller.ProfessorController;
 import Controller.SubjectController;
-import Subject.AbstractTableModelSubjects;
-import Subject.SubjectTable;
 import model.Professor;
 import model.Subject;
 

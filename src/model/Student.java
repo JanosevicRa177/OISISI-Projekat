@@ -4,20 +4,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import Base.StudentBase;
 import Controller.StudentController;
 import Controller.SubjectController;
 import Controller.MarkController;
-import PassedSubjects.AbstractTableModelPassedSubjects;
-import PassedSubjects.PassedSubjectTable;
-import Professor.AbstractTableModelProfessors;
-import Professor.ProfessorTable;
-import Student.AbstractTableModelStudents;
-import Student.StudentTable;
-import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
-import UnpassedSubjects.UnpassedSubjectTable;
+import view.AbstractTableModelPassedSubjects;
+import view.AbstractTableModelProfessors;
+import view.AbstractTableModelStudents;
+import view.AbstractTableModelUnpassedSubjects;
 import view.MainFrame;
+import view.PassedSubjectTable;
+import view.ProfessorTable;
+import view.StudentBase;
+import view.StudentTable;
 import view.StudentUpdateDialog;
+import view.UnpassedSubjectTable;
 
 public class Student extends Person {
 	

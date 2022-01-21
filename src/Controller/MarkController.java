@@ -2,9 +2,9 @@ package Controller;
 
 import java.util.List;
 
-import Base.MarkBase;
-import Base.StudentBase;
 import model.Mark;
+import view.MarkBase;
+import view.StudentBase;
 
 public class MarkController {
 

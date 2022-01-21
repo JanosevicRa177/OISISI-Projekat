@@ -2,8 +2,8 @@ package Controller;
 
 import java.util.List;
 
-import Base.AddressBase;
 import model.Address;
+import view.AddressBase;
 
 public class AddressController {
 

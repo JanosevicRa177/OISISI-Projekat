@@ -2,11 +2,11 @@ package Controller;
 
 import java.util.List;
 
-import Base.DeskBase;
-import Base.StudentBase;
 import model.Desk;
 import model.Professor;
 import model.Student;
+import view.DeskBase;
+import view.StudentBase;
 
 public class DeskController {
 

@@ -17,12 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Base.StudentBase;
-import Base.SubjectBase;
 import Controller.MarkController;
 import Controller.StudentController;
-import Student.StudentTable;
-import UnpassedSubjects.UnpassedSubjectTable;
 import model.Mark;
 import model.Student;
 import model.Subject;

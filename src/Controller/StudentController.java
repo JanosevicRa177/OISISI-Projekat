@@ -12,13 +12,13 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Base.ProfessorBase;
-import Base.MarkBase;
-import Base.StudentBase;
-import Base.SubjectBase;
-import Student.StudentTable;
 import model.Student;
 import view.MainFrame;
+import view.MarkBase;
+import view.ProfessorBase;
+import view.StudentBase;
+import view.StudentTable;
+import view.SubjectBase;
 
 public class StudentController {
 	private static StudentController instance = null;

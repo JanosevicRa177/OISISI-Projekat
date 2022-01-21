@@ -10,11 +10,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JScrollPane;
 
-import Base.SubjectBase;
-import ChooseProfessor.ChooseProfessorTable;
 import Controller.ProfessorController;
 import Controller.SubjectController;
-import Subject.SubjectTable;
 import model.Professor;
 
 public class ChooseProfessorDialog extends JDialog{

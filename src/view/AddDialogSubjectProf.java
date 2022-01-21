@@ -10,16 +10,8 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import AddSubjectToProf.AbstractSubjProfTable;
-import AddSubjectToProf.SubjProfTable;
-import AddSubjects.AddSubjectsTable;
 import Controller.ProfessorController;
 import Controller.SubjectController;
-import Professor.AbstractTableModelProfessors;
-import Professor.ProfessorTable;
-import ProffessorSubjects.AbstractTableProffSubjects;
-import ProffessorSubjects.ProffSubjectsTable;
-import Subject.SubjectTable;
 
 public class AddDialogSubjectProf extends JDialog {
 	

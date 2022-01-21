@@ -21,17 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import AddSubjectToProf.SubjProfTable;
-import Base.AddressBase;
-import Base.ProfessorBase;
 import Controller.ProfessorController;
 import Controller.SubjectController;
-import Professor.AbstractTableModelProfessors;
-import Professor.ProfessorTable;
-import ProffessorSubjects.AbstractTableProffSubjects;
-import ProffessorSubjects.ProffSubjectsTable;
-import Subject.SubjectTable;
-import UnpassedSubjects.UnpassedSubjectTable;
 import model.Address;
 import model.Professor;
 
@@ -288,8 +279,8 @@ public class ProfessorUpdateDialog extends JDialog{
 
 		@Override
 		public void focusLost(FocusEvent arg0) {
-			if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z0-9( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+") |
-					!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z0-9( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+,[a-zA-Z( )Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
+			if(getTxtName().getText().equals("") | getTxtSurname().getText().equals("") | !isValidDate(getTxtDateOfBirth().getText()) | !getTxtAddress().getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") |
+					!getTxtPhoneNumber().getText().matches("[0-9]+") | !getTxtOfficeAddress().getText().matches("[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z0-9( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+,[a-zA-Z( )ŠĆĐŽČšćžđč]+") | !getTxtIDnumber().getText().matches("[0-9]+") |
 					getTxtTitle().getText().equals("")| !getTxtExperienceYears().getText().matches("[0-9]+")) {
 				update.setEnabled(false);
 				return;

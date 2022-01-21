@@ -18,11 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import Base.AddressBase;
-import Base.ProfessorBase;
 import Controller.ProfessorController;
-import Professor.AbstractTableModelProfessors;
-import Professor.ProfessorTable;
 import model.Address;
 import model.Professor;
 

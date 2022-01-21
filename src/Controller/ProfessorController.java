@@ -13,16 +13,16 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Base.ProfessorBase;
-import Base.StudentBase;
-import Base.SubjectBase;
-import Professor.ProfessorTable;
-import Subject.SubjectTable;
 import model.Professor;
 import model.Student;
 import model.Subject;
 import view.ErrorDialogProfessorsChiefDialog;
 import view.MainFrame;
+import view.ProfessorBase;
+import view.ProfessorTable;
+import view.StudentBase;
+import view.SubjectBase;
+import view.SubjectTable;
 
 public class ProfessorController {
 

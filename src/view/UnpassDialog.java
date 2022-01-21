@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Controller.StudentController;
-import PassedSubjects.PassedSubjectTable;
 
 public class UnpassDialog extends JDialog{
 

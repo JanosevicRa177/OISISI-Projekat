@@ -12,14 +12,14 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import Base.ProfessorBase;
-import Base.StudentBase;
-import Base.SubjectBase;
 import model.Professor;
-import Subject.SubjectTable;
 import model.Student;
 import model.Subject;
 import view.MainFrame;
+import view.ProfessorBase;
+import view.StudentBase;
+import view.SubjectBase;
+import view.SubjectTable;
 
 public class SubjectController {
 

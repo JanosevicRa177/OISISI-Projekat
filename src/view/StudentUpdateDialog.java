@@ -24,21 +24,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
-import AddSubjects.AbstractAddSubjectsTable;
-import AddSubjects.AddSubjectsTable;
-import Base.AddressBase;
-import Base.StudentBase;
-import Base.SubjectBase;
 import Controller.StudentController;
 import Controller.SubjectController;
-import PassedSubjects.PassedSubjectTable;
-import Professor.AbstractTableModelProfessors;
-import Professor.ProfessorTable;
-import Student.AbstractTableModelStudents;
-import Student.StudentTable;
-import Subject.SubjectTable;
-import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
-import UnpassedSubjects.UnpassedSubjectTable;
 import model.Address;
 import model.Student;
 
@@ -359,7 +346,7 @@ public class StudentUpdateDialog extends JDialog {
 		passedSubjects.add(buttonsPassed);
 		passedSubjects.add(passedSubjectTable);
 		int l = PassedSubjectTable.getInstance().getESPB();
-		int ll = PassedSubjectTable.getInstance().getProsek();
+		float ll = PassedSubjectTable.getInstance().getProsek();
 		String lbl1 = "ESPB: ";
 		String lbl2 = "Average grade: ";
 		lbl2 = lbl2 + ll;

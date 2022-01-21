@@ -12,10 +12,6 @@ import javax.swing.JScrollPane;
 
 import Controller.DeskController;
 import Controller.ProfessorController;
-import DepTables.AbstractDepartmentTable;
-import DepTables.DepartmentTable;
-import DepartmentsBoss.BossTable;
-import Professor.ProfessorTable;
 
 public class AddBossDialog extends JDialog {
 	
@@ -39,12 +35,13 @@ public class AddBossDialog extends JDialog {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						if(BossTable.getInstance().getSelectedRow() != -1) {
 						DeskController.getInstance().findSelectedDesk(DepartmentTable.getInstance().getSelectedRow()).setDeskChief(ProfessorController.getInstance().findSelectedProffessor(BossTable.getInstance().getSelectedRow()).getIdProfByName(ProfessorController.getInstance().findSelectedProffessor(BossTable.getInstance().getSelectedRow()).getName()));
 						AbstractDepartmentTable model = (AbstractDepartmentTable) DepartmentTable.getInstance().getModel();
 						model.fireTableDataChanged();
-
 						setVisible(false);
 						MainFrame.getInstance().validate();
+						}
 					}
 			
 				});

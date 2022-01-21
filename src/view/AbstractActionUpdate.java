@@ -4,10 +4,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import Professor.ProfessorTable;
-import Student.StudentTable;
-import Subject.SubjectTable;
-
 public class AbstractActionUpdate extends AbstractAction {
 	/**
 	 * 

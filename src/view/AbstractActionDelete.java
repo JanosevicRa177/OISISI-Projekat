@@ -8,14 +8,6 @@ import javax.swing.AbstractAction;
 import Controller.ProfessorController;
 import Controller.StudentController;
 import Controller.SubjectController;
-import IOStream.OutputAddress;
-import IOStream.OutputStudent;
-import Professor.AbstractTableModelProfessors;
-import Professor.ProfessorTable;
-import Student.AbstractTableModelStudents;
-import Student.StudentTable;
-import Subject.AbstractTableModelSubjects;
-import Subject.SubjectTable;
 
 public class AbstractActionDelete extends AbstractAction  {
 

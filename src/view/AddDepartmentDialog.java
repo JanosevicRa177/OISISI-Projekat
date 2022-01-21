@@ -10,9 +10,6 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import AddSubjects.AddSubjectsTable;
-import DepTables.DepartmentTable;
-
 public class AddDepartmentDialog extends JDialog {
 	
 	private static final long serialVersionUID = -9162250925534372358L;
