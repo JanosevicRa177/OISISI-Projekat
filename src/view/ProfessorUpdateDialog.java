@@ -196,7 +196,7 @@ public class ProfessorUpdateDialog extends JDialog{
 				}
 				String[] address = txtAddress.getText().split(",");
 				String[] oAddress = txtOfficeAddress.getText().split(",");
-				int row = ProfessorTable.getInstance().getSelectedRow();
+				int row = ProfessorTable.getInstance().getSelectedIndex();
 				Address addressInsert = new Address(address[0],address[1],address[2],address[3]);
 				AddressBase.getInstance().addAddress(addressInsert);
 				Address oAddressInsert = new Address(oAddress[0],oAddress[1],oAddress[2],oAddress[3]);
@@ -206,7 +206,7 @@ public class ProfessorUpdateDialog extends JDialog{
 						getTxtEmail().getText(),oAddressInsert,Integer.parseInt(getTxtIDnumber().getText()),
 						getTxtTitle().getText(),Integer.parseInt(getTxtExperienceYears().getText()),oldID);
 				AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();
-				model.fireTableRowsInserted(row, row);
+				model.fireTableRowsUpdated(row, row);
 				MainFrame.getInstance().validate();
 				setVisible(false);
 			}

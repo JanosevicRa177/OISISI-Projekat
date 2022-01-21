@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 
+import Base.StudentBase;
 import Controller.AddressController;
 import Controller.StudentController;
 import model.Address;
@@ -35,7 +36,6 @@ public class InputStudent {
 				int finalPhone = Integer.parseInt(phone[0] + phone1[0] + phone1[1]);
 				
 				Address address = new Address("","","","");
-				
 				if(student[9].equals("B")) {
 					if(student[6].equals("null")) {
 						StudentController.getInstance().addStudent(new Student(student[2],student[3],localDate,

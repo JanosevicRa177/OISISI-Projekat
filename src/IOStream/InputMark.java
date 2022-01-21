@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.time.LocalDate;
 
 import Controller.MarkController;
+import Controller.StudentController;
+import Controller.SubjectController;
 import model.Mark;
 
 public class InputMark {
@@ -26,6 +28,8 @@ public class InputMark {
 				String date = "" + passDate[2] + "-" + passDate[1] + "-" + passDate[0];
 				LocalDate localDate = LocalDate.parse(date);
 				MarkController.getInstance().addMark(new Mark(Integer.parseInt(mark[0]),Integer.parseInt(mark[1]),Integer.parseInt(mark[2]),localDate));
+				SubjectController.getInstance().addPassedStudent(Integer.parseInt(mark[0]),Integer.parseInt(mark[1]));
+				StudentController.getInstance().addPassedSubject(Integer.parseInt(mark[0]),Integer.parseInt(mark[1]));
 				}
 		} finally {
 			reader.close();

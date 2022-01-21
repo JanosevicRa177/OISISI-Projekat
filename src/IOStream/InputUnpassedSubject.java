@@ -14,7 +14,7 @@ public class InputUnpassedSubject {
 	public InputUnpassedSubject() {
 		// TODO Auto-generated constructor stub
 	}
-	public static void ReadSubject(String file) throws IOException {
+	public static void ReadUnpassedSubject(String file) throws IOException {
 		File f = new File(file);
 		String line = "";
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f),"UTF8"));

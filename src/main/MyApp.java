@@ -21,8 +21,7 @@ public class MyApp {
 		InputProfessor.ReadProfessors("Professors.txt");
 		InputSubject.ReadSubject("Subjects.txt");
 		InputMark.ReadMarks("Marks.txt");
-		InputUnpassedSubject.ReadSubject("UnpassedSubjects.txt");
-		
+		InputUnpassedSubject.ReadUnpassedSubject("UnpassedSubjects.txt");
 		MainFrame.getInstance();
 	}
 }

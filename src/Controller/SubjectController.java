@@ -40,6 +40,9 @@ public class SubjectController {
 	public void addUnpassedStudent(int student,int subject) {
 		SubjectBase.getInstance().addUnpassedStudent(student, subject);
 	}
+	public void addPassedStudent(int student,int subject) {
+		SubjectBase.getInstance().addPassedStudent(student, subject);
+	}
 	public void addSubject(Subject subject) {
 		SubjectBase.getInstance().addSubject(subject);
 	}
