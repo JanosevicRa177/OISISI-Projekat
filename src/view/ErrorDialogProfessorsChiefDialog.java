@@ -11,21 +11,22 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class InputErrorDialog extends JDialog {
+public class ErrorDialogProfessorsChiefDialog extends JDialog{
 
-	private static final long serialVersionUID = -7087392391344164569L;
+	private static final long serialVersionUID = -7957423915557578694L;
 
-	public InputErrorDialog() {
-		super(MainFrame.getInstance(), "Input Error", true);
+	public ErrorDialogProfessorsChiefDialog() {
+		// TODO Auto-generated constructor stub
+		super(MainFrame.getInstance(), "Cant delete", true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
 		Dimension screenSize = kit.getScreenSize();
 		int width = screenSize.width;
 		int height = screenSize.height;
-		setSize(width*1/6, height*1/7);
+		setSize(width*1/4, height*1/7);
 		setLocationRelativeTo(MainFrame.getInstance());
 		
 		JPanel error = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		JLabel errorTxt = new JLabel("Input Error: ID must be unique!");
+		JLabel errorTxt = new JLabel("Cant delete professor because he is chief of subject");
 		error.add(errorTxt);
 		Dimension dim = new Dimension(100, 25);
 		JButton ok = new JButton();

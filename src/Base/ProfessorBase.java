@@ -12,6 +12,7 @@ import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import model.Address;
 import model.Professor;
+import model.Subject;
 import view.MainFrame;
 
 
@@ -69,7 +70,14 @@ public class ProfessorBase {
 			  }
 			});
 	}
-	
+	public void removeSubjectofProfessor(Subject subject) {
+		int prof = subject.getProfessorOfSubject();
+		for(Professor pr : professors) {
+			if(pr.getIdProf() == prof) {
+				pr.getProfessors_subjects().remove(subject);
+			}
+		}
+	}
 	public int getID(){
 		int id = 1;
 		Iterator<Professor> it = professors.iterator();
