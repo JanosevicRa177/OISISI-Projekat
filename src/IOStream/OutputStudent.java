@@ -38,7 +38,8 @@ public class OutputStudent {
 
 		int j = 0;
 		while(j < stList.size()) {
-			line = stList.get(j).getIndexNumber() + " ";
+			line = stList.get(j).getIdStudent() + " ";
+			line = line + stList.get(j).getIndexNumber() + " ";
 			line = line + stList.get(j).getName() + " ";
 			line = line + stList.get(j).getSurname() + " ";
 			line = line + stList.get(j).getCurrentYear() + " ";

@@ -44,7 +44,8 @@ public class OutputProffesor {
 
 		int j = 0;
 		while(j < prList.size()) {
-			line = prList.get(j).getIDnumber() + " ";
+			line = prList.get(j).getIdProf() + " ";
+			line = line + prList.get(j).getIDnumber() + " ";
 			line = line + prList.get(j).getName() + " ";
 			line = line + prList.get(j).getSurname() + " ";
 			if(prList.get(j).getDate_of_birth().getDayOfMonth() < 10)

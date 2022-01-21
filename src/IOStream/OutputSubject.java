@@ -42,7 +42,8 @@ public class OutputSubject {
 		List<Professor> pList = ProfessorController.getInstance().getAllProf();
 
 		while(j < subjectList.size()) {
-			line = subjectList.get(j).getiDSubject() + ",";
+			line = subjectList.get(j).getiDIntSubject() + ",";
+			line = line + subjectList.get(j).getiDSubject() + ",";
 			line = line + subjectList.get(j).getSubjectName() + ",";
 			line = line + subjectList.get(j).getsubjectYearExecution() + ",";
 			line = line + subjectList.get(j).getESPBvalue()  + ",";
