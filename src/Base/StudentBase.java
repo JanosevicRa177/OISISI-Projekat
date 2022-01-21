@@ -118,7 +118,7 @@ public class StudentBase {
 				row++;
 			}
 			students = studentsVisible;
-		}else if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+( )[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+		}else if(search.matches("[a-zA-ZŠĆĐŽČšćžđč]+( )[a-zA-ZŠĆĐŽČšćžđč]+")) {
 			String[] search1 = search.split(" ");
 			Iterator<Student> it1 = students.iterator();
 			row = 0;
@@ -135,7 +135,7 @@ public class StudentBase {
 			}
 			students = studentsVisible;
 		}
-		else{
+		else if(search.matches("[a-zA-Z0-9 \\/]+( )[a-zA-ZŠĆĐŽČšćžđč]+( )[a-zA-ZŠĆĐŽČšćžđč]+")){
 			String[] search2 = search.split(" ");
 			Iterator<Student> it1 = students.iterator();
 			row = 0;

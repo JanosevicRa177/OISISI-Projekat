@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import Base.ProfessorBase;
 import Base.StudentBase;
 import Base.SubjectBase;
+import model.Professor;
 import model.Student;
 import model.Subject;
 import view.MainFrame;
@@ -55,6 +56,7 @@ public class SubjectController {
 	{
 		return SubjectBase.getInstance().getSubjects();
 	}
+	
 	public void deleteSubject(int rowSelectedIndex) {
     	if (rowSelectedIndex < 0) {
 			return;

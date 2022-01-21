@@ -36,6 +36,7 @@ public class ProfessorBase {
 		this.professorsNotVisible = new ArrayList<Professor>();
 		this.professorsVisible = new ArrayList<Professor>();
 		this.colons = new ArrayList<String>();
+		this.colons.add("ID");
 		this.colons.add("Name");
 		this.colons.add("Surname");
 		this.colons.add("Title");
@@ -68,6 +69,21 @@ public class ProfessorBase {
 			    return pr1.getIdProf() - pr2.getIdProf();
 			  }
 			});
+	}
+	public List<Professor> DepartmentsBoss()
+	{
+		List<Professor> lp = new ArrayList();
+		for(Professor p : professors)
+		{
+			if(p.getTitle().equals("REDOVNI_PROFESOR") || p.getTitle().equals("VANREDNI_PROFESOR"))
+			{
+				if(p.getYears_of_experience() >= 5)
+				{
+					lp.add(p);
+				}
+			}
+		}
+		return lp;
 	}
 	
 	public int getID(){
@@ -149,6 +165,31 @@ public class ProfessorBase {
 
 	public List<Professor> getProfessors() {
 		return professors;
+	}
+	public Professor getProfbyID(int id)
+	{
+		Professor prof = new Professor();
+		for(Professor p : professors)
+		{
+			if(p.getIdProf() == id)
+			{
+				prof = p;
+				break;
+			}
+		}
+		return prof;
+	}
+	public  int getProfIdByName(String name)
+	{
+		int i = 0;
+		for(Professor p:professors)
+		{
+			if(p.getName().equals(name))
+			{
+				i = p.getIdProf();
+			}
+		}
+		return i;
 	}
 	
 	public String getColumnName(int index) {

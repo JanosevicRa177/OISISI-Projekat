@@ -10,26 +10,22 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import AddSubjectToProf.AbstractSubjProfTable;
 import AddSubjectToProf.SubjProfTable;
-import AddSubjects.AbstractAddSubjectsTable;
 import AddSubjects.AddSubjectsTable;
 import Controller.ProfessorController;
-import Controller.StudentController;
+import Controller.SubjectController;
+import Professor.AbstractTableModelProfessors;
 import Professor.ProfessorTable;
 import ProffessorSubjects.AbstractTableProffSubjects;
 import ProffessorSubjects.ProffSubjectsTable;
-import Student.StudentTable;
-import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
-import UnpassedSubjects.UnpassedSubjectTable;
+import Subject.SubjectTable;
 
-public class AddDialogSubject extends JDialog 
-{
-	/**
-	 * 
-	 */
+public class AddDialogSubjectProf extends JDialog {
+	
 	private static final long serialVersionUID = -9162250925534372358L;
 
-	public AddDialogSubject() {
+	public AddDialogSubjectProf() {
 		// TODO Auto-generated constructor stub
 		super(MainFrame.getInstance(), "Add Subject", true);
 		Toolkit kit = Toolkit.getDefaultToolkit();
@@ -48,8 +44,9 @@ public class AddDialogSubject extends JDialog
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
-						StudentController.getInstance().findSelectedStudent(StudentTable.getInstance().getSelectedRow()).addUnpassedSubject(StudentController.getInstance().findSelectedStudent(StudentTable.getInstance().getSelectedRow()).getForAddSubjects().get(AddSubjectsTable.getInstance().getSelectedRow()));
-						AbstractTableModelUnpassedSubjects model = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
+
+						ProfessorController.getInstance().findSelectedProffessor(ProfessorTable.getInstance().getSelectedRow()).add_Professors_subject(ProfessorController.getInstance().findSelectedProffessor(ProfessorTable.getInstance().getSelectedRow()).getProfessorsSubjects().get(SubjProfTable.getInstance().getSelectedRow()));
+						AbstractTableProffSubjects model = (AbstractTableProffSubjects) ProffSubjectsTable.getInstance().getModel();
 						model.fireTableDataChanged();
 
 						setVisible(false);
@@ -59,19 +56,20 @@ public class AddDialogSubject extends JDialog
 				});
 		add.setText("Add");
 		add.setPreferredSize(dim);
-		JScrollPane addsubpan =new JScrollPane(AddSubjectsTable.getInstance());
+		JScrollPane addsubpan =new JScrollPane(SubjProfTable.getInstance());
 		addsubpan.setPreferredSize(new Dimension(200, 200));
 		JButton cancel = new JButton();
-		cancel.setText("Cancel");
-		cancel.addActionListener(new ActionListener() {
+		cancel.addActionListener(new ActionListener()
+				{
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				setVisible(false);
-			}
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						setVisible(false);
+					}
 			
-		});
+				});
+		cancel.setText("Cancel");
 		cancel.setPreferredSize(dim);
 		
 		jp.add(addsubpan);
@@ -86,6 +84,5 @@ public class AddDialogSubject extends JDialog
 		
 	}
 		
-
 
 }

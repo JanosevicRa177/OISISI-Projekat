@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import Base.StudentBase;
 import Controller.StudentController;
 import Controller.SubjectController;
 import Controller.MarkController;

@@ -45,6 +45,10 @@ public class ProfessorController {
 	public void searchProfessor(String search) {
 		ProfessorBase.getInstance().searchProfessor(search);
 	}
+	public List<Professor> DepartmentsBoss()
+	{
+		return ProfessorBase.getInstance().DepartmentsBoss();
+	}
 	public void addProfessor(Professor professor) {
 			ProfessorBase.getInstance().addProfessor(professor);
 	}
@@ -58,6 +62,7 @@ public class ProfessorController {
 	{
 		return ProfessorBase.getInstance().getProfessors();
 	}
+	
     public void deleteProfessor(int rowSelectedIndex) {
     	if (rowSelectedIndex < 0) {
 			return;

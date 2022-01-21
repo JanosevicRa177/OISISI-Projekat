@@ -18,8 +18,8 @@ public class InputDesk {
 	public static void ReadDesks(String file) throws IOException {
 		File f = new File(file);
 		String line = "";
-		Desk deskNull = new Desk("","",-1,0);
-		DeskBase.getInstance().addDesk(deskNull);
+		//Desk deskNull = new Desk("","",-1,0);
+		//DeskBase.getInstance().addDesk(deskNull);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f),"UTF8"));
 	try {
 		while((line = reader.readLine()) != null) {
