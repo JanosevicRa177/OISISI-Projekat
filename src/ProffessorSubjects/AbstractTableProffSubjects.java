@@ -21,7 +21,6 @@ public class AbstractTableProffSubjects extends AbstractTableModel{
 	}
 
 	public int getRowCount() {
-	//	System.out.println(ProfessorController.getInstance().findSelectedProffessor(ProfessorTable.getInstance().getSelectedRow()).getProfessors_subjects().size());
 		return ProfessorController.getInstance().findSelectedProffessor(ProfessorTable.getInstance().getSelectedRow()).getProfessors_subjects().size();
 	}
 	public int getColumnCount() {
@@ -48,7 +47,6 @@ public class AbstractTableProffSubjects extends AbstractTableModel{
 		
 		} else {
 			Subject subject = ProfessorController.getInstance().findSelectedProffessor(ProfessorTable.getInstance().getSelectedRow()).getProfessors_subjects().get(row);
-			System.out.println(subject);
 			switch (column) {
 			case 0:
 				return subject.getiDSubject();

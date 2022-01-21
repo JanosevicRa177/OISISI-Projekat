@@ -27,7 +27,7 @@ public class AddDialogSubject extends JDialog
 		Dimension dim = new Dimension(100,25);
 		setSize(width*1/6, height*3/8);
 		setLocationRelativeTo(MainFrame.getInstance());
-		setTitle("Dodavanje predmeta");
+		setTitle("Add Subject");
 		JPanel jp = new JPanel();
 		JButton add = new JButton();
 		add.setText("Add");

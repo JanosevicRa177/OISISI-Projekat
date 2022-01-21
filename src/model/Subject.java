@@ -37,7 +37,9 @@ public class Subject {
 	public String getiDSubject() {
 		return iDSubject;
 	}
-	
+	public void removeProfessor() {
+		professorOfSubject = 0;
+	}
 	public void setiDSubject(String iDSubject) {
 		this.iDSubject = iDSubject;
 	}

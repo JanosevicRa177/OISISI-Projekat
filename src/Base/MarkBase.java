@@ -41,6 +41,13 @@ private static MarkBase instance = null;
 		return mark;
 		
 	}
+	public int getGrade(int student,int subject) {
+		for(Mark m : marks) {
+			if((m.get_Subject() == subject) && (m.getStudentWhichPassExam() == student))
+			return m.getMarkValue();
+		}
+		return 0;
+	}
 	public void removeMark(int student, int subject) {
 		System.out.println("Ulaz");
 		for(Mark m : marks) {

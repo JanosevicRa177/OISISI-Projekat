@@ -20,6 +20,9 @@ public class MarkController {
 	private MarkController() {
 		// TODO Auto-generated constructor stub
 	}
+	public int getGrade(int student,int subject) {
+		return MarkBase.getInstance().getGrade(student, subject);
+	}
 	public void removeMark(int student, int subject) {
 		MarkBase.getInstance().removeMark(student,subject);
 	}

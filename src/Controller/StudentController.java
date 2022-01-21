@@ -29,6 +29,9 @@ public class StudentController {
 		}
 		return instance;
 	}
+	public void calculateAvgGrade() {
+		StudentBase.getInstance().calculateAvgGrade();
+	}
 	public void addPassedSubject(int student,int subject) {
 		StudentBase.getInstance().addPassedSubject(student, subject);
 	}
@@ -46,12 +49,12 @@ public class StudentController {
 		return StudentBase.getInstance().getAllStudents().get(row);
 	}
 	public void passTest(int subject) {
-		int studentNum = StudentTable.getInstance().getSelectedRow();
+		int studentNum = StudentTable.getInstance().getSelectedIndex();
 		StudentBase.getInstance().getAllStudents().get(studentNum).passSubject(subject);
 		SubjectBase.getInstance().getSubjects().get(subject).addStudentsWhoPassed(StudentBase.getInstance().getAllStudents().get(studentNum).getIdStudent());
 	}
 	public void unpassTest(int subject) {
-		int studentNum = StudentTable.getInstance().getSelectedRow();
+		int studentNum = StudentTable.getInstance().getSelectedIndex();
 		StudentBase.getInstance().getAllStudents().get(studentNum).unpassSubject(subject);
 		SubjectBase.getInstance().getSubjects().get(subject).addStudentsWhoDidntPass(StudentBase.getInstance().getAllStudents().get(studentNum).getIdStudent());
 	}
@@ -71,11 +74,10 @@ public class StudentController {
     	if (rowSelectedIndex < 0) {
 			return;
 		}
-    
         StudentDeleteDialog dialog = new StudentDeleteDialog(rowSelectedIndex);
         dialog.setVisible(true);
-    	Student student = StudentBase.getInstance().getRow(rowSelectedIndex);
-    	StudentBase.getInstance().deleteStudent(student.getIndexNumber());
+//    	Student student = StudentBase.getInstance().getRow(rowSelectedIndex);
+//    	StudentBase.getInstance().deleteStudent(student.getIndexNumber());
 	}
 	public boolean containsStudent(String id) {
 		return StudentBase.getInstance().containsadd(id);

@@ -38,7 +38,7 @@ public class StatusBar extends JPanel {
 //    int height = screenSize.height;
 //    this.setPreferredSize(new Dimension(width,height*1/40));
 	
-	String jlbl = "Studentska sluzba - ";
+	String jlbl = "Student services - ";
 	
     JLabel label=new JLabel(jlbl);
     panLeft.add(label);
@@ -59,8 +59,6 @@ public class StatusBar extends JPanel {
     
    
     add(panRight,BorderLayout.EAST);
-    //this.add(Box.createHorizontalStrut(30));
-    //this.add(Box.createVerticalStrut(10));
 	
 	
 	setLbl(1);

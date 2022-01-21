@@ -3,6 +3,7 @@ package main;
 
 import java.io.IOException;
 
+import Controller.StudentController;
 import IOStream.InputAddress;
 import IOStream.InputDesk;
 import IOStream.InputMark;
@@ -22,6 +23,7 @@ public class MyApp {
 		InputSubject.ReadSubject("Subjects.txt");
 		InputMark.ReadMarks("Marks.txt");
 		InputUnpassedSubject.ReadUnpassedSubject("UnpassedSubjects.txt");
+		StudentController.getInstance().calculateAvgGrade();
 		MainFrame.getInstance();
 	}
 }

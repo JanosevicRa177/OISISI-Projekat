@@ -94,7 +94,7 @@ public class ProfessorBase {
 		sortByID();
 		professorsVisible = new ArrayList<Professor>();
 		professorsNotVisible = new ArrayList<Professor>();
-		if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
 			Iterator<Professor> it1 = professors.iterator();
 			row = 0;
 			while(it1.hasNext()) {
@@ -108,7 +108,7 @@ public class ProfessorBase {
 				row++;
 			}
 			professors = professorsVisible;
-		}else if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+( )[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
+		}else if(search.matches("[A-Za-zŠĆĐŽČšćžđč]+( )[A-Za-zŠĆĐŽČšćžđč]+")) {
 			String[] search1 = search.split(" ");
 			Iterator<Professor> it1 = professors.iterator();
 			row = 0;

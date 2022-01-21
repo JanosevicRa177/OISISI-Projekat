@@ -38,13 +38,13 @@ public class AbstractActionDelete extends AbstractAction  {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if(TabsWithTabels.getInstance().getFocus().equals("Professors")) {
-			int row = ProfessorTable.getInstance().getSelectedRow();
+			int row = ProfessorTable.getInstance().getSelectedIndex();
 			ProfessorController.getInstance().deleteProfessor(row);
 			AbstractTableModelProfessors model = (AbstractTableModelProfessors) ProfessorTable.getInstance().getModel();
 			model.fireTableRowsDeleted(row, row);
 			MainFrame.getInstance().validate();
 		} else if(TabsWithTabels.getInstance().getFocus().equals("Subjects")) {
-			int row = SubjectTable.getInstance().getSelectedRow();
+			int row = SubjectTable.getInstance().getSelectedIndex();
 			SubjectController.getInstance().deleteSubject(row);
 			AbstractTableModelSubjects model = (AbstractTableModelSubjects) SubjectTable.getInstance().getModel();
 			model.fireTableRowsDeleted(row, row);
@@ -53,7 +53,8 @@ public class AbstractActionDelete extends AbstractAction  {
 			
 		}else if(TabsWithTabels.getInstance().getFocus().equals("Students"))
 		{
-			int row = StudentTable.getInstance().getSelectedRow();
+			int row = StudentTable.getInstance().getSelectedIndex();
+			System.out.println(row);
 			StudentController.getInstance().deleteStudent(row);
 			AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 			model.fireTableRowsDeleted(row, row);
