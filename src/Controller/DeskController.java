@@ -23,7 +23,7 @@ public class DeskController {
 	}
 	public String getColumnName(int index) {
 		return DeskBase.getInstance().getColumnName(index);
-  
+	}
 	public boolean contains(int idProf) {
 		return DeskBase.getInstance().contains(idProf);
 	}

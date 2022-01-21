@@ -31,14 +31,15 @@ public class OutputDesk {
 	public void WriteDesk(String file) throws IOException {
 		File f = new File(file);
 		String line = "";
-		int j = 1;
+		int j = 0;
 		BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(f),"UTF8"));
 	try {
 		List<Desk> deskList = DeskController.getInstance().getAllDesks();
 		List<Professor> pList = ProfessorController.getInstance().getAllProf();
 
 		while(j < deskList.size()) {
-			line = deskList.get(j).getDeskCode() + ",";
+			line = deskList.get(j).getIdDesk() + ",";
+			line = line + deskList.get(j).getDeskCode() + ",";
 			line = line + deskList.get(j).getDeskName() + ",";
 			line = line + deskList.get(j).getDeskChief();
 		j++;
