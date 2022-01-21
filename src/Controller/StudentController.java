@@ -12,6 +12,7 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import Base.ProfessorBase;
 import Base.MarkBase;
 import Base.StudentBase;
 import Base.SubjectBase;
@@ -20,8 +21,6 @@ import model.Student;
 import view.MainFrame;
 
 public class StudentController {
-	
-
 	private static StudentController instance = null;
 	
 	public static StudentController getInstance() {
@@ -35,6 +34,10 @@ public class StudentController {
 	}
 	public void addUnpassedSubject(int student,int subject) {
 		StudentBase.getInstance().addUnpassedSubject(student, subject);
+	}
+	public int getYear()
+	{
+		return StudentBase.getInstance().getYear();
 	}
 	public StudentController() {
 		// TODO Auto-generated constructor stub
@@ -51,6 +54,9 @@ public class StudentController {
 		int studentNum = StudentTable.getInstance().getSelectedRow();
 		StudentBase.getInstance().getAllStudents().get(studentNum).unpassSubject(subject);
 		SubjectBase.getInstance().getSubjects().get(subject).addStudentsWhoDidntPass(StudentBase.getInstance().getAllStudents().get(studentNum).getIdStudent());
+	}
+	public void searchStudent(String search) {
+		StudentBase.getInstance().searchStudents(search);
 	}
 	public int getID() {
 		return StudentBase.getInstance().getID();

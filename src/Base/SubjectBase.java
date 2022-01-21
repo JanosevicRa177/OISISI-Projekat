@@ -92,7 +92,7 @@ public class SubjectBase {
 		sortByID();
 		subjectsVisible = new ArrayList<Subject>();
 		subjectsNotVisible = new ArrayList<Subject>();
-		if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
+		if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
 			Iterator<Subject> it1 = subjects.iterator();
 			row = 0;
 			while(it1.hasNext()) {
@@ -106,7 +106,7 @@ public class SubjectBase {
 				row++;
 			}
 			subjects = subjectsVisible;
-		}else if(search.matches("[A-Za-z0-9ŠĆĐŽČšćžđč]+( )[A-Za-z0-9ŠĆĐŽČšćžđč]+")) {
+		}else if(search.matches("[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+( )[A-Za-z0-9Å Ä†Ä�Å½ÄŒÅ¡Ä‡Å¾Ä‘Ä�]+")) {
 			String[] search1 = search.split(" ");
 			Iterator<Subject> it1 = subjects.iterator();
 			row = 0;
@@ -202,6 +202,7 @@ public class SubjectBase {
 		subjects.add(subject);
 		SubjectBase.getInstance().sortByID();
 	}
+	
 	public void setSubjects(List<Subject> subjects) {
 		this.subjects = subjects;
 	}

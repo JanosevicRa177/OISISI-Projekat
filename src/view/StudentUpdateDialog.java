@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,12 +24,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 
+import AddSubjects.AbstractAddSubjectsTable;
+import AddSubjects.AddSubjectsTable;
 import Base.AddressBase;
 import Base.StudentBase;
+import Base.SubjectBase;
 import Controller.StudentController;
+import Controller.SubjectController;
 import PassedSubjects.PassedSubjectTable;
+import Professor.AbstractTableModelProfessors;
+import Professor.ProfessorTable;
 import Student.AbstractTableModelStudents;
 import Student.StudentTable;
+import Subject.SubjectTable;
+import UnpassedSubjects.AbstractTableModelUnpassedSubjects;
 import UnpassedSubjects.UnpassedSubjectTable;
 import model.Address;
 import model.Student;
@@ -68,7 +77,7 @@ public class StudentUpdateDialog extends JDialog {
 			int height = screenSize.height;
 			setSize(width*1/3 + 50,height*3/4 - 20);
 			setLocationRelativeTo(MainFrame.getInstance());
-			setTitle("Update Student");
+			setTitle("Izmena Studenta");
 			
 			Dimension labelDim = new Dimension((width*1/3)/2, 30);
 			Dimension inputDim = new Dimension((width*1/4+25)/2, 20);
@@ -78,7 +87,7 @@ public class StudentUpdateDialog extends JDialog {
 			JLabel labelName = new JLabel("Name:");
 			labelName.setPreferredSize(labelDim);
 			inputName.setPreferredSize(inputDim);
-			int row = StudentTable.getInstance().getSelectedRow();
+			int row = StudentTable.getInstance().getSelectedIndex();
 			AbstractTableModelStudents model = (AbstractTableModelStudents) StudentTable.getInstance().getModel();
 			inputName.setText(model.getValueAt(row,1).toString());
 			Name.add(labelName);
@@ -250,7 +259,7 @@ public class StudentUpdateDialog extends JDialog {
 					Address adresaInsert = new Address(adresa[0],adresa[1],adresa[2],adresa[3]);
 					AddressBase.getInstance().addAddress(adresaInsert);
 					StudentBase.getInstance().changeStudent(inputName.getText(), inputSurname.getText(), LocalDate.of(Integer.parseInt(birth[0]),Integer.parseInt(birth[1]),Integer.parseInt(birth[2])), adresaInsert, Integer.parseInt(inputCell.getText()), inputEmail.getText(), inputIndex.getText(), Integer.parseInt(inputYear.getText()), god,temp.getEnumByString(stat),oldID);
-					int row = StudentTable.getInstance().getSelectedRow();
+					int row = StudentTable.getInstance().getSelectedIndex();
 					AbstractTableModelStudents model = (AbstractTableModelStudents)StudentTable.getInstance().getModel();
 					model.fireTableRowsUpdated(row, row);
 					MainFrame.getInstance().validate();
@@ -273,11 +282,38 @@ public class StudentUpdateDialog extends JDialog {
 		JButton addUnpassed = new JButton();
 		addUnpassed.setText("Add");
 		addUnpassed.setPreferredSize(dim);
+		addUnpassed.addActionListener(new ActionListener()
+				{
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						AddDialogSubject sd = new AddDialogSubject();
+						
+						sd.setVisible(true);
+						
+						
+					}
+			
+				});
 		buttonsUnpassed.add(addUnpassed);
 		
 		JButton deleteUnpassed = new JButton();
 		deleteUnpassed.setText("Delete");
 		deleteUnpassed.setPreferredSize(dim);
+		deleteUnpassed.addActionListener(new ActionListener()
+				{
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						StudentController.getInstance().findSelectedStudent(StudentTable.getInstance().getSelectedRow()).deleteUnpassedSubject(SubjectController.getInstance().findSelectedSubject(UnpassedSubjectTable.getInstance().getSelectedRow()).getiDIntSubject());
+						AbstractTableModelUnpassedSubjects model = (AbstractTableModelUnpassedSubjects) UnpassedSubjectTable.getInstance().getModel();
+						model.fireTableRowsDeleted(row, row);
+						MainFrame.getInstance().validate();
+					}
+			
+				});
 		buttonsUnpassed.add(deleteUnpassed);
 		
 		JButton pass = new JButton();

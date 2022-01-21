@@ -17,6 +17,7 @@ import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
 
 import Controller.ProfessorController;
+import Controller.StudentController;
 import Controller.SubjectController;
 
 public class Mytoolbar extends JToolBar {
@@ -111,6 +112,8 @@ public class Mytoolbar extends JToolBar {
 					ProfessorController.getInstance().searchProfessor(search);
 				}else if(TabsWithTabels.getInstance().getFocus().equals("Subjects")) {
 					SubjectController.getInstance().searchSubject(search);
+				}else if(TabsWithTabels.getInstance().getFocus().equals("Students")) {
+					StudentController.getInstance().searchStudent(search);
 				}
 			}});
 		Search.setToolTipText("Search");

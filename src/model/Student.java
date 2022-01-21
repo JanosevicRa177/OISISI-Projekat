@@ -4,7 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import Base.StudentBase;
+import Controller.StudentController;
+import Controller.SubjectController;
 import Controller.MarkController;
 import PassedSubjects.AbstractTableModelPassedSubjects;
 import PassedSubjects.PassedSubjectTable;
@@ -121,6 +122,10 @@ public class Student extends Person {
 	public int getCurrentYear() {
 		return currentYear;
 	}
+	public void deleteUnpassedSubject(int i)
+	{
+		unpassedSubjects.remove(i-1);
+	}
 
 
 	public void setCurrentYear(int currentYear) {
@@ -160,6 +165,28 @@ public class Student extends Person {
 
 	public List<Integer> getUnpassedSubjects() {
 		return unpassedSubjects;
+	}
+	public List<Integer> getForAddSubjects()
+	{
+		List<Integer> retList = new ArrayList();
+		List<Integer> retList2 = new ArrayList();
+		List<Subject> forRet = SubjectController.getInstance().getAllSubjects();
+		for(Subject s : forRet)
+		{
+			if(!unpassedSubjects.contains(s.getiDIntSubject()))
+			{
+				if(StudentController.getInstance().getYear() == s.getsubjectYearExecution())
+					retList.add(s.getiDIntSubject());
+			}
+			
+			
+		}
+		for(Integer i : retList)
+		{
+			if(!passedSubjects.contains(i))retList2.add(i);
+		}
+		
+		return retList2;
 	}
 
 
